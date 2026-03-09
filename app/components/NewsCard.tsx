@@ -54,7 +54,7 @@ export default function NewsCard({
 
         {/* TEXTO — flotando encima de la imagen, rounded en todas las esquinas */}
         <div
-          className="absolute top-[60%] left-0 right-0 bottom-0 rounded-[28px] px-8 py-8 z-10"
+          className="absolute top-[60%] left-0 right-0 bottom-0 rounded-b-2xl px-8 py-8 z-10"
           style={{ backgroundColor: v.bg }}
         >
           <h3 className={`text-2xl font-medium mb-3 text-left ${v.text}`} style={{ fontFamily: "var(--font-geist-sans)" }}>{title}</h3>

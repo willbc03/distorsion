@@ -1,10 +1,7 @@
 import "./globals.css";
 import { Merriweather, Poppins } from "next/font/google";
+import { LanguageProvider } from "./components/LanguageContext";
 
-
-/* =====================
-   FUENTES
-===================== */
 const merriweather = Merriweather({
   subsets: ["latin"],
   weight: ["300", "400", "700", "900"],
@@ -22,20 +19,14 @@ export const metadata = {
   description: "Arma tu noticia",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body
-  className={`${merriweather.variable} ${poppins.variable} bg-white`}
->
-  {children}
-</body>
-
+      <body className={`${merriweather.variable} ${poppins.variable}`}>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }
-

@@ -1,34 +1,13 @@
 @import "tailwindcss";
 
-/* =====================
-   VARIABLES BASE
-===================== */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@variant dark (&:where(.dark, .dark *));
 
-  /* fuentes (vienen de layout.tsx) */
+:root {
   --font-title: var(--font-title);
   --font-body: var(--font-body);
 }
 
-/* =====================
-   DARK MODE
-===================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* =====================
-   BODY
-===================== */
 body {
-  background-color: var(--background);
-  color: var(--foreground);
   font-family: var(--font-body);
   margin: 0;
 }
-

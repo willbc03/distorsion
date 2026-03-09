@@ -1,67 +1,189 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import Navbar from "../../components/Navbar";
+import { useLang } from "../../components/LanguageContext";
 
-type PublishedNews = {
+type ContentItem =
+  | { type: "text"; text: string; image?: string }
+  | { type: "subtitle"; text: string }
+  | { type: "text-full"; text: string };
+
+type SavedNews = {
   title: string;
-  content: string[];
+  subtitle: string;
+  heroImage: string;
+  intro: string;
+  tags: string[];
+  contentItems: ContentItem[];
   author: string;
   verdict: "buena" | "mala";
+  verdictText: string;
   createdAt: string;
 };
 
+function groupItems(items: ContentItem[]) {
+  type Group = { subtitle?: string; fullWidth?: boolean; texts: { text: string; image?: string }[] };
+  const groups: Group[] = [];
+  let current: Group | null = null;
+
+  for (const item of items) {
+    if (item.type === "subtitle") {
+      if (current) groups.push(current);
+      current = { subtitle: item.text, texts: [] };
+    } else if (item.type === "text-full") {
+      if (current) groups.push(current);
+      current = { fullWidth: true, texts: [{ text: item.text }] };
+    } else {
+      if (!current) current = { texts: [] };
+      current.texts.push({ text: item.text, image: (item as any).image });
+    }
+  }
+  if (current) groups.push(current);
+  return groups;
+}
+
 export default function PublicadaPage() {
   const params = useParams<{ slug: string }>();
-  const [news, setNews] = useState<PublishedNews | null>(null);
+  const { lang, t } = useLang();
+  const [news, setNews] = useState<SavedNews | null>(null);
 
   useEffect(() => {
-    if (!params.slug) return;
-
-    const stored = localStorage.getItem(`news-${params.slug}`);
-    if (stored) {
-      setNews(JSON.parse(stored));
-    }
+    const raw = localStorage.getItem(`news-${params.slug}`);
+    if (raw) setNews(JSON.parse(raw));
   }, [params.slug]);
 
   if (!news) {
     return (
-      <main className="p-10 text-center">
-        <p>Noticia no encontrada.</p>
+      <main className="min-h-screen bg-white dark:bg-[#0A0A0A] flex items-center justify-center">
+        <p className="text-black/50 dark:text-white/50">{t("Noticia no encontrada.", "Story not found.")}</p>
       </main>
     );
   }
 
+  const date = new Date(news.createdAt).toLocaleDateString(lang === "ES" ? "es-ES" : "en-US", {
+    year: "numeric", month: "long", day: "numeric"
+  }).toUpperCase();
+
+  const groups = groupItems(news.contentItems || []);
+  const noticiaId = params.slug.split("-")[1];
+
   return (
-    <main className="min-h-screen bg-white px-6 py-16 flex justify-center">
-      <article className="max-w-3xl w-full space-y-6">
-        <header className="space-y-2">
-          <h1 className="text-4xl font-bold">{news.title}</h1>
-          <p className="text-sm text-zinc-500">
-            Publicada por {news.author} ·{" "}
-            {new Date(news.createdAt).toLocaleDateString()}
-          </p>
-        </header>
+    <main className="min-h-screen bg-white dark:bg-[#0A0A0A] text-black dark:text-white transition-colors duration-300">
 
-        <section className="space-y-4 text-lg leading-relaxed">
-          {news.content.map((p, i) => (
-            <p key={i}>{p}</p>
+      <Navbar />
+
+      <section className="max-w-7xl mx-auto px-10 pt-32 pb-24">
+
+        {/* HEADER META */}
+        <div className="flex items-center gap-4 mb-8 text-xs font-medium tracking-widest flex-wrap">
+          <span className="text-black/70 dark:text-white/70 font-medium">{date}</span>
+          <span className="text-black/50 dark:text-white/50">/</span>
+          {(news.tags || []).map((tag, i) => (
+            <span key={i} className="border-2 border-black/60 dark:border-white/60 rounded-full px-4 py-1 text-black dark:text-white font-medium">{tag}</span>
           ))}
-        </section>
+          <span className="text-black/50 dark:text-white/50">/</span>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-full bg-[#CCFF00] flex items-center justify-center text-black font-bold text-xs">
+              {news.author.charAt(0).toUpperCase()}
+            </div>
+            <span className="text-black/70 dark:text-white/70">
+              {t("Por", "By")} <span className="text-black dark:text-white font-medium">{news.author}</span>
+            </span>
+          </div>
+        </div>
 
-        <footer className="pt-10 border-t space-y-4">
-          <p className="font-semibold">
-            {news.verdict === "buena"
-              ? "Esta noticia presenta una cobertura informativa."
-              : "Esta noticia presenta una cobertura desinformante."}
-          </p>
+        {/* HERO */}
+        <div className="grid grid-cols-2 gap-12 items-start mb-10 overflow-hidden">
+          <div>
+            <h1 className="font-serif font-bold text-black dark:text-white leading-tight uppercase mb-6"
+              style={{ fontSize: "clamp(2rem, 3.8vw, 999px)" }}>
+              {news.title}
+            </h1>
+            <p className="text-black/70 dark:text-white/70 text-base leading-relaxed max-w-lg">{news.subtitle}</p>
+          </div>
+          <div className="rounded-2xl overflow-hidden bg-[#FF3D00] h-[500px]">
+            <img src={news.heroImage.startsWith("/") ? news.heroImage : `/${news.heroImage}`}
+              alt={news.title} className="w-full h-full object-cover grayscale"
+              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+          </div>
+        </div>
 
-          <a href="/" className="text-sm underline text-zinc-600">
-            Volver al inicio
-          </a>
-        </footer>
-      </article>
+        <hr className="border-black/30 dark:border-white/30 mb-8" />
+        <p className="text-black/70 dark:text-white/70 text-base leading-relaxed mb-16">{news.intro}</p>
+
+        {/* CONTENIDO */}
+        {groups.map((group, gi) => {
+          const hasSubtitle = !!group.subtitle;
+          const imageItem = group.texts.find(t => t.image);
+
+          if (group.fullWidth) {
+            return (
+              <div key={gi} className="mb-10">
+                <hr className="border-black/10 dark:border-white/10 mb-10" />
+                {group.texts.map((t, ti) => (
+                  <p key={ti} className="text-black/80 dark:text-white/80 text-base leading-relaxed mb-6">{t.text}</p>
+                ))}
+              </div>
+            );
+          } else if (hasSubtitle) {
+            return (
+              <div key={gi} className="mb-16">
+                <hr className="border-black/10 dark:border-white/10 mb-10" />
+                <div className="grid grid-cols-2 gap-12 items-stretch">
+                  <div>
+                    <h2 className="font-serif font-bold text-black dark:text-white leading-tight uppercase mb-8"
+                      style={{ fontSize: "clamp(2rem, 3.8vw, 999px)" }}>
+                      {group.subtitle}
+                    </h2>
+                    {group.texts.map((t, ti) => (
+                      <p key={ti} className="text-black/80 dark:text-white/80 text-base leading-relaxed mb-6">{t.text}</p>
+                    ))}
+                  </div>
+                  <div className="bg-[#FF3D00] overflow-hidden relative" style={{ minHeight: "200px" }}>
+                    {imageItem?.image && (
+                      <img src={imageItem.image} alt=""
+                        className="absolute inset-0 w-full h-full object-cover grayscale"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <div key={gi} className="mb-10">
+                {group.texts.map((t, ti) => (
+                  <div key={ti}>
+                    <p className="text-black/80 dark:text-white/80 text-base leading-relaxed border-l-2 border-[#FF3D00] pl-6 mb-6">{t.text}</p>
+                    {t.image && <img src={t.image} alt="" className="w-full h-[420px] object-cover grayscale mb-6" />}
+                  </div>
+                ))}
+              </div>
+            );
+          }
+        })}
+
+        {/* CIERRE */}
+        <div className="mt-24">
+          <hr className="border-black/10 dark:border-white/10 mb-16" />
+          <h2 className="font-serif font-bold text-black dark:text-white uppercase text-center mb-12"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 999px)" }}>
+            {t("Noticia publicada", "Story published")}
+          </h2>
+          <div className="flex items-center justify-center gap-6">
+            <Link href="/" className="bg-[#CCFF00] text-black font-bold px-10 py-4 rounded-full hover:bg-white transition text-base">
+              {t("Volver al inicio", "Back to home")}
+            </Link>
+            <Link href={`/noticia/${noticiaId}`} className="bg-[#FF3D00] text-white font-bold px-10 py-4 rounded-full hover:bg-red-600 transition text-base">
+              {t("Volver a empezar", "Start over")}
+            </Link>
+          </div>
+        </div>
+
+      </section>
     </main>
   );
 }
-
