@@ -2,12 +2,18 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-:root {
-  --font-title: var(--font-title);
-  --font-body: var(--font-body);
+@font-face {
+  font-family: "MerriweatherBold";
+  src: url("/fonts/Merriweather_120pt-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-body), system-ui, sans-serif;
   margin: 0;
+}
+
+.font-title {
+  font-family: "MerriweatherBold", Georgia, serif !important;
 }

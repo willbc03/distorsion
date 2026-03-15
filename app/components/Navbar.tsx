@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export default function Navbar() {
   const { lang, setLang, t } = useLang();
   const [dark, setDark] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -23,17 +24,16 @@ export default function Navbar() {
   };
 
   const scrollToArmaNoticia = () => {
+    setMenuOpen(false);
     const section = document.getElementById("arma-tu-noticia");
     if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
-      <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 backdrop-blur-md border rounded-full px-2 py-2 flex items-center gap-1 transition-colors duration-300
-        ${dark
-          ? "bg-white/10 border-white/20"
-          : "bg-black/10 border-black/20"
-        }`}>
+      {/* NAVBAR DESKTOP */}
+      <nav className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 backdrop-blur-md border rounded-full px-2 py-2 items-center gap-1 transition-colors duration-300 hidden md:flex
+        ${dark ? "bg-white/10 border-white/20" : "bg-black/10 border-black/20"}`}>
         <Link href="/" className="px-5 py-2 rounded-full bg-[#CCFF00] text-black text-sm font-medium">
           {t("Inicio", "Home")}
         </Link>
@@ -49,9 +49,7 @@ export default function Navbar() {
             ${dark ? "text-white hover:bg-white/10" : "text-black hover:bg-black/10"}`}>
           {t("Contacto", "Contact")}
         </Link>
-
         <div className={`w-px h-4 mx-1 ${dark ? "bg-white/20" : "bg-black/20"}`} />
-
         <button
           onClick={() => setLang(lang === "ES" ? "EN" : "ES")}
           className="flex items-center gap-1 px-3 py-2 rounded-full transition hover:bg-black/10"
@@ -61,6 +59,51 @@ export default function Navbar() {
           <span className={`text-xs font-bold transition ${lang === "EN" ? (dark ? "text-white" : "text-black") : (dark ? "text-white/40" : "text-black/40")}`}>EN</span>
         </button>
       </nav>
+
+      {/* NAVBAR MOBILE */}
+      <nav className={`fixed top-4 left-4 right-4 z-50 backdrop-blur-md border rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-300 md:hidden
+        ${dark ? "bg-white/10 border-white/20" : "bg-black/10 border-black/20"}`}>
+        <Link href="/" className="px-4 py-1.5 rounded-full bg-[#CCFF00] text-black text-sm font-medium">
+          {t("Inicio", "Home")}
+        </Link>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setLang(lang === "ES" ? "EN" : "ES")}
+            className="flex items-center gap-1 px-2 py-1.5 rounded-full"
+          >
+            <span className={`text-xs font-bold ${lang === "ES" ? (dark ? "text-white" : "text-black") : (dark ? "text-white/40" : "text-black/40")}`}>ES</span>
+            <span className={`text-xs ${dark ? "text-white/20" : "text-black/20"}`}>/</span>
+            <span className={`text-xs font-bold ${lang === "EN" ? (dark ? "text-white" : "text-black") : (dark ? "text-white/40" : "text-black/40")}`}>EN</span>
+          </button>
+          {/* Hamburger */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className={`w-9 h-9 rounded-full flex flex-col items-center justify-center gap-1.5 ${dark ? "text-white" : "text-black"}`}
+          >
+            <span className={`block w-5 h-0.5 transition-all ${dark ? "bg-white" : "bg-black"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-5 h-0.5 transition-all ${dark ? "bg-white" : "bg-black"} ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-5 h-0.5 transition-all ${dark ? "bg-white" : "bg-black"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
+      </nav>
+
+      {/* MENU MOBILE DESPLEGADO */}
+      {menuOpen && (
+        <div className={`fixed top-20 left-4 right-4 z-50 backdrop-blur-md border rounded-2xl p-4 flex flex-col gap-2 md:hidden transition-colors duration-300
+          ${dark ? "bg-black/80 border-white/20" : "bg-white/90 border-black/20"}`}>
+          <button
+            onClick={scrollToArmaNoticia}
+            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium ${dark ? "text-white hover:bg-white/10" : "text-black hover:bg-black/10"}`}
+          >
+            {t("Arma tu noticia", "Build your story")}
+          </button>
+          <Link href="/contacto"
+            onClick={() => setMenuOpen(false)}
+            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium ${dark ? "text-white hover:bg-white/10" : "text-black hover:bg-black/10"}`}>
+            {t("Contacto", "Contact")}
+          </Link>
+        </div>
+      )}
 
       {/* Botón sol/luna */}
       <button
