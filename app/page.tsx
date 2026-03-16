@@ -100,6 +100,7 @@ useEffect(() => {
   }}
 >
   <source src="/distorsion-titulo.webm" type="video/webm" />
+  <source src="/distorsion-titulo.mp4" type="video/mp4" />
 </video>
         </div>
       </section>
