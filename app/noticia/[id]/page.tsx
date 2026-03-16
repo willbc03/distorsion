@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLang } from "../../components/LanguageContext";
@@ -14,64 +14,1268 @@ type StoryNode = {
   ending?: { verdict: string; verdictEn: string; tone: "buena" | "mala"; };
 };
 
-const storyF1: StoryNode[] = [
+const storyBayern: StoryNode[] = [
   {
     type: "text",
-    text: "La FIA presentó el nuevo reglamento técnico para la temporada 2026, generando un intenso debate en el paddock sobre su impacto en la competitividad.",
+    text: "",
     options: [
-      { text: "Los organizadores del campeonato estudian la posibilidad de añadir nuevas sedes al calendario, incluyendo circuitos urbanos en distintas ciudades del mundo. La propuesta busca ampliar la presencia global del deporte.", textEn: "Championship organizers are studying the possibility of adding new venues to the calendar, including urban circuits in different cities around the world. The proposal seeks to expand the sport's global presence.", next: 1, image: "/tenis.jpg" },
-      { text: "Varios pilotos han expresado su preocupación por cómo las nuevas regulaciones podrían afectar las dinámicas de adelantamiento y la gestión de energía durante las carreras. Algunos ingenieros señalan que los cambios podrían obligar a replantear estrategias que durante años definieron el desarrollo de los monoplazas.", textEn: "Several drivers have expressed concern about how the new regulations could affect overtaking dynamics and energy management during races. Some engineers note that the changes could force a rethink of strategies that for years defined the development of the cars.", next: 1, image: "/f1.jpg" },
+      {
+        text: "Tras el partido, el Bayern Múnich confirmó que inició el proceso de apelación para revisar la expulsión de Luis Díaz. El club considera que, al existir un reconocimiento del árbitro sobre la dureza de la decisión, el tribunal deportivo podría analizar nuevamente la jugada. Mientras tanto, el equipo continúa preparando su próximo compromiso de Bundesliga.",
+        textEn: "After the match, Bayern Munich confirmed it has begun the appeal process to review Luis Díaz's red card. The club believes that, given the referee's acknowledgment of the harshness of the decision, the sports tribunal could re-examine the play. Meanwhile, the team continues preparing for their next Bundesliga fixture.",
+        next: 1, image: "/futbol.jpg"
+      },
+      {
+        text: "Después del encuentro, el Bayern Múnich decidió presentar una apelación para revisar la expulsión de Luis Díaz. Aunque el árbitro admitió que la sanción pudo haber sido demasiado severa, el debate sobre la jugada sigue abierto y el club insiste en que la decisión influyó en el desarrollo del partido.",
+        textEn: "After the match, Bayern Munich decided to file an appeal to review Luis Díaz's red card. Although the referee admitted the punishment may have been too harsh, the debate over the play remains open and the club insists the decision affected the course of the match.",
+        next: 1, image: "/futbol.jpg"
+      },
     ],
   },
   {
     type: "subtitle",
-    text: "Los datos preliminares empiezan a dar forma a la cobertura del hecho.",
+    text: "",
     options: [
-      { text: "NUEVO SISTEMA DE ENERGÍA PODRÍA NIVELAR EL CAMPO", textEn: "NEW ENERGY SYSTEM COULD LEVEL THE PLAYING FIELD", next: 2 },
-      { text: "SE ESPECULA QUE LOS CAMBIOS FAVORECEN A LOS MÁS RICOS", textEn: "SPECULATION THAT CHANGES FAVOR THE WEALTHIEST TEAMS", next: 3 },
+      { text: "EL CLUB DEFIENDE QUE LA EXPULSIÓN FUE UNA INTERPRETACIÓN APRESURADA", textEn: "CLUB ARGUES RED CARD WAS A HASTY INTERPRETATION", next: 2 },
+      { text: "ANALISTAS SEÑALAN QUE LA JUGADA SIGUE SIENDO DISCUTIBLE", textEn: "ANALYSTS POINT OUT THE PLAY REMAINS DEBATABLE", next: 3 },
     ],
   },
   {
     type: "text",
     text: "",
     options: [
-      { text: "Ingenieros de distintos equipos coinciden en que el nuevo sistema de recuperación de energía requerirá un rediseño completo de las estrategias de carrera. Los cambios en la unidad de potencia implican repensar desde la gestión de batería hasta la distribución de frenada regenerativa, lo que podría abrir la puerta a equipos medianos.", textEn: "Engineers from different teams agree that the new energy recovery system will require a complete redesign of race strategies. Changes in the power unit mean rethinking everything from battery management to regenerative braking distribution, which could open the door to midfield teams.", next: 4 },
-      { text: "Se priorizan declaraciones alarmistas de pilotos sin contrastar con datos técnicos verificados. La nota pierde rigor en favor del impacto emocional.", textEn: "Alarmist statements from drivers are prioritized without cross-checking with verified technical data. The story loses rigor in favor of emotional impact.", next: 5 },
+      {
+        text: "El Bayern sostiene que las imágenes del partido muestran que el contacto con el arquero existió, aunque fuera leve, y que la decisión de mostrar una segunda tarjeta amarilla terminó siendo desproporcionada. Directivos del club afirmaron que el reconocimiento del árbitro abre la puerta a una revisión justa del caso.\n\nAdemás, el cuerpo técnico considera que Luis Díaz fue uno de los jugadores más activos del encuentro, participando en varias jugadas ofensivas y logrando el empate parcial del equipo.",
+        textEn: "Bayern argues that match footage shows contact with the goalkeeper did occur, even if minimal, and that the decision to show a second yellow card was disproportionate. Club officials stated that the referee's acknowledgment opens the door to a fair review of the case.\n\nFurthermore, the coaching staff considers Luis Díaz to have been one of the most active players in the match, participating in several offensive plays and scoring the team's equalizer.",
+        next: 4
+      },
+      {
+        text: "Otros sectores del análisis deportivo señalan que, aunque el árbitro admitió su error, la jugada refleja también una situación confusa generada por el propio desarrollo del partido. El contacto con el portero fue mínimo y la caída del jugador ocurrió antes del choque directo.\n\nEn ese contexto, algunos consideran que la acción pudo interpretarse como intento de provocar una falta, lo que explica la reacción inmediata del árbitro durante el encuentro.",
+        textEn: "Other sports analysts point out that, although the referee admitted the mistake, the play also reflects a confusing situation generated by the flow of the match itself. Contact with the goalkeeper was minimal and the player's fall occurred before any direct collision.\n\nIn that context, some believe the action could be interpreted as an attempt to draw a foul, which explains the referee's immediate reaction during the match.",
+        next: 5
+      },
     ],
   },
   {
     type: "text",
     text: "",
     options: [
-      { text: "El equipo editorial decide contrastar las especulaciones con fuentes técnicas oficiales antes de publicar. La nota recupera solidez.", textEn: "The editorial team decides to cross-check speculation with official technical sources before publishing. The story recovers its solidity.", next: 4 },
-      { text: "Fuentes cercanas a varios equipos aseguran que los cambios perjudicarán a los pilotos, sin datos concretos que lo respalden. La especulación avanza.", textEn: "Sources close to several teams claim the changes will harm drivers, without concrete data to back it up. Speculation advances.", next: 5 },
+      {
+        text: "El Bayern sostiene que las imágenes del partido muestran que el contacto con el arquero existió, aunque fuera leve, y que la decisión de mostrar una segunda tarjeta amarilla terminó siendo desproporcionada. Directivos del club afirmaron que el reconocimiento del árbitro abre la puerta a una revisión justa del caso.\n\nAdemás, el cuerpo técnico considera que Luis Díaz fue uno de los jugadores más activos del encuentro, participando en varias jugadas ofensivas y logrando el empate parcial del equipo.",
+        textEn: "Bayern argues that match footage shows contact with the goalkeeper did occur, even if minimal, and that the decision to show a second yellow card was disproportionate. Club officials stated that the referee's acknowledgment opens the door to a fair review of the case.\n\nFurthermore, the coaching staff considers Luis Díaz to have been one of the most active players in the match, participating in several offensive plays and scoring the team's equalizer.",
+        next: 4
+      },
+      {
+        text: "Otros sectores del análisis deportivo señalan que, aunque el árbitro admitió su error, la jugada refleja también una situación confusa generada por el propio desarrollo del partido. El contacto con el portero fue mínimo y la caída del jugador ocurrió antes del choque directo.\n\nEn ese contexto, algunos consideran que la acción pudo interpretarse como intento de provocar una falta, lo que explica la reacción inmediata del árbitro durante el encuentro.",
+        textEn: "Other sports analysts point out that, although the referee admitted the mistake, the play also reflects a confusing situation generated by the flow of the match itself. Contact with the goalkeeper was minimal and the player's fall occurred before any direct collision.\n\nIn that context, some believe the action could be interpreted as an attempt to draw a foul, which explains the referee's immediate reaction during the match.",
+        next: 5
+      },
     ],
   },
   {
     type: "text-full",
     text: "",
     options: [
-      { text: "La nota final incluye declaraciones de pilotos, ingenieros y directivos de múltiples equipos, ofreciendo una visión equilibrada y bien contextualizada que permite al lector formarse su propia opinión con datos verificados.", textEn: "The final story includes statements from drivers, engineers and executives from multiple teams, offering a balanced and well-contextualized view that allows readers to form their own opinion with verified data.", next: 6, image: "/f1.jpg" },
-      { text: "En el último momento se cedió a la presión y se incluyeron rumores sin confirmar que debilitaron la credibilidad de toda la nota.", textEn: "At the last moment, pressure led to including unconfirmed rumors that weakened the credibility of the entire story.", next: 7, image: "/tenis.jpg" },
+      {
+        text: "Si el recurso prospera, el Bayern podría contar con Luis Díaz para el partido frente a Unión Berlín. La presencia del colombiano sería clave para mantener la dinámica ofensiva del equipo en un momento importante de la temporada.\n\nEl club espera que el tribunal deportivo valore la evidencia disponible y que el reconocimiento del error arbitral sea suficiente para reconsiderar la sanción.",
+        textEn: "If the appeal succeeds, Bayern could have Luis Díaz available for the match against Union Berlin. The Colombian's presence would be key to maintaining the team's offensive momentum at a crucial point in the season.\n\nThe club hopes the sports tribunal will weigh the available evidence and that the acknowledgment of the referee's error will be sufficient to reconsider the suspension.",
+        next: 6, image: "/futbol.jpg"
+      },
+      {
+        text: "La apelación del Bayern fue admitida a trámite y el tribunal deportivo confirmó que revisará las imágenes antes de ratificar o levantar la sanción. El club confía en que el fallo llegará antes del próximo partido.",
+        textEn: "Bayern's appeal was accepted for review and the sports tribunal confirmed it will examine the footage before upholding or lifting the suspension. The club is confident the ruling will come before their next match.",
+        next: 6, image: "/futbol.jpg"
+      },
     ],
   },
   {
     type: "text-full",
     text: "",
     options: [
-      { text: "A pesar del camino irregular, el cierre de la nota logró recuperar el rigor. Se añadió contexto técnico real que equilibró la cobertura.", textEn: "Despite the irregular path, the story's conclusion managed to recover rigor. Real technical context was added that balanced the coverage.", next: 6, image: "/f1.jpg" },
-      { text: "La especulación se viralizó en redes sociales antes de que ningún medio la verificara, dificultando enormemente la corrección posterior del error. Una vez instalado el rumor, resultó casi imposible desmentirlo.", textEn: "Speculation went viral on social media before any outlet could verify it, making subsequent correction of the error extremely difficult. Once the rumor was embedded, it proved almost impossible to debunk.", next: 7, image: "/tenis.jpg" },
+      {
+        text: "Sin embargo, algunos expertos señalan que incluso si la apelación es revisada, no siempre estas decisiones terminan cambiando el resultado disciplinario. En muchas ocasiones, el comité arbitral mantiene la sanción para respaldar la autoridad del árbitro en el campo.\n\nEsto deja abierta la posibilidad de que el Bayern tenga que afrontar el próximo partido sin el jugador colombiano.",
+        textEn: "However, some experts point out that even if the appeal is reviewed, these decisions do not always end up changing the disciplinary outcome. In many cases, the referee committee upholds the sanction to support the authority of the on-field official.\n\nThis leaves open the possibility that Bayern may have to face their next match without the Colombian player.",
+        next: 7, image: "/futbol.jpg"
+      },
+      {
+        text: "A pesar del sólido respaldo del club, filtraciones sin confirmar sobre el estado físico de Luis Díaz comenzaron a circular en medios, desviando la atención del proceso arbitral y generando ruido innecesario alrededor de la apelación.",
+        textEn: "Despite the club's solid backing, unconfirmed leaks about Luis Díaz's physical condition began circulating in the media, diverting attention from the arbitration process and generating unnecessary noise around the appeal.",
+        next: 7, image: "/futbol.jpg"
+      },
     ],
   },
-  { text: "", ending: { verdict: "Tu nota informó con rigor sobre los cambios y su impacto real en la Fórmula 1.", verdictEn: "Your story rigorously informed about the changes and their real impact on Formula 1.", tone: "buena" } },
-  { text: "", ending: { verdict: "Tu nota generó controversia innecesaria y desinformó sobre el reglamento.", verdictEn: "Your story generated unnecessary controversy and misinformed about the regulations.", tone: "mala" } },
+  { text: "", ending: { verdict: "Tu nota cubrió la polémica con rigor, presentando los hechos verificados y el contexto necesario para que el lector formara su propia opinión.", verdictEn: "Your story covered the controversy rigorously, presenting verified facts and the necessary context for readers to form their own opinion.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota amplificó el debate sin suficiente respaldo factual, generando más confusión que claridad sobre lo ocurrido en el partido.", verdictEn: "Your story amplified the debate without enough factual support, generating more confusion than clarity about what happened in the match.", tone: "mala" } },
+];
+
+const storyVenezuela: StoryNode[] = [
+  // NODO 0 — Ronda 1 (neutral, ambas van a nodo 1)
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Desde la primera entrada el encuentro mostró intensidad ofensiva. Ronald Acuña Jr. abrió el marcador con un cuadrangular que encendió al público presente en el estadio.\n\nJapón respondió poco después con un jonrón de Shohei Ohtani, lo que confirmó que el partido tendría momentos de gran nivel competitivo.",
+        textEn: "From the first inning the game showed offensive intensity. Ronald Acuña Jr. opened the scoring with a home run that electrified the crowd.\n\nJapan responded shortly after with a Shohei Ohtani homer, confirming the match would feature moments of high competitive quality.",
+        next: 1, image: "/futbol.jpg"
+      },
+      {
+        text: "El partido comenzó con una dinámica ofensiva por parte de ambos equipos. Ronald Acuña Jr. conectó un cuadrangular temprano que puso en ventaja a Venezuela.\n\nSin embargo, Japón reaccionó rápidamente con un jonrón de Shohei Ohtani, demostrando por qué era considerado uno de los favoritos del torneo.",
+        textEn: "The game began with an offensive dynamic from both teams. Ronald Acuña Jr. hit an early home run that gave Venezuela the lead.\n\nHowever, Japan responded quickly with a Shohei Ohtani homer, showing why they were considered one of the tournament's favorites.",
+        next: 1, image: "/futbol.jpg"
+      },
+    ],
+  },
+  // NODO 1 — Ronda 2 subtítulo (A→nodo 2, B→nodo 3)
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "VENEZUELA MANTUVO UNA ESTRATEGIA OFENSIVA CONSTANTE QUE COMENZÓ A INCLINAR EL JUEGO A SU FAVOR",
+        textEn: "VENEZUELA MAINTAINED A CONSTANT OFFENSIVE STRATEGY THAT BEGAN TO TILT THE GAME IN THEIR FAVOR",
+        next: 2
+      },
+      {
+        text: "JAPÓN INTENTÓ MANTENER EL CONTROL DEL PARTIDO, AUNQUE ALGUNOS ERRORES DEFENSIVOS EMPEZARON A COMPLICAR EL PANORAMA",
+        textEn: "JAPAN TRIED TO MAINTAIN CONTROL OF THE GAME, ALTHOUGH SOME DEFENSIVE ERRORS BEGAN TO COMPLICATE THE OUTLOOK",
+        next: 3
+      },
+    ],
+  },
+  // NODO 2 — Ronda 3 desde camino bueno (A→nodo 4, B→nodo 5)
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "El momento decisivo llegó en la sexta entrada, cuando Wilyer Abreu conectó un cuadrangular que impulsó tres carreras. Esa jugada permitió ampliar la ventaja y cambió por completo el ritmo del encuentro.\n\nA partir de ese momento, el equipo venezolano logró controlar el juego con una combinación de bateo oportuno y lanzamientos estratégicos.",
+        textEn: "The decisive moment came in the sixth inning, when Wilyer Abreu hit a home run that drove in three runs. That play extended the lead and completely changed the rhythm of the game.\n\nFrom that point on, the Venezuelan team managed to control the game with a combination of timely hitting and strategic pitching.",
+        next: 4
+      },
+      {
+        text: "La sexta entrada terminó siendo determinante para el resultado final. Un cuadrangular de Wilyer Abreu permitió que Venezuela tomara una ventaja importante en el marcador.\n\nAunque Japón intentó responder en las entradas siguientes, la defensa venezolana logró frenar varias oportunidades ofensivas del conjunto asiático.",
+        textEn: "The sixth inning proved decisive for the final result. A Wilyer Abreu home run gave Venezuela a significant lead on the scoreboard.\n\nAlthough Japan tried to respond in the following innings, the Venezuelan defense managed to shut down several offensive opportunities from the Asian side.",
+        next: 5
+      },
+    ],
+  },
+  // NODO 3 — Ronda 3 desde camino malo (A→nodo 4, B→nodo 5)
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "El momento decisivo llegó en la sexta entrada, cuando Wilyer Abreu conectó un cuadrangular que impulsó tres carreras. Esa jugada permitió ampliar la ventaja y cambió por completo el ritmo del encuentro.\n\nA partir de ese momento, el equipo venezolano logró controlar el juego con una combinación de bateo oportuno y lanzamientos estratégicos.",
+        textEn: "The decisive moment came in the sixth inning, when Wilyer Abreu hit a home run that drove in three runs. That play extended the lead and completely changed the rhythm of the game.\n\nFrom that point on, the Venezuelan team managed to control the game with a combination of timely hitting and strategic pitching.",
+        next: 4
+      },
+      {
+        text: "La sexta entrada terminó siendo determinante para el resultado final. Un cuadrangular de Wilyer Abreu permitió que Venezuela tomara una ventaja importante en el marcador.\n\nAunque Japón intentó responder en las entradas siguientes, la defensa venezolana logró frenar varias oportunidades ofensivas del conjunto asiático.",
+        textEn: "The sixth inning proved decisive for the final result. A Wilyer Abreu home run gave Venezuela a significant lead on the scoreboard.\n\nAlthough Japan tried to respond in the following innings, the Venezuelan defense managed to shut down several offensive opportunities from the Asian side.",
+        next: 5
+      },
+    ],
+  },
+  // NODO 4 — Ronda 4 solo buenas (ambas→ending buena nodo 6)
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Con este resultado, Venezuela aseguró su regreso a una semifinal del Clásico Mundial y además obtuvo la clasificación directa a los Juegos Olímpicos de Los Ángeles 2028. El equipo ahora se prepara para enfrentar a Italia en busca de un lugar en la final.",
+        textEn: "With this result, Venezuela secured their return to a World Baseball Classic semifinal and also obtained direct qualification for the 2028 Los Angeles Olympics. The team now prepares to face Italy in search of a place in the final.",
+        next: 6, image: "/futbol.jpg"
+      },
+      {
+        text: "El triunfo venezolano fue respaldado por estadísticas sólidas a lo largo del partido: 12 hits, 3 cuadrangulares y una actuación del cuerpo de lanzadores que mantuvo a Japón por debajo de su promedio ofensivo en el torneo.",
+        textEn: "The Venezuelan victory was backed by solid statistics throughout the game: 12 hits, 3 home runs and a pitching staff performance that kept Japan below their offensive average in the tournament.",
+        next: 6, image: "/futbol.jpg"
+      },
+    ],
+  },
+  // NODO 5 — Ronda 4 solo malas (ambas→ending mala nodo 7)
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "La derrota japonesa también generó sorpresa entre los analistas, quienes consideraban al equipo asiático como uno de los más sólidos del torneo. Mientras tanto, Venezuela se prepara para enfrentar a Italia en la siguiente fase.",
+        textEn: "Japan's defeat also surprised analysts, who considered the Asian team one of the most solid in the tournament. Meanwhile, Venezuela prepares to face Italy in the next phase.",
+        next: 7, image: "/futbol.jpg"
+      },
+      {
+        text: "Voces en redes sociales cuestionaron si la victoria venezolana fue producto del nivel del rival más que del mérito propio, generando un debate que opacó la celebración del equipo antes de la semifinal.",
+        textEn: "Voices on social media questioned whether Venezuela's victory was more a product of the opponent's level than their own merit, generating a debate that overshadowed the team's celebration before the semifinal.",
+        next: 7, image: "/futbol.jpg"
+      },
+    ],
+  },
+  // NODO 6 — Ending buena
+  { text: "", ending: { verdict: "Tu nota destacó el mérito deportivo de Venezuela con datos verificados y contexto justo, permitiendo al lector comprender la magnitud del logro.", verdictEn: "Your story highlighted Venezuela's sporting merit with verified data and fair context, allowing readers to understand the magnitude of the achievement.", tone: "buena" } },
+  // NODO 7 — Ending mala
+  { text: "", ending: { verdict: "Tu nota priorizó el morbo y la polémica sobre los hechos, distorsionando una victoria histórica con especulaciones sin respaldo.", verdictEn: "Your story prioritized sensationalism and controversy over the facts, distorting a historic victory with unsupported speculation.", tone: "mala" } },
+];
+
+const storyPresupuesto: StoryNode[] = [
+  // NODO 0 — Ronda 1 (neutral, ambas van a nodo 1)
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Durante el encuentro se explicó que la disminución de recursos podría afectar varios programas deportivos. Autoridades y representantes del sector coincidieron en que es necesario revisar la situación para evitar consecuencias a largo plazo.",
+        textEn: "During the meeting it was explained that the decrease in resources could affect several sports programs. Authorities and sector representatives agreed that the situation needs to be reviewed to avoid long-term consequences.",
+        next: 1, image: "/f1.jpg"
+      },
+      {
+        text: "En el foro también se mencionó que la reducción presupuestal ha generado preocupación entre ligas y federaciones, quienes consideran que algunos programas podrían verse limitados si no se revisa la asignación de recursos.",
+        textEn: "The forum also mentioned that the budget reduction has raised concern among leagues and federations, who consider that some programs could be limited if the resource allocation is not reviewed.",
+        next: 1, image: "/f1.jpg"
+      },
+    ],
+  },
+  // NODO 1 — Ronda 2 subtítulo (A→nodo 2, B→nodo 3)
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "ALGUNOS SECTORES PROPONEN NUEVAS INICIATIVAS LEGISLATIVAS PARA FORTALECER LA FINANCIACIÓN DEL DEPORTE",
+        textEn: "SOME SECTORS PROPOSE NEW LEGISLATIVE INITIATIVES TO STRENGTHEN SPORTS FUNDING",
+        next: 2
+      },
+      {
+        text: "OTROS ANALISTAS ADVIERTEN QUE LOS RECORTES PODRÍAN AFECTAR LA CONTINUIDAD DE VARIOS PROYECTOS DEPORTIVOS",
+        textEn: "OTHER ANALYSTS WARN THAT CUTS COULD AFFECT THE CONTINUITY OF SEVERAL SPORTS PROJECTS",
+        next: 3
+      },
+    ],
+  },
+  // NODO 2 — Ronda 3 desde camino bueno (A→nodo 4, B→nodo 5)
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Entre las propuestas planteadas se encuentra la creación de nuevos fondos destinados exclusivamente al desarrollo deportivo. Estas iniciativas buscan garantizar recursos para programas de formación, preparación de atletas y participación internacional.\n\nAdemás, algunos congresistas plantearon la posibilidad de destinar nuevos ingresos tributarios al sector deportivo.",
+        textEn: "Among the proposals put forward is the creation of new funds exclusively dedicated to sports development. These initiatives seek to guarantee resources for training programs, athlete preparation and international participation.\n\nAdditionally, some legislators raised the possibility of directing new tax revenues to the sports sector.",
+        next: 4
+      },
+      {
+        text: "Por otro lado, varios representantes del sector deportivo señalaron que la reducción presupuestal podría afectar procesos que requieren planificación a largo plazo. La formación de atletas para ciclos olímpicos, por ejemplo, suele necesitar años de preparación.\n\nTambién se mencionó que algunos programas de incentivo y apoyo económico podrían enfrentar retrasos si no se asegura una financiación estable.",
+        textEn: "On the other hand, several sports sector representatives pointed out that the budget reduction could affect processes that require long-term planning. Training athletes for Olympic cycles, for example, usually requires years of preparation.\n\nIt was also mentioned that some incentive and economic support programs could face delays if stable funding is not secured.",
+        next: 5
+      },
+    ],
+  },
+  // NODO 3 — Ronda 3 desde camino malo (A→nodo 4, B→nodo 5)
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Entre las propuestas planteadas se encuentra la creación de nuevos fondos destinados exclusivamente al desarrollo deportivo. Estas iniciativas buscan garantizar recursos para programas de formación, preparación de atletas y participación internacional.\n\nAdemás, algunos congresistas plantearon la posibilidad de destinar nuevos ingresos tributarios al sector deportivo.",
+        textEn: "Among the proposals put forward is the creation of new funds exclusively dedicated to sports development. These initiatives seek to guarantee resources for training programs, athlete preparation and international participation.\n\nAdditionally, some legislators raised the possibility of directing new tax revenues to the sports sector.",
+        next: 4
+      },
+      {
+        text: "Por otro lado, varios representantes del sector deportivo señalaron que la reducción presupuestal podría afectar procesos que requieren planificación a largo plazo. La formación de atletas para ciclos olímpicos, por ejemplo, suele necesitar años de preparación.\n\nTambién se mencionó que algunos programas de incentivo y apoyo económico podrían enfrentar retrasos si no se asegura una financiación estable.",
+        textEn: "On the other hand, several sports sector representatives pointed out that the budget reduction could affect processes that require long-term planning. Training athletes for Olympic cycles, for example, usually requires years of preparation.\n\nIt was also mentioned that some incentive and economic support programs could face delays if stable funding is not secured.",
+        next: 5
+      },
+    ],
+  },
+  // NODO 4 — Ronda 4 solo buenas (ambas→ending buena nodo 6)
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Los defensores de las nuevas iniciativas consideran que el deporte puede convertirse en una herramienta clave para el desarrollo social, especialmente en programas dirigidos a jóvenes y comunidades.",
+        textEn: "Advocates of the new initiatives believe that sport can become a key tool for social development, especially in programs aimed at youth and communities.",
+        next: 6, image: "/f1.jpg"
+      },
+      {
+        text: "Expertos en política pública señalan que invertir en deporte base genera retornos a largo plazo en salud, convivencia y representación internacional, lo que justifica revisar con urgencia la asignación presupuestal.",
+        textEn: "Public policy experts point out that investing in grassroots sport generates long-term returns in health, social cohesion and international representation, which justifies urgently reviewing the budget allocation.",
+        next: 6, image: "/f1.jpg"
+      },
+    ],
+  },
+  // NODO 5 — Ronda 4 solo malas (ambas→ending mala nodo 7)
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Sin embargo, otros analistas advierten que, sin una planificación financiera clara, los programas deportivos podrían enfrentar dificultades para sostener su crecimiento en los próximos años.",
+        textEn: "However, other analysts warn that, without clear financial planning, sports programs could face difficulties sustaining their growth in the coming years.",
+        next: 7, image: "/f1.jpg"
+      },
+      {
+        text: "Voces críticas señalan que la discusión presupuestal ha ignorado el impacto real en atletas de alto rendimiento que ya se encuentran en etapas avanzadas de preparación para competencias internacionales.",
+        textEn: "Critical voices point out that the budget discussion has ignored the real impact on high-performance athletes who are already in advanced stages of preparation for international competitions.",
+        next: 7, image: "/f1.jpg"
+      },
+    ],
+  },
+  // NODO 6 — Ending buena
+  { text: "", ending: { verdict: "Tu nota abordó el debate presupuestal con rigor, contextualizando las cifras y presentando propuestas concretas para el sector deportivo.", verdictEn: "Your story addressed the budget debate rigorously, contextualizing the figures and presenting concrete proposals for the sports sector.", tone: "buena" } },
+  // NODO 7 — Ending mala
+  { text: "", ending: { verdict: "Tu nota amplificó la alarma sin ofrecer contexto suficiente, generando más incertidumbre que claridad sobre el futuro del deporte colombiano.", verdictEn: "Your story amplified the alarm without providing enough context, generating more uncertainty than clarity about the future of Colombian sport.", tone: "mala" } },
+];
+
+const storyPolilla: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "El humorista Nelson Polanía, conocido como 'Polilla', compartió recientemente que tras el fallecimiento de su esposa, la también comediante Fabiola Posada, conocida como 'La Gorda Fabiola', comenzó a encontrar cartas y poemas escritos por ella hace varios años. Según relató, estos escritos aparecieron mientras revisaba algunos objetos personales en su casa, convirtiéndose en un recuerdo inesperado dentro de su proceso de duelo.",
+        textEn: "Comedian Nelson Polanía, known as 'Polilla', recently shared that after the passing of his wife, fellow comedian Fabiola Posada, known as 'La Gorda Fabiola', he began finding letters and poems she had written years ago. According to him, these writings appeared while going through some personal belongings at home, becoming an unexpected memory within his grieving process.",
+        next: 1, image: "/bts.jpg"
+      },
+      {
+        text: "Durante una entrevista en el podcast Me raya la cabeza de Caracol Televisión, Nelson Polanía habló sobre cómo ha enfrentado la pérdida de su esposa, la humorista Fabiola Posada. En medio de ese proceso, el comediante contó que descubrió varios escritos que ella había dejado años atrás, entre cartas y poemas que hoy se han convertido en un apoyo emocional para él.",
+        textEn: "During an interview on Caracol Televisión's podcast Me raya la cabeza, Nelson Polanía spoke about how he has faced the loss of his wife, comedian Fabiola Posada. In the midst of that process, he shared that he discovered several writings she had left years ago, including letters and poems that have now become an emotional support for him.",
+        next: 1, image: "/bts.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "POLILLA CONTÓ QUE UN SUEÑO LE RECORDÓ UNA CARTA ESCRITA POR SU ESPOSA HACE MÁS DE DOS DÉCADAS",
+        textEn: "POLILLA SHARED THAT A DREAM REMINDED HIM OF A LETTER WRITTEN BY HIS WIFE MORE THAN TWO DECADES AGO",
+        next: 2
+      },
+      {
+        text: "POLANÍA REVELÓ QUE ENTRE LOS ESCRITOS HALLÓ UNA CARTA DE HACE 24 AÑOS DONDE LA HUMORISTA REFLEXIONABA SOBRE LA VIDA",
+        textEn: "POLANÍA REVEALED THAT AMONG THE WRITINGS HE FOUND A LETTER FROM 24 YEARS AGO WHERE THE COMEDIAN REFLECTED ON LIFE",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Polilla explicó que, aunque el recuerdo del sueño fue lo que lo llevó a pensar en esa carta en particular, lo que realmente le ha dado fuerza en este proceso ha sido releer los mensajes que su esposa dejó escritos años atrás. Según contó, esos textos hoy se han convertido en una forma de mantener viva la historia que compartieron durante casi tres décadas.",
+        textEn: "Polilla explained that, although the memory of the dream was what led him to think about that particular letter, what has truly given him strength in this process has been rereading the messages his wife left written years ago. According to him, those texts have now become a way to keep alive the story they shared for almost three decades.",
+        next: 4
+      },
+      {
+        text: "El comediante contó que el último sueño que tuvo con su esposa fue el que lo llevó a recordar la carta escrita hace más de dos décadas. Después de ese momento, comenzó a revisar algunos de los documentos que ella había dejado guardados.",
+        textEn: "The comedian shared that the last dream he had with his wife was what led him to remember the letter written more than two decades ago. After that moment, he began going through some of the documents she had kept.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Polilla explicó que, aunque el recuerdo del sueño fue lo que lo llevó a pensar en esa carta en particular, lo que realmente le ha dado fuerza en este proceso ha sido releer los mensajes que su esposa dejó escritos años atrás. Según contó, esos textos hoy se han convertido en una forma de mantener viva la historia que compartieron durante casi tres décadas.",
+        textEn: "Polilla explained that, although the memory of the dream was what led him to think about that particular letter, what has truly given him strength in this process has been rereading the messages his wife left written years ago. According to him, those texts have now become a way to keep alive the story they shared for almost three decades.",
+        next: 4
+      },
+      {
+        text: "El comediante contó que el último sueño que tuvo con su esposa fue el que lo llevó a recordar la carta escrita hace más de dos décadas. Después de ese momento, comenzó a revisar algunos de los documentos que ella había dejado guardados.",
+        textEn: "The comedian shared that the last dream he had with his wife was what led him to remember the letter written more than two decades ago. After that moment, he began going through some of the documents she had kept.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "En la entrevista, Polilla también habló sobre las estrategias que ha utilizado para cuidar su salud mental tras la pérdida de su esposa. Entre ellas, escribir recuerdos de su relación y transformar algunas de esas experiencias en historias que, desde el humor, le permiten rendir homenaje a la mujer con la que compartió 28 años.",
+        textEn: "In the interview, Polilla also spoke about the strategies he has used to take care of his mental health after the loss of his wife. Among them, writing memories of their relationship and transforming some of those experiences into stories that, through humor, allow him to pay tribute to the woman with whom he shared 28 years.",
+        next: 6, image: "/bts.jpg"
+      },
+      {
+        text: "El comediante señaló que el humor ha sido su principal herramienta para procesar el duelo, y que contar estas historias en escena le ha permitido sentir que su esposa sigue presente de alguna manera en su trabajo y en la conexión que tiene con el público.",
+        textEn: "The comedian noted that humor has been his main tool for processing grief, and that telling these stories on stage has allowed him to feel that his wife is somehow still present in his work and in the connection he has with the audience.",
+        next: 6, image: "/bts.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "El relato del comediante ha generado curiosidad entre algunos seguidores, quienes se han enfocado especialmente en la forma en que el sueño coincidió con el descubrimiento de la carta escrita años atrás.",
+        textEn: "The comedian's account has sparked curiosity among some followers, who have focused especially on the way the dream coincided with the discovery of the letter written years ago.",
+        next: 7, image: "/bts.jpg"
+      },
+      {
+        text: "En redes sociales, varios usuarios comenzaron a especular sobre el contenido exacto de las cartas, generando debates que se alejaron del mensaje principal que Polilla quiso transmitir en la entrevista.",
+        textEn: "On social media, several users began speculating about the exact content of the letters, generating debates that strayed from the main message Polilla intended to convey in the interview.",
+        next: 7, image: "/bts.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota respetó el testimonio de Polilla con sensibilidad, contextualizando su historia sin caer en el sensacionalismo.", verdictEn: "Your story respected Polilla's testimony with sensitivity, contextualizing his story without falling into sensationalism.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota priorizó el morbo sobre el mensaje, distorsionando un relato personal con especulaciones innecesarias.", verdictEn: "Your story prioritized sensationalism over the message, distorting a personal account with unnecessary speculation.", tone: "mala" } },
+];
+
+const storyValdiri: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "La celebración se llevó a cabo el 13 de marzo en un exclusivo lugar de Cartagena y contó con presentaciones musicales, una decoración temática y varios cambios de vestuario para la quinceañera. Diferentes creadores de contenido y figuras del entretenimiento asistieron al evento y compartieron algunos momentos en redes sociales.",
+        textEn: "The celebration took place on March 13th at an exclusive venue in Cartagena and featured musical performances, themed decoration and several outfit changes for the birthday girl. Different content creators and entertainment figures attended the event and shared some moments on social media.",
+        next: 1, image: "/jimcarrey.jpg"
+      },
+      {
+        text: "El evento reunió a familiares, amigos y varias figuras del mundo digital que acompañaron a Isabella en su celebración. Videos y fotografías del festejo comenzaron a circular en redes sociales, mostrando parte de la ambientación, los artistas invitados y los diferentes momentos de la noche.",
+        textEn: "The event brought together family, friends and several digital world figures who joined Isabella in her celebration. Videos and photographs from the party began circulating on social media, showing part of the setting, the invited artists and the different moments of the night.",
+        next: 1, image: "/jimcarrey.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "DURANTE LA CELEBRACIÓN, VALDIRI ANUNCIÓ QUE CADA INVITADO RECIBIRÍA UNA ESMERALDA COMO RECUERDO DEL EVENTO",
+        textEn: "DURING THE CELEBRATION, VALDIRI ANNOUNCED THAT EACH GUEST WOULD RECEIVE AN EMERALD AS A KEEPSAKE FROM THE EVENT",
+        next: 2
+      },
+      {
+        text: "COMENZÓ A CIRCULAR LA CIFRA DE 2.500 MILLONES DE PESOS COMO POSIBLE COSTO DEL EVENTO, AUNQUE NO HA SIDO CONFIRMADA",
+        textEn: "A FIGURE OF 2.500 MILLION PESOS BEGAN CIRCULATING AS THE POSSIBLE COST OF THE EVENT, ALTHOUGH IT HAS NOT BEEN CONFIRMED",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Valdiri explicó que el obsequio consistía en un dije con esmeralda que los invitados podían usar en una cadena. Según dijo, el detalle representaba prosperidad y un recuerdo simbólico de la celebración de su hija.",
+        textEn: "Valdiri explained that the gift consisted of an emerald charm that guests could wear on a chain. According to her, the detail represented prosperity and a symbolic memory of her daughter's celebration.",
+        next: 4
+      },
+      {
+        text: "La cifra comenzó a replicarse rápidamente en diferentes plataformas, donde usuarios debatieron sobre el nivel de gasto que habría tenido el evento.",
+        textEn: "The figure began spreading quickly across different platforms, where users debated about the level of spending the event may have involved.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Valdiri explicó que el obsequio consistía en un dije con esmeralda que los invitados podían usar en una cadena. Según dijo, el detalle representaba prosperidad y un recuerdo simbólico de la celebración de su hija.",
+        textEn: "Valdiri explained that the gift consisted of an emerald charm that guests could wear on a chain. According to her, the detail represented prosperity and a symbolic memory of her daughter's celebration.",
+        next: 4
+      },
+      {
+        text: "La cifra comenzó a replicarse rápidamente en diferentes plataformas, donde usuarios debatieron sobre el nivel de gasto que habría tenido el evento.",
+        textEn: "The figure began spreading quickly across different platforms, where users debated about the level of spending the event may have involved.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Durante su discurso, Valdiri explicó que el recuerdo fue pensado como un símbolo especial para quienes acompañaron a Isabella en una fecha importante para su familia.",
+        textEn: "During her speech, Valdiri explained that the keepsake was designed as a special symbol for those who accompanied Isabella on an important date for her family.",
+        next: 6, image: "/jimcarrey.jpg"
+      },
+      {
+        text: "La influenciadora también aprovechó el momento para agradecer a quienes hicieron parte de la organización del evento y a los artistas que se presentaron durante la noche, destacando el esfuerzo detrás de cada detalle de la celebración.",
+        textEn: "The influencer also took the moment to thank those who were part of the event organization and the artists who performed during the night, highlighting the effort behind each detail of the celebration.",
+        next: 6, image: "/jimcarrey.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "La discusión en redes continuó creciendo, con usuarios comparando el supuesto costo del evento con otras celebraciones similares.",
+        textEn: "The discussion on social media continued growing, with users comparing the supposed cost of the event with other similar celebrations.",
+        next: 7, image: "/jimcarrey.jpg"
+      },
+      {
+        text: "Algunos medios retomaron la cifra sin verificarla, ampliando el debate sobre el gasto y desplazando la cobertura del evento en sí hacia una discusión sobre el dinero invertido.",
+        textEn: "Some media outlets picked up the figure without verifying it, expanding the debate about the spending and shifting coverage from the event itself toward a discussion about the money invested.",
+        next: 7, image: "/jimcarrey.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota cubrió la celebración con equilibrio, destacando los detalles verificados sin caer en especulaciones sobre cifras no confirmadas.", verdictEn: "Your story covered the celebration with balance, highlighting verified details without falling into speculation about unconfirmed figures.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota amplificó cifras no verificadas, desviando la atención del evento hacia un debate económico sin sustento.", verdictEn: "Your story amplified unverified figures, diverting attention from the event toward an unsupported economic debate.", tone: "mala" } },
+];
+
+const storyAntonelli: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Antonelli completó una carrera sólida en la que mantuvo el liderato durante gran parte de las 56 vueltas. Solo un bloqueo de ruedas en las últimas vueltas le generó un momento de tensión antes de asegurar la victoria.",
+        textEn: "Antonelli completed a solid race in which he held the lead for most of the 56 laps. Only a wheel lock-up in the final laps created a moment of tension before he secured the victory.",
+        next: 1, image: "/badbunny.jpg"
+      },
+      {
+        text: "El piloto de Mercedes vivió un fin de semana lleno de emociones en Shanghái, pasando de conseguir su primera pole position a lograr su primer triunfo en la categoría.",
+        textEn: "The Mercedes driver had an emotion-filled weekend in Shanghai, going from securing his first pole position to achieving his first victory in the category.",
+        next: 1, image: "/badbunny.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "EL PILOTO ITALIANO ASEGURÓ QUE ESTE RESULTADO LE DA CONFIANZA, AUNQUE AÚN TIENE MUCHO QUE APRENDER EN LA CATEGORÍA",
+        textEn: "THE ITALIAN DRIVER SAID THIS RESULT GIVES HIM CONFIDENCE, ALTHOUGH HE STILL HAS A LOT TO LEARN IN THE CATEGORY",
+        next: 2
+      },
+      {
+        text: "ANTONELLI DIJO QUE LA VICTORIA LE DA CONFIANZA, PERO QUE AÚN TIENE MUCHO POR APRENDER",
+        textEn: "ANTONELLI SAID THE VICTORY GIVES HIM CONFIDENCE, BUT HE STILL HAS A LOT TO LEARN",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "De igual forma también reconoció que competir contra su compañero George Russell será uno de los mayores desafíos de la temporada.",
+        textEn: "He also acknowledged that competing against his teammate George Russell will be one of the biggest challenges of the season.",
+        next: 4
+      },
+      {
+        text: "Agregado a esto, Antonelli aseguró que días como este le hacen más consciente de lo que es capaz de lograr dentro de la categoría.",
+        textEn: "Added to this, Antonelli said that days like this make him more aware of what he is capable of achieving within the category.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "De igual forma también reconoció que competir contra su compañero George Russell será uno de los mayores desafíos de la temporada.",
+        textEn: "He also acknowledged that competing against his teammate George Russell will be one of the biggest challenges of the season.",
+        next: 4
+      },
+      {
+        text: "Agregado a esto, Antonelli aseguró que días como este le hacen más consciente de lo que es capaz de lograr dentro de la categoría.",
+        textEn: "Added to this, Antonelli said that days like this make him more aware of what he is capable of achieving within the category.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Antonelli explicó después de la carrera que todavía tiene mucho por aprender en la Fórmula 1 y que prefiere mantener las expectativas bajo control mientras continúa desarrollándose como piloto.",
+        textEn: "Antonelli explained after the race that he still has a lot to learn in Formula 1 and that he prefers to keep expectations under control while continuing to develop as a driver.",
+        next: 6, image: "/badbunny.jpg"
+      },
+      {
+        text: "El joven piloto también destacó el trabajo del equipo como factor clave en el resultado, señalando que la estrategia de boxes y la preparación técnica del fin de semana fueron determinantes para conseguir la victoria.",
+        textEn: "The young driver also highlighted the team's work as a key factor in the result, noting that the pit stop strategy and the technical preparation over the weekend were decisive in securing the victory.",
+        next: 6, image: "/badbunny.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Sus declaraciones también dejaron la impresión de que el piloto está dispuesto a asumir un papel más dominante dentro del equipo si los resultados continúan acompañándolo y sin importarle el camino que tome su compañero de equipo.",
+        textEn: "His statements also left the impression that the driver is willing to take on a more dominant role within the team if results continue to go his way, regardless of the path his teammate takes.",
+        next: 7, image: "/badbunny.jpg"
+      },
+      {
+        text: "Algunos analistas interpretaron sus palabras como una señal de que Antonelli podría convertirse en el piloto número uno de Mercedes antes de lo esperado, lo que generó debate sobre el futuro de Russell en el equipo.",
+        textEn: "Some analysts interpreted his words as a sign that Antonelli could become Mercedes' number one driver sooner than expected, sparking debate about Russell's future at the team.",
+        next: 7, image: "/badbunny.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota cubrió la victoria de Antonelli con rigor, presentando sus declaraciones en contexto y sin exagerar su significado.", verdictEn: "Your story covered Antonelli's victory rigorously, presenting his statements in context without overstating their significance.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota extrapoló declaraciones del piloto para construir una narrativa de conflicto interno en Mercedes que no tiene respaldo factual.", verdictEn: "Your story extrapolated the driver's statements to build a narrative of internal conflict at Mercedes that has no factual basis.", tone: "mala" } },
+];
+
+const storyElNino: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Científicos están monitoreando cambios recientes en la temperatura del océano Pacífico que podrían indicar el desarrollo de un nuevo episodio de El Niño en los próximos meses. Este fenómeno ocurre cuando las aguas del Pacífico ecuatorial se calientan por encima de lo normal y puede modificar los patrones de lluvia y temperatura en distintas regiones del planeta. Aunque algunos modelos climáticos sugieren que el evento podría ser más intenso de lo habitual, los investigadores señalan que todavía es temprano para confirmar su magnitud.",
+        textEn: "Scientists are monitoring recent changes in Pacific Ocean temperatures that could indicate the development of a new El Niño episode in the coming months. This phenomenon occurs when equatorial Pacific waters warm above normal levels and can modify rainfall and temperature patterns across different regions of the planet. Although some climate models suggest the event could be more intense than usual, researchers note it is still too early to confirm its magnitude.",
+        next: 1, image: "/petro.jpg"
+      },
+      {
+        text: "Señales detectadas en el océano Pacífico indican la posible formación de un 'super' evento de El Niño que podría alterar significativamente el clima del planeta en los próximos años. Este fenómeno, caracterizado por un calentamiento intenso de las aguas del Pacífico ecuatorial, tiene la capacidad de elevar las temperaturas globales y provocar cambios drásticos en los patrones climáticos de diversas regiones del mundo.",
+        textEn: "Signals detected in the Pacific Ocean indicate the possible formation of a 'super' El Niño event that could significantly alter the planet's climate in the coming years. This phenomenon, characterized by intense warming of equatorial Pacific waters, has the capacity to raise global temperatures and cause drastic changes in climate patterns across various regions of the world.",
+        next: 1, image: "/petro.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "LOS CIENTÍFICOS CONTINÚAN ANALIZANDO LOS DATOS DEL OCÉANO PARA DETERMINAR SI EL FENÓMENO REALMENTE PODRÍA INTENSIFICARSE",
+        textEn: "SCIENTISTS CONTINUE ANALYZING OCEAN DATA TO DETERMINE WHETHER THE PHENOMENON COULD ACTUALLY INTENSIFY",
+        next: 2
+      },
+      {
+        text: "EXPERTOS ADVIERTEN QUE EL POSIBLE 'SUPER EL NIÑO' PODRÍA PROVOCAR CAMBIOS CLIMÁTICOS EXTREMOS EN DISTINTAS REGIONES",
+        textEn: "EXPERTS WARN THAT THE POSSIBLE 'SUPER EL NIÑO' COULD CAUSE EXTREME CLIMATE CHANGES IN DIFFERENT REGIONS",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Los especialistas explican que El Niño puede elevar temporalmente la temperatura global al liberar hacia la atmósfera parte del calor acumulado en el océano Pacífico. Este fenómeno también modifica los patrones de precipitación, generando sequías en algunas regiones y lluvias más intensas en otras. Sin embargo, los investigadores señalan que todavía existe incertidumbre sobre la intensidad que podría alcanzar el evento y que su evolución depende de múltiples factores del sistema climático.",
+        textEn: "Specialists explain that El Niño can temporarily raise global temperatures by releasing into the atmosphere part of the heat accumulated in the Pacific Ocean. This phenomenon also modifies precipitation patterns, generating droughts in some regions and more intense rainfall in others. However, researchers note that uncertainty still exists about the intensity the event could reach and that its evolution depends on multiple factors of the climate system.",
+        next: 4
+      },
+      {
+        text: "El desarrollo de un posible 'super' El Niño podría desencadenar un aumento significativo de las temperaturas globales y provocar fenómenos climáticos extremos en diferentes partes del planeta. Episodios de calor intenso, sequías prolongadas e inundaciones más severas podrían presentarse en diversas regiones si el calentamiento del Pacífico tropical alcanza niveles especialmente altos.",
+        textEn: "The development of a possible 'super' El Niño could trigger a significant increase in global temperatures and cause extreme climate events in different parts of the planet. Intense heat episodes, prolonged droughts and more severe flooding could occur in various regions if tropical Pacific warming reaches especially high levels.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Los especialistas explican que El Niño puede elevar temporalmente la temperatura global al liberar hacia la atmósfera parte del calor acumulado en el océano Pacífico. Este fenómeno también modifica los patrones de precipitación, generando sequías en algunas regiones y lluvias más intensas en otras. Sin embargo, los investigadores señalan que todavía existe incertidumbre sobre la intensidad que podría alcanzar el evento y que su evolución depende de múltiples factores del sistema climático.",
+        textEn: "Specialists explain that El Niño can temporarily raise global temperatures by releasing into the atmosphere part of the heat accumulated in the Pacific Ocean. This phenomenon also modifies precipitation patterns, generating droughts in some regions and more intense rainfall in others. However, researchers note that uncertainty still exists about the intensity the event could reach and that its evolution depends on multiple factors of the climate system.",
+        next: 4
+      },
+      {
+        text: "El desarrollo de un posible 'super' El Niño podría desencadenar un aumento significativo de las temperaturas globales y provocar fenómenos climáticos extremos en diferentes partes del planeta. Episodios de calor intenso, sequías prolongadas e inundaciones más severas podrían presentarse en diversas regiones si el calentamiento del Pacífico tropical alcanza niveles especialmente altos.",
+        textEn: "The development of a possible 'super' El Niño could trigger a significant increase in global temperatures and cause extreme climate events in different parts of the planet. Intense heat episodes, prolonged droughts and more severe flooding could occur in various regions if tropical Pacific warming reaches especially high levels.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Por ahora, la comunidad científica continúa monitoreando la evolución de El Niño en el océano Pacífico para entender cómo podría desarrollarse durante los próximos meses. Aunque algunos modelos climáticos sugieren la posibilidad de un evento fuerte, los investigadores destacan que todavía existe incertidumbre y que será necesario analizar nuevos datos antes de confirmar su intensidad y sus posibles impactos en el clima global.",
+        textEn: "For now, the scientific community continues monitoring El Niño's evolution in the Pacific Ocean to understand how it could develop over the coming months. Although some climate models suggest the possibility of a strong event, researchers emphasize that uncertainty still exists and that new data will need to be analyzed before confirming its intensity and possible impacts on global climate.",
+        next: 6, image: "/petro.jpg"
+      },
+      {
+        text: "Organismos internacionales de meteorología han comenzado a emitir alertas preventivas para que los gobiernos de regiones vulnerables inicien protocolos de preparación ante posibles fenómenos climáticos extremos asociados al desarrollo del evento.",
+        textEn: "International meteorological organizations have begun issuing preventive alerts for governments in vulnerable regions to initiate preparedness protocols for possible extreme climate events associated with the phenomenon's development.",
+        next: 6, image: "/petro.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Es decir un 'super' El Niño podría marcar uno de los episodios climáticos más intensos de los últimos años, con la capacidad de impulsar nuevas olas de calor global y alterar de manera significativa los patrones de lluvia en distintos continentes. De confirmarse su evolución hacia un evento de gran intensidad, el fenómeno podría agravar los extremos climáticos y generar impactos importantes en diversas regiones del planeta.",
+        textEn: "In other words, a 'super' El Niño could mark one of the most intense climate episodes in recent years, with the capacity to drive new waves of global heat and significantly alter rainfall patterns across different continents. If its evolution toward a high-intensity event is confirmed, the phenomenon could worsen climate extremes and generate significant impacts in various regions of the planet.",
+        next: 7, image: "/petro.jpg"
+      },
+      {
+        text: "Algunos medios comenzaron a circular proyecciones no verificadas sobre catástrofes climáticas inminentes, generando alarma pública antes de que la comunidad científica confirmara la magnitud real del fenómeno.",
+        textEn: "Some media outlets began circulating unverified projections about imminent climate catastrophes, generating public alarm before the scientific community confirmed the actual magnitude of the phenomenon.",
+        next: 7, image: "/petro.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota informó sobre el fenómeno climático con rigor científico, presentando la incertidumbre con honestidad y sin generar alarma innecesaria.", verdictEn: "Your story reported on the climate phenomenon with scientific rigor, presenting uncertainty honestly and without generating unnecessary alarm.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota amplificó proyecciones no confirmadas, generando alarma desproporcionada sobre un fenómeno que la ciencia aún no ha podido caracterizar con certeza.", verdictEn: "Your story amplified unconfirmed projections, generating disproportionate alarm about a phenomenon that science has not yet been able to characterize with certainty.", tone: "mala" } },
+];
+
+const storyFrontera: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Los gobiernos de Colombia y Venezuela anunciaron nuevas medidas de cooperación para enfrentar el narcotráfico y otras economías ilegales que operan a lo largo de su frontera común, una zona de más de 2.200 kilómetros donde actúan diversas estructuras criminales. El acuerdo incluye el intercambio de información de inteligencia y la coordinación de acciones de seguridad entre las autoridades de ambos países.",
+        textEn: "The governments of Colombia and Venezuela announced new cooperation measures to confront drug trafficking and other illegal economies operating along their shared border, a zone of more than 2,200 kilometers where various criminal structures operate. The agreement includes intelligence information sharing and coordination of security actions between authorities from both countries.",
+        next: 1, image: "/trump.jpg"
+      },
+      {
+        text: "El nuevo acuerdo de seguridad entre Colombia y Venezuela para realizar operaciones conjuntas en la frontera ha generado inquietud entre algunos analistas, que advierten que la estrategia podría intensificar las tensiones en una región donde operan diversos grupos armados y redes del narcotráfico. La extensa zona limítrofe ha sido durante años un escenario complejo de criminalidad y presencia de actores ilegales, lo que plantea dudas sobre cómo se desarrollarán estas operaciones coordinadas.",
+        textEn: "The new security agreement between Colombia and Venezuela to carry out joint operations on the border has raised concern among some analysts, who warn that the strategy could intensify tensions in a region where various armed groups and drug trafficking networks operate. The extensive border zone has for years been a complex scenario of criminality and illegal actors, raising questions about how these coordinated operations will unfold.",
+        next: 1, image: "/trump.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "AUTORIDADES DE AMBOS PAÍSES EXPLICAN CÓMO FUNCIONARÁ LA COOPERACIÓN Y LAS OPERACIONES CONJUNTAS EN LA FRONTERA",
+        textEn: "AUTHORITIES FROM BOTH COUNTRIES EXPLAIN HOW THE COOPERATION AND JOINT OPERATIONS ON THE BORDER WILL WORK",
+        next: 2
+      },
+      {
+        text: "EXPERTOS ADVIERTEN QUE LAS OPERACIONES COORDINADAS PODRÍAN AUMENTAR EL RIESGO DE ENFRENTAMIENTOS EN LA FRONTERA",
+        textEn: "EXPERTS WARN THAT COORDINATED OPERATIONS COULD INCREASE THE RISK OF CONFRONTATIONS ON THE BORDER",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "El anuncio fue realizado por el ministro de Defensa de Colombia, Pedro Arnulfo Sánchez, tras una reunión en Caracas con representantes del Ministerio de Defensa de Venezuela. Durante el encuentro se acordó fortalecer el intercambio de información de inteligencia y desarrollar operaciones espejo en ambos lados de la frontera, una estrategia que busca actuar simultáneamente en los dos territorios para debilitar las redes de narcotráfico, minería ilegal y otras economías ilícitas que afectan a las comunidades fronterizas.",
+        textEn: "The announcement was made by Colombia's Defense Minister, Pedro Arnulfo Sánchez, following a meeting in Caracas with representatives from Venezuela's Defense Ministry. During the meeting, it was agreed to strengthen intelligence information sharing and develop mirror operations on both sides of the border, a strategy that seeks to act simultaneously in both territories to weaken drug trafficking networks, illegal mining and other illicit economies affecting border communities.",
+        next: 4
+      },
+      {
+        text: "El plan contempla la realización de operaciones simultáneas en ambos lados de la frontera para atacar las rutas utilizadas por redes de narcotráfico y otras economías ilegales. Sin embargo, la presencia de grupos armados en varias zonas fronterizas plantea el riesgo de que estas intervenciones desencadenen enfrentamientos o aumenten la presión sobre comunidades que ya viven en medio de dinámicas de violencia asociadas al control territorial de estas organizaciones.",
+        textEn: "The plan contemplates simultaneous operations on both sides of the border to target routes used by drug trafficking networks and other illegal economies. However, the presence of armed groups in various border areas raises the risk that these interventions could trigger confrontations or increase pressure on communities already living amid dynamics of violence associated with these organizations' territorial control.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "El anuncio fue realizado por el ministro de Defensa de Colombia, Pedro Arnulfo Sánchez, tras una reunión en Caracas con representantes del Ministerio de Defensa de Venezuela. Durante el encuentro se acordó fortalecer el intercambio de información de inteligencia y desarrollar operaciones espejo en ambos lados de la frontera, una estrategia que busca actuar simultáneamente en los dos territorios para debilitar las redes de narcotráfico, minería ilegal y otras economías ilícitas que afectan a las comunidades fronterizas.",
+        textEn: "The announcement was made by Colombia's Defense Minister, Pedro Arnulfo Sánchez, following a meeting in Caracas with representatives from Venezuela's Defense Ministry. During the meeting, it was agreed to strengthen intelligence information sharing and develop mirror operations on both sides of the border, a strategy that seeks to act simultaneously in both territories to weaken drug trafficking networks, illegal mining and other illicit economies affecting border communities.",
+        next: 4
+      },
+      {
+        text: "El plan contempla la realización de operaciones simultáneas en ambos lados de la frontera para atacar las rutas utilizadas por redes de narcotráfico y otras economías ilegales. Sin embargo, la presencia de grupos armados en varias zonas fronterizas plantea el riesgo de que estas intervenciones desencadenen enfrentamientos o aumenten la presión sobre comunidades que ya viven en medio de dinámicas de violencia asociadas al control territorial de estas organizaciones.",
+        textEn: "The plan contemplates simultaneous operations on both sides of the border to target routes used by drug trafficking networks and other illegal economies. However, the presence of armed groups in various border areas raises the risk that these interventions could trigger confrontations or increase pressure on communities already living amid dynamics of violence associated with these organizations' territorial control.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Las autoridades señalaron que la cooperación entre Colombia y Venezuela busca fortalecer la seguridad en la frontera y afectar las estructuras criminales que utilizan esta región como corredor para el narcotráfico. El intercambio de información y las operaciones coordinadas forman parte de una estrategia para enfrentar la criminalidad transnacional y mejorar las condiciones de seguridad en las comunidades fronterizas.",
+        textEn: "Authorities indicated that cooperation between Colombia and Venezuela seeks to strengthen security on the border and disrupt the criminal structures that use this region as a corridor for drug trafficking. Information sharing and coordinated operations are part of a strategy to confront transnational crime and improve security conditions in border communities.",
+        next: 6, image: "/trump.jpg"
+      },
+      {
+        text: "Organizaciones de derechos humanos que trabajan en la zona fronteriza señalaron que cualquier operación coordinada debe incluir protocolos claros de protección para las comunidades civiles que habitan estas regiones, a fin de evitar que sean afectadas por los operativos de seguridad.",
+        textEn: "Human rights organizations working in the border area noted that any coordinated operation must include clear protection protocols for the civilian communities inhabiting these regions, to prevent them from being affected by security operations.",
+        next: 6, image: "/trump.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "El nuevo esquema de operaciones conjuntas en la frontera abre un escenario complejo para una región donde históricamente han operado múltiples grupos armados y redes del narcotráfico. Analistas advierten que, si la coordinación entre ambos gobiernos no se maneja con precisión, las intervenciones podrían aumentar la tensión en el territorio y desencadenar nuevos episodios de violencia en una de las zonas más sensibles de la región.",
+        textEn: "The new joint operations scheme on the border opens a complex scenario for a region where multiple armed groups and drug trafficking networks have historically operated. Analysts warn that if coordination between both governments is not handled precisely, interventions could increase tension in the territory and trigger new episodes of violence in one of the region's most sensitive areas.",
+        next: 7, image: "/trump.jpg"
+      },
+      {
+        text: "Fuentes sin confirmar comenzaron a circular en redes sociales afirmando que las operaciones ya habían generado enfrentamientos en zonas fronterizas, información que no fue verificada por ninguna autoridad oficial de los dos países.",
+        textEn: "Unconfirmed sources began circulating on social media claiming that operations had already generated confrontations in border areas, information that was not verified by any official authority from either country.",
+        next: 7, image: "/trump.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota cubrió el acuerdo fronterizo con equilibrio, presentando tanto los objetivos del plan como las advertencias de expertos sin tomar partido.", verdictEn: "Your story covered the border agreement with balance, presenting both the plan's objectives and expert warnings without taking sides.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota amplificó información no verificada sobre la frontera, generando alarma innecesaria en una situación que requiere cobertura precisa y responsable.", verdictEn: "Your story amplified unverified information about the border, generating unnecessary alarm in a situation that requires precise and responsible coverage.", tone: "mala" } },
+];
+
+const storyIA: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "El avance de la inteligencia artificial generativa está generando un intenso debate sobre el futuro del trabajo. Mientras algunas personas temen que las máquinas puedan reemplazar empleos humanos, varios académicos señalan que estas tecnologías también podrían convertirse en herramientas que potencien las capacidades de los trabajadores y transformen la manera en que se realizan muchas tareas.",
+        textEn: "The advance of generative artificial intelligence is generating an intense debate about the future of work. While some people fear that machines could replace human jobs, several academics note that these technologies could also become tools that enhance workers' capabilities and transform the way many tasks are performed.",
+        next: 1, image: "/activismo.jpg"
+      },
+      {
+        text: "El rápido crecimiento de la inteligencia artificial generativa está provocando preocupación en distintos sectores laborales ante la posibilidad de que miles de empleos sean reemplazados por sistemas capaces de escribir, analizar información y automatizar tareas que antes requerían intervención humana. El avance de estas tecnologías ha encendido el debate sobre hasta qué punto las máquinas podrían asumir funciones que tradicionalmente han sido realizadas por trabajadores.",
+        textEn: "The rapid growth of generative artificial intelligence is causing concern across different labor sectors over the possibility that thousands of jobs could be replaced by systems capable of writing, analyzing information and automating tasks that previously required human intervention. The advance of these technologies has sparked debate about the extent to which machines could take over functions traditionally performed by workers.",
+        next: 1, image: "/activismo.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "EXPERTOS EXPLICAN CÓMO LA INTELIGENCIA ARTIFICIAL PODRÍA TRANSFORMAR LOS EMPLEOS Y CREAR NUEVAS FORMAS DE TRABAJO",
+        textEn: "EXPERTS EXPLAIN HOW ARTIFICIAL INTELLIGENCE COULD TRANSFORM JOBS AND CREATE NEW FORMS OF WORK",
+        next: 2
+      },
+      {
+        text: "EL AVANCE DE LA INTELIGENCIA ARTIFICIAL PLANTEA INTERROGANTES SOBRE CUÁNTOS EMPLEOS PODRÍAN DESAPARECER EN LOS PRÓXIMOS AÑOS",
+        textEn: "THE ADVANCE OF ARTIFICIAL INTELLIGENCE RAISES QUESTIONS ABOUT HOW MANY JOBS COULD DISAPPEAR IN THE COMING YEARS",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Especialistas señalan que el impacto de la inteligencia artificial puede entenderse como una evolución del trabajo más que como su desaparición. Algunos académicos proponen una pirámide de alfabetización en IA que incluye a los usuarios de herramientas tecnológicas, los desarrolladores que integran estas soluciones en productos y servicios, y los investigadores que trabajan en mejorar los modelos existentes. En este escenario, el reto principal consiste en desarrollar habilidades para interactuar de forma crítica con estas tecnologías, comprender sus límites y utilizarlas de manera responsable en distintos ámbitos profesionales.",
+        textEn: "Specialists note that the impact of artificial intelligence can be understood as an evolution of work rather than its disappearance. Some academics propose an AI literacy pyramid that includes users of technological tools, developers who integrate these solutions into products and services, and researchers working to improve existing models. In this scenario, the main challenge consists of developing skills to interact critically with these technologies, understand their limits and use them responsibly across different professional fields.",
+        next: 4
+      },
+      {
+        text: "El avance de la inteligencia artificial ya está generando cambios visibles en varios sectores laborales. Informes citados por analistas advierten que millones de trabajadores en áreas como atención al cliente podrían ver amenazados sus empleos debido a la automatización, mientras que otras ocupaciones podrían experimentar recortes significativos a medida que las empresas adoptan sistemas capaces de realizar tareas administrativas, análisis de datos y generación de contenido con mayor rapidez que los humanos.",
+        textEn: "The advance of artificial intelligence is already generating visible changes in several labor sectors. Reports cited by analysts warn that millions of workers in areas such as customer service could see their jobs threatened by automation, while other occupations could experience significant cuts as companies adopt systems capable of performing administrative tasks, data analysis and content generation faster than humans.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Especialistas señalan que el impacto de la inteligencia artificial puede entenderse como una evolución del trabajo más que como su desaparición. Algunos académicos proponen una pirámide de alfabetización en IA que incluye a los usuarios de herramientas tecnológicas, los desarrolladores que integran estas soluciones en productos y servicios, y los investigadores que trabajan en mejorar los modelos existentes. En este escenario, el reto principal consiste en desarrollar habilidades para interactuar de forma crítica con estas tecnologías, comprender sus límites y utilizarlas de manera responsable en distintos ámbitos profesionales.",
+        textEn: "Specialists note that the impact of artificial intelligence can be understood as an evolution of work rather than its disappearance. Some academics propose an AI literacy pyramid that includes users of technological tools, developers who integrate these solutions into products and services, and researchers working to improve existing models. In this scenario, the main challenge consists of developing skills to interact critically with these technologies, understand their limits and use them responsibly across different professional fields.",
+        next: 4
+      },
+      {
+        text: "El avance de la inteligencia artificial ya está generando cambios visibles en varios sectores laborales. Informes citados por analistas advierten que millones de trabajadores en áreas como atención al cliente podrían ver amenazados sus empleos debido a la automatización, mientras que otras ocupaciones podrían experimentar recortes significativos a medida que las empresas adoptan sistemas capaces de realizar tareas administrativas, análisis de datos y generación de contenido con mayor rapidez que los humanos.",
+        textEn: "The advance of artificial intelligence is already generating visible changes in several labor sectors. Reports cited by analysts warn that millions of workers in areas such as customer service could see their jobs threatened by automation, while other occupations could experience significant cuts as companies adopt systems capable of performing administrative tasks, data analysis and content generation faster than humans.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Para los expertos, el desarrollo de la inteligencia artificial representa un cambio profundo en el mundo laboral, pero no necesariamente la desaparición del trabajo humano. A lo largo de la historia, las revoluciones tecnológicas han transformado los empleos existentes y han dado origen a nuevas profesiones, por lo que el desafío actual consiste en adaptarse, desarrollar nuevas habilidades y aprovechar estas herramientas para ampliar las capacidades humanas.",
+        textEn: "For experts, the development of artificial intelligence represents a profound change in the labor world, but not necessarily the disappearance of human work. Throughout history, technological revolutions have transformed existing jobs and given rise to new professions, so the current challenge consists of adapting, developing new skills and leveraging these tools to expand human capabilities.",
+        next: 6, image: "/activismo.jpg"
+      },
+      {
+        text: "Investigadores en educación y formación profesional señalan que los sistemas educativos deben comenzar a integrar competencias digitales y de pensamiento crítico desde etapas tempranas, para preparar a las nuevas generaciones para un mercado laboral en el que la colaboración entre humanos e inteligencia artificial será cada vez más común.",
+        textEn: "Researchers in education and professional training note that educational systems must begin integrating digital competencies and critical thinking from early stages, to prepare new generations for a labor market in which collaboration between humans and artificial intelligence will become increasingly common.",
+        next: 6, image: "/activismo.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "El crecimiento acelerado de la inteligencia artificial podría marcar el inicio de una transformación laboral sin precedentes, en la que millones de trabajadores enfrenten la posibilidad de ser reemplazados por sistemas automatizados capaces de ejecutar tareas cada vez más complejas. A medida que las empresas adopten estas tecnologías para reducir costos y aumentar la productividad, el mercado laboral podría experimentar una presión creciente que obligue a muchos trabajadores a competir con máquinas en un escenario de mayor incertidumbre económica.",
+        textEn: "The accelerated growth of artificial intelligence could mark the beginning of an unprecedented labor transformation, in which millions of workers face the possibility of being replaced by automated systems capable of executing increasingly complex tasks. As companies adopt these technologies to reduce costs and increase productivity, the labor market could experience growing pressure that forces many workers to compete with machines in a scenario of greater economic uncertainty.",
+        next: 7, image: "/activismo.jpg"
+      },
+      {
+        text: "Proyecciones sin respaldo metodológico claro comenzaron a circular en medios, afirmando que la mayoría de los empleos actuales desaparecerían en menos de una década, generando un debate público basado en cifras que la comunidad académica no ha podido verificar.",
+        textEn: "Projections without clear methodological backing began circulating in media, claiming that most current jobs would disappear in less than a decade, generating a public debate based on figures that the academic community has not been able to verify.",
+        next: 7, image: "/activismo.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota abordó el debate sobre la IA y el trabajo con equilibrio, presentando distintas perspectivas sin caer en el alarmismo ni en el optimismo sin fundamento.", verdictEn: "Your story addressed the AI and work debate with balance, presenting different perspectives without falling into alarmism or unfounded optimism.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota amplificó proyecciones alarmistas sobre el futuro del trabajo sin el respaldo científico necesario, contribuyendo a la desinformación sobre un tema complejo.", verdictEn: "Your story amplified alarmist projections about the future of work without the necessary scientific backing, contributing to misinformation about a complex topic.", tone: "mala" } },
+];
+
+const storyVacuna: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Un grupo de científicos en Estados Unidos presentó una vacuna nasal experimental que en pruebas de laboratorio mostró resultados prometedores frente a distintos virus, bacterias e incluso algunos desencadenantes alérgicos. El estudio, publicado en la revista Science, propone una estrategia diferente a las vacunas tradicionales al intentar reforzar la coordinación entre distintos mecanismos del sistema inmunológico.",
+        textEn: "A group of scientists in the United States presented an experimental nasal vaccine that in laboratory tests showed promising results against various viruses, bacteria and even some allergic triggers. The study, published in the journal Science, proposes a different strategy from traditional vaccines by attempting to strengthen coordination between different mechanisms of the immune system.",
+        next: 1, image: "/science-fake.jpg"
+      },
+      {
+        text: "Un equipo de investigadores en Estados Unidos desarrolló una vacuna nasal experimental diseñada para actuar contra múltiples virus, bacterias y hasta alergias al mismo tiempo. El enfoque busca modificar la forma en que el sistema inmunológico responde a distintas amenazas respiratorias, lo que abre el debate sobre cómo podría reaccionar el organismo ante una intervención que altera varios mecanismos de defensa simultáneamente.",
+        textEn: "A team of researchers in the United States developed an experimental nasal vaccine designed to act against multiple viruses, bacteria and even allergies at the same time. The approach seeks to modify the way the immune system responds to different respiratory threats, opening debate about how the body could react to an intervention that alters several defense mechanisms simultaneously.",
+        next: 1, image: "/science-fake.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "EL ESTUDIO EXPLICA CÓMO LA VACUNA INTENTA MEJORAR LA COOPERACIÓN ENTRE DIFERENTES DEFENSAS DEL SISTEMA INMUNOLÓGICO",
+        textEn: "THE STUDY EXPLAINS HOW THE VACCINE ATTEMPTS TO IMPROVE COOPERATION BETWEEN DIFFERENT IMMUNE SYSTEM DEFENSES",
+        next: 2
+      },
+      {
+        text: "LA NUEVA ESTRATEGIA INMUNOLÓGICA PLANTEA INTERROGANTES SOBRE CÓMO REACCIONARÁ EL SISTEMA INMUNE ANTE UNA ACTIVACIÓN MÁS AMPLIA",
+        textEn: "THE NEW IMMUNOLOGICAL STRATEGY RAISES QUESTIONS ABOUT HOW THE IMMUNE SYSTEM WILL REACT TO A BROADER ACTIVATION",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "La vacuna fue administrada como aerosol nasal en modelos experimentales y mostró protección frente a distintos virus respiratorios, incluido COVID-19, además de bacterias asociadas a infecciones hospitalarias como Staphylococcus aureus. Según los investigadores, el objetivo no es reemplazar las vacunas tradicionales, sino mejorar la cooperación entre la inmunidad innata, la primera línea de defensa del organismo y la inmunidad adaptativa, que responde con mayor precisión y memoria frente a los patógenos.",
+        textEn: "The vaccine was administered as a nasal aerosol in experimental models and showed protection against various respiratory viruses, including COVID-19, as well as bacteria associated with hospital infections such as Staphylococcus aureus. According to researchers, the goal is not to replace traditional vaccines, but to improve cooperation between innate immunity, the body's first line of defense, and adaptive immunity, which responds with greater precision and memory against pathogens.",
+        next: 4
+      },
+      {
+        text: "El experimento mostró que la vacuna puede activar de manera más prolongada la respuesta del sistema inmunológico, acelerando la reacción del organismo frente a virus y bacterias respiratorias. Sin embargo, esta estrategia implica mantener al sistema inmune en un estado de alerta más intenso de lo habitual, una intervención que podría generar preocupación entre algunos especialistas por la posibilidad de que una activación prolongada desencadene reacciones inflamatorias o respuestas inmunológicas difíciles de controlar.",
+        textEn: "The experiment showed that the vaccine can activate the immune system response for a longer period, accelerating the body's reaction to respiratory viruses and bacteria. However, this strategy involves keeping the immune system in a more intense state of alert than usual, an intervention that could raise concern among some specialists over the possibility that prolonged activation could trigger inflammatory reactions or immune responses that are difficult to control.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "La vacuna fue administrada como aerosol nasal en modelos experimentales y mostró protección frente a distintos virus respiratorios, incluido COVID-19, además de bacterias asociadas a infecciones hospitalarias como Staphylococcus aureus. Según los investigadores, el objetivo no es reemplazar las vacunas tradicionales, sino mejorar la cooperación entre la inmunidad innata, la primera línea de defensa del organismo y la inmunidad adaptativa, que responde con mayor precisión y memoria frente a los patógenos.",
+        textEn: "The vaccine was administered as a nasal aerosol in experimental models and showed protection against various respiratory viruses, including COVID-19, as well as bacteria associated with hospital infections such as Staphylococcus aureus. According to researchers, the goal is not to replace traditional vaccines, but to improve cooperation between innate immunity, the body's first line of defense, and adaptive immunity, which responds with greater precision and memory against pathogens.",
+        next: 4
+      },
+      {
+        text: "El experimento mostró que la vacuna puede activar de manera más prolongada la respuesta del sistema inmunológico, acelerando la reacción del organismo frente a virus y bacterias respiratorias. Sin embargo, esta estrategia implica mantener al sistema inmune en un estado de alerta más intenso de lo habitual, una intervención que podría generar preocupación entre algunos especialistas por la posibilidad de que una activación prolongada desencadene reacciones inflamatorias o respuestas inmunológicas difíciles de controlar.",
+        textEn: "The experiment showed that the vaccine can activate the immune system response for a longer period, accelerating the body's reaction to respiratory viruses and bacteria. However, this strategy involves keeping the immune system in a more intense state of alert than usual, an intervention that could raise concern among some specialists over the possibility that prolonged activation could trigger inflammatory reactions or immune responses that are difficult to control.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Los investigadores señalan que los resultados obtenidos hasta ahora son prometedores, aunque todavía se encuentran en una etapa temprana de investigación. El siguiente paso será realizar ensayos en humanos para comprobar si la vacuna mantiene su eficacia y seguridad fuera del laboratorio. Si los resultados se confirman, este enfoque podría abrir nuevas posibilidades para prevenir distintas infecciones respiratorias mediante estrategias inmunológicas más amplias.",
+        textEn: "Researchers note that the results obtained so far are promising, although they are still at an early stage of research. The next step will be to conduct human trials to verify whether the vaccine maintains its efficacy and safety outside the laboratory. If the results are confirmed, this approach could open new possibilities for preventing various respiratory infections through broader immunological strategies.",
+        next: 6, image: "/science-fake.jpg"
+      },
+      {
+        text: "Expertos independientes consultados por medios especializados destacaron que el diseño del estudio es sólido, aunque señalaron que será fundamental esperar los resultados de ensayos clínicos en humanos antes de proyectar aplicaciones a gran escala de esta tecnología.",
+        textEn: "Independent experts consulted by specialized media highlighted that the study design is solid, although they noted it will be essential to wait for the results of human clinical trials before projecting large-scale applications of this technology.",
+        next: 6, image: "/science-fake.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Aunque el estudio plantea una idea innovadora, el desarrollo de una vacuna capaz de modificar de forma amplia la respuesta del sistema inmunológico también genera interrogantes sobre sus posibles efectos a largo plazo. Antes de llegar a su aplicación en personas, los científicos deberán demostrar que mantener al sistema inmune en un estado de alerta más prolongado no produce reacciones adversas o desequilibrios inmunológicos que puedan afectar la salud de quienes reciban este tipo de intervención.",
+        textEn: "Although the study raises an innovative idea, the development of a vaccine capable of broadly modifying the immune system response also raises questions about its possible long-term effects. Before reaching application in humans, scientists will need to demonstrate that keeping the immune system in a more prolonged state of alert does not produce adverse reactions or immune imbalances that could affect the health of those receiving this type of intervention.",
+        next: 7, image: "/science-fake.jpg"
+      },
+      {
+        text: "Algunos titulares comenzaron a circular en redes sociales afirmando que la vacuna ya había sido aprobada para uso humano, información incorrecta que los propios investigadores debieron desmentir públicamente antes de que se extendiera más la confusión.",
+        textEn: "Some headlines began circulating on social media claiming the vaccine had already been approved for human use, incorrect information that the researchers themselves had to publicly deny before the confusion spread further.",
+        next: 7, image: "/science-fake.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota cubrió el avance científico con rigor, contextualizando el hallazgo sin exagerar sus alcances ni minimizar la etapa en que se encuentra la investigación.", verdictEn: "Your story covered the scientific advance rigorously, contextualizing the finding without overstating its scope or minimizing the stage the research is at.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota amplificó el hallazgo más allá de lo que el estudio permite concluir, contribuyendo a la desinformación sobre un avance que aún está en etapa experimental.", verdictEn: "Your story amplified the finding beyond what the study allows to conclude, contributing to misinformation about an advance that is still in the experimental stage.", tone: "mala" } },
+];
+
+const storyEclipse: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Un eclipse lunar ocurre cuando la Tierra se alinea entre el Sol y la Luna, proyectando su sombra sobre el satélite. Durante este proceso, la Luna puede adquirir un tono rojizo debido a la forma en que la atmósfera terrestre filtra la luz solar.",
+        textEn: "A lunar eclipse occurs when the Earth aligns between the Sun and the Moon, casting its shadow on the satellite. During this process, the Moon can take on a reddish hue due to the way the Earth's atmosphere filters sunlight.",
+        next: 1, image: "/ciencia.jpg"
+      },
+      {
+        text: "El fenómeno se produce cuando la Luna atraviesa la sombra de la Tierra. En lugar de desaparecer, el satélite cambia de color y puede verse rojizo durante la fase conocida como totalidad.",
+        textEn: "The phenomenon occurs when the Moon passes through Earth's shadow. Instead of disappearing, the satellite changes color and can appear reddish during the phase known as totality.",
+        next: 1, image: "/ciencia.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "EL TONO ROJIZO APARECE CUANDO LA LUZ SOLAR ATRAVIESA LA ATMÓSFERA ANTES DE LLEGAR A LA LUNA",
+        textEn: "THE REDDISH HUE APPEARS WHEN SUNLIGHT PASSES THROUGH THE ATMOSPHERE BEFORE REACHING THE MOON",
+        next: 2
+      },
+      {
+        text: "DURANTE EL ECLIPSE, LA LUNA CAMBIARÁ DE COLOR DURANTE APROXIMADAMENTE UNA HORA",
+        textEn: "DURING THE ECLIPSE, THE MOON WILL CHANGE COLOR FOR APPROXIMATELY ONE HOUR",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Según explican agencias espaciales como la NASA, el color rojizo es un efecto óptico producido por la atmósfera terrestre.",
+        textEn: "According to space agencies such as NASA, the reddish color is an optical effect produced by the Earth's atmosphere.",
+        next: 4
+      },
+      {
+        text: "El fenómeno ocurre porque la luz del Sol se dispersa al atravesar la atmósfera antes de alcanzar la superficie lunar.",
+        textEn: "The phenomenon occurs because sunlight scatters as it passes through the atmosphere before reaching the lunar surface.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Según explican agencias espaciales como la NASA, el color rojizo es un efecto óptico producido por la atmósfera terrestre.",
+        textEn: "According to space agencies such as NASA, the reddish color is an optical effect produced by the Earth's atmosphere.",
+        next: 4
+      },
+      {
+        text: "El fenómeno ocurre porque la luz del Sol se dispersa al atravesar la atmósfera antes de alcanzar la superficie lunar.",
+        textEn: "The phenomenon occurs because sunlight scatters as it passes through the atmosphere before reaching the lunar surface.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "El eclipse del 3 de marzo podrá observarse en distintas regiones del planeta, aunque la visibilidad dependerá del lugar desde donde se observe.",
+        textEn: "The March 3rd eclipse will be observable in different regions of the planet, although visibility will depend on the location from which it is observed.",
+        next: 6, image: "/ciencia.jpg"
+      },
+      {
+        text: "Organizaciones astronómicas han publicado guías con los horarios exactos del eclipse según cada zona horaria, para que los observadores puedan planificar con anticipación el mejor momento para ver el fenómeno.",
+        textEn: "Astronomical organizations have published guides with the exact eclipse times for each time zone, so observers can plan in advance the best moment to watch the phenomenon.",
+        next: 6, image: "/ciencia.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "La intensidad del color puede variar dependiendo de las condiciones de la atmósfera terrestre en ese momento.",
+        textEn: "The intensity of the color can vary depending on the conditions of the Earth's atmosphere at that moment.",
+        next: 7, image: "/ciencia.jpg"
+      },
+      {
+        text: "Algunos contenidos en redes sociales comenzaron a vincular el eclipse con predicciones sobre eventos naturales extremos, información sin ningún respaldo científico que generó confusión entre usuarios que no diferenciaron entre astronomía y superstición.",
+        textEn: "Some social media content began linking the eclipse to predictions about extreme natural events, information with no scientific backing that generated confusion among users who did not differentiate between astronomy and superstition.",
+        next: 7, image: "/ciencia.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota explicó el fenómeno astronómico con claridad y precisión científica, ayudando al lector a entender qué ocurre y cómo observarlo.", verdictEn: "Your story explained the astronomical phenomenon with clarity and scientific precision, helping readers understand what happens and how to observe it.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota mezcló información astronómica con contenido no verificado, generando confusión sobre un fenómeno que tiene una explicación científica clara.", verdictEn: "Your story mixed astronomical information with unverified content, generating confusion about a phenomenon that has a clear scientific explanation.", tone: "mala" } },
+];
+
+const storyMascotas: StoryNode[] = [
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Varios estudios han encontrado que las personas que conviven con mascotas suelen presentar indicadores de salud positivos. Entre ellos se mencionan menores niveles de estrés, presión arterial más baja y una mayor actividad física relacionada con el cuidado del animal.",
+        textEn: "Several studies have found that people who live with pets tend to show positive health indicators. Among them are lower stress levels, lower blood pressure and greater physical activity related to animal care.",
+        next: 1, image: "/ia.jpg"
+      },
+      {
+        text: "Algunas investigaciones han observado que quienes tienen mascotas muestran ciertos indicadores de salud favorables. Sin embargo, los científicos señalan que estos resultados pueden estar relacionados con otros factores del estilo de vida de las personas.",
+        textEn: "Some research has observed that pet owners show certain favorable health indicators. However, scientists note that these results may be related to other lifestyle factors of the individuals.",
+        next: 1, image: "/ia.jpg"
+      },
+    ],
+  },
+  {
+    type: "subtitle",
+    text: "",
+    options: [
+      {
+        text: "LOS INVESTIGADORES DESTACAN QUE PASEAR A LOS PERROS PUEDE INCENTIVAR LA ACTIVIDAD FÍSICA DIARIA",
+        textEn: "RESEARCHERS HIGHLIGHT THAT WALKING DOGS CAN ENCOURAGE DAILY PHYSICAL ACTIVITY",
+        next: 2
+      },
+      {
+        text: "OTROS ESPECIALISTAS RECUERDAN QUE NO TODOS LOS DUEÑOS MANTIENEN UNA RUTINA CONSTANTE DE EJERCICIO CON SUS MASCOTAS",
+        textEn: "OTHER SPECIALISTS POINT OUT THAT NOT ALL OWNERS MAINTAIN A CONSTANT EXERCISE ROUTINE WITH THEIR PETS",
+        next: 3
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Algunos expertos consideran que uno de los principales beneficios de tener un perro es la actividad física que implica su cuidado. Las caminatas diarias ayudan a muchas personas a cumplir con las recomendaciones de ejercicio establecidas por organismos de salud; Además, este hábito puede contribuir a mejorar la circulación, fortalecer el sistema cardiovascular y promover un estilo de vida más activo.",
+        textEn: "Some experts consider that one of the main benefits of having a dog is the physical activity involved in its care. Daily walks help many people meet the exercise recommendations established by health organizations. Additionally, this habit can help improve circulation, strengthen the cardiovascular system and promote a more active lifestyle.",
+        next: 4
+      },
+      {
+        text: "No obstante, algunos investigadores advierten que la relación entre mascotas y salud puede ser más compleja. En ciertos casos, las personas que ya tienen hábitos saludables son las que con mayor frecuencia deciden adoptar animales; Por esta razón, algunos estudios sugieren que los beneficios observados podrían estar relacionados tanto con el estilo de vida previo como con la presencia de la mascota.",
+        textEn: "However, some researchers warn that the relationship between pets and health may be more complex. In certain cases, people who already have healthy habits are the ones who most frequently decide to adopt animals. For this reason, some studies suggest that the observed benefits could be related both to the previous lifestyle and to the presence of the pet.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text",
+    text: "",
+    options: [
+      {
+        text: "Algunos expertos consideran que uno de los principales beneficios de tener un perro es la actividad física que implica su cuidado. Las caminatas diarias ayudan a muchas personas a cumplir con las recomendaciones de ejercicio establecidas por organismos de salud; Además, este hábito puede contribuir a mejorar la circulación, fortalecer el sistema cardiovascular y promover un estilo de vida más activo.",
+        textEn: "Some experts consider that one of the main benefits of having a dog is the physical activity involved in its care. Daily walks help many people meet the exercise recommendations established by health organizations. Additionally, this habit can help improve circulation, strengthen the cardiovascular system and promote a more active lifestyle.",
+        next: 4
+      },
+      {
+        text: "No obstante, algunos investigadores advierten que la relación entre mascotas y salud puede ser más compleja. En ciertos casos, las personas que ya tienen hábitos saludables son las que con mayor frecuencia deciden adoptar animales; Por esta razón, algunos estudios sugieren que los beneficios observados podrían estar relacionados tanto con el estilo de vida previo como con la presencia de la mascota.",
+        textEn: "However, some researchers warn that the relationship between pets and health may be more complex. In certain cases, people who already have healthy habits are the ones who most frequently decide to adopt animals. For this reason, some studies suggest that the observed benefits could be related both to the previous lifestyle and to the presence of the pet.",
+        next: 5
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Más allá del ejercicio, varios científicos destacan que las mascotas también pueden influir en la salud mental. La compañía diaria puede reducir la sensación de soledad, disminuir el estrés y generar rutinas que favorecen el bienestar emocional.\n\nEn especial para personas que viven solas, el vínculo con un animal puede convertirse en una fuente constante de apoyo y motivación.",
+        textEn: "Beyond exercise, several scientists highlight that pets can also influence mental health. Daily companionship can reduce the feeling of loneliness, decrease stress and generate routines that promote emotional wellbeing.\n\nEspecially for people who live alone, the bond with an animal can become a constant source of support and motivation.",
+        next: 6, image: "/ia.jpg"
+      },
+      {
+        text: "Investigadores también han explorado cómo el vínculo emocional con las mascotas puede activar mecanismos neurológicos relacionados con el bienestar, como la liberación de oxitocina, una hormona asociada al afecto y la reducción del estrés.",
+        textEn: "Researchers have also explored how the emotional bond with pets can activate neurological mechanisms related to wellbeing, such as the release of oxytocin, a hormone associated with affection and stress reduction.",
+        next: 6, image: "/ia.jpg"
+      },
+    ],
+  },
+  {
+    type: "text-full",
+    text: "",
+    options: [
+      {
+        text: "Sin embargo, los especialistas también recuerdan que tener una mascota implica responsabilidades importantes. El cuidado diario, los gastos veterinarios y el tiempo necesario para atender al animal pueden representar un desafío para algunos propietarios.\n\nPor ello, los expertos recomiendan que la decisión de adoptar un animal no se base únicamente en posibles beneficios para la salud.",
+        textEn: "However, specialists also remind that having a pet involves important responsibilities. Daily care, veterinary expenses and the time needed to attend to the animal can represent a challenge for some owners.\n\nFor this reason, experts recommend that the decision to adopt an animal should not be based solely on possible health benefits.",
+        next: 7, image: "/ia.jpg"
+      },
+      {
+        text: "Titulares en redes sociales comenzaron a circular afirmando que tener un perro garantiza una vida más larga, simplificando de forma engañosa los hallazgos de estudios que en realidad señalan asociaciones estadísticas y no relaciones de causa y efecto.",
+        textEn: "Headlines on social media began circulating claiming that having a dog guarantees a longer life, misleadingly simplifying the findings of studies that actually point to statistical associations and not cause-and-effect relationships.",
+        next: 7, image: "/ia.jpg"
+      },
+    ],
+  },
+  { text: "", ending: { verdict: "Tu nota presentó la evidencia científica sobre mascotas y salud con precisión, sin exagerar los beneficios ni ignorar las limitaciones de los estudios.", verdictEn: "Your story presented the scientific evidence on pets and health accurately, without overstating the benefits or ignoring the limitations of the studies.", tone: "buena" } },
+  { text: "", ending: { verdict: "Tu nota simplificó los hallazgos científicos de forma engañosa, presentando asociaciones estadísticas como garantías de salud que los estudios no respaldan.", verdictEn: "Your story misleadingly simplified scientific findings, presenting statistical associations as health guarantees that the studies do not support.", tone: "mala" } },
 ];
 
 const stories: Record<string, StoryNode[]> = {
-  "1": storyF1, "2": storyF1, "3": storyF1, "4": storyF1,
-  "5": storyF1, "6": storyF1, "7": storyF1, "8": storyF1,
-  "9": storyF1, "10": storyF1, "11": storyF1, "12": storyF1,
+  "1": storyBayern, "2": storyVenezuela, "3": storyPresupuesto,
+  "4": storyPolilla, "5": storyValdiri, "6": storyAntonelli,
+  "7": storyElNino, "8": storyFrontera, "9": storyIA,
+  "10": storyVacuna, "11": storyEclipse, "12": storyMascotas,
 };
+
+const NOTICIA_1_TITLE    = { es: "Polémica arbitral marca el partido del Bayern Múnich y genera apelación del club", en: "Controversial refereeing marks Bayern Munich match and prompts club appeal" };
+const NOTICIA_1_SUBTITLE = { es: "El Bayern Múnich presentó una apelación ante la Federación Alemana para revisar la expulsión del colombiano Luis Díaz en el partido contra Bayer Leverkusen.", en: "Bayern Munich filed an appeal with the German Football Federation to review the red card given to Colombian player Luis Díaz in the match against Bayer Leverkusen." };
+const NOTICIA_1_IMAGE    = "/futbol.jpg";
+const NOTICIA_1_TAGS     = { es: ["DEPORTES", "FÚTBOL"], en: ["SPORTS", "FOOTBALL"] };
+const NOTICIA_1_INTRO    = { es: "El árbitro del encuentro reconoció después que la decisión pudo haber sido demasiado severa.", en: "The match referee later acknowledged that the decision may have been too harsh." };
+
+const NOTICIA_2_TITLE    = { es: "Venezuela sorprende en el Clásico Mundial de Béisbol y avanza a semifinales", en: "Venezuela stuns at the World Baseball Classic and advances to semifinals" };
+const NOTICIA_2_SUBTITLE = { es: "La selección de Venezuela derrotó 8-5 a Japón en el Clásico Mundial de Béisbol 2026, en un partido lleno de ofensiva que terminó sorprendiendo a uno de los favoritos del torneo.", en: "Venezuela defeated Japan 8-5 at the 2026 World Baseball Classic, in an offense-filled game that ended up stunning one of the tournament's favorites." };
+const NOTICIA_2_IMAGE    = "/futbol.jpg";
+const NOTICIA_2_TAGS     = { es: ["DEPORTES", "BÉISBOL"], en: ["SPORTS", "BASEBALL"] };
+const NOTICIA_2_INTRO    = { es: "Con este resultado, el equipo venezolano avanzó a las semifinales del campeonato y además aseguró su clasificación a los Juegos Olímpicos de Los Ángeles 2028, marcando un momento histórico para el béisbol del país.", en: "With this result, the Venezuelan team advanced to the championship semifinals and also secured their qualification for the 2028 Los Angeles Olympics, marking a historic moment for baseball in the country." };
+
+const NOTICIA_3_TITLE    = { es: "Debate sobre el presupuesto del deporte colombiano para 2026", en: "Debate over Colombia's sports budget for 2026" };
+const NOTICIA_3_SUBTITLE = { es: "El presupuesto destinado al deporte en Colombia para 2026 ha disminuido considerablemente, generando preocupación entre dirigentes deportivos y diferentes federaciones del país.", en: "The budget allocated to sports in Colombia for 2026 has decreased considerably, raising concern among sports leaders and various federations across the country." };
+const NOTICIA_3_IMAGE    = "/f1.jpg";
+const NOTICIA_3_TAGS     = { es: ["DEPORTES", "COLOMBIA"], en: ["SPORTS", "COLOMBIA"] };
+const NOTICIA_3_INTRO    = { es: "Atletas y organizaciones advierten que esta reducción podría afectar programas de formación, preparación deportiva y la participación de Colombia en competencias internacionales durante los próximos años.", en: "Athletes and organizations warn that this reduction could affect training programs, sports preparation and Colombia's participation in international competitions in the coming years." };
+
+const NOTICIA_4_TITLE    = { es: "Polilla habla de cartas que le dejó la Gorda Fabiola", en: "Polilla speaks about letters left by La Gorda Fabiola" };
+const NOTICIA_4_SUBTITLE = { es: "El humorista Nelson Polanía, conocido como 'Polilla', compartió recientemente algunos detalles sobre el proceso que ha vivido tras la pérdida de su esposa, la también comediante Fabiola Posada, recordada como 'La Gorda Fabiola'.", en: "Comedian Nelson Polanía, known as 'Polilla', recently shared some details about the process he has gone through after the loss of his wife, fellow comedian Fabiola Posada, known as 'La Gorda Fabiola'." };
+const NOTICIA_4_IMAGE    = "/bts.jpg";
+const NOTICIA_4_TAGS     = { es: ["FARANDULA", "COLOMBIA"], en: ["ENTERTAINMENT", "COLOMBIA"] };
+const NOTICIA_4_INTRO    = { es: "Durante una entrevista, el comediante contó que en medio del duelo comenzó a encontrar cartas y poemas escritos por ella hace varios años, los cuales hoy se han convertido en un recuerdo significativo dentro de su historia juntos.", en: "During an interview, the comedian shared that amid his grief he began finding letters and poems she had written years ago, which have now become a meaningful memory within their shared story." };
+
+const NOTICIA_5_TITLE    = { es: "Valdiri regaló esmeraldas en los 15 de su hija", en: "Valdiri gifted emeralds at her daughter's quinceañera" };
+const NOTICIA_5_SUBTITLE = { es: "La creadora de contenido Andrea Valdiri celebró los quince años de su hija Isabella con una fiesta en Cartagena que reunió a invitados del mundo digital y del entretenimiento.", en: "Content creator Andrea Valdiri celebrated her daughter Isabella's fifteenth birthday with a party in Cartagena that brought together guests from the digital and entertainment world." };
+const NOTICIA_5_IMAGE    = "/jimcarrey.jpg";
+const NOTICIA_5_TAGS     = { es: ["FARANDULA", "COLOMBIA"], en: ["ENTERTAINMENT", "COLOMBIA"] };
+const NOTICIA_5_INTRO    = { es: "Uno de los detalles que más llamó la atención fue el recuerdo entregado a los asistentes: un dije con esmeralda como símbolo de prosperidad.", en: "One of the most attention-grabbing details was the keepsake given to guests: an emerald charm as a symbol of prosperity." };
+
+const NOTICIA_6_TITLE    = { es: "F1: Antonelli gana en Shanghái y apunta alto", en: "F1: Antonelli wins in Shanghai and aims high" };
+const NOTICIA_6_SUBTITLE = { es: "El piloto italiano Kimi Antonelli vivió un fin de semana inolvidable en el Gran Premio de Shanghái, donde consiguió su primera victoria en Fórmula 1 tras una actuación que sorprendió incluso dentro de su propio equipo.", en: "Italian driver Kimi Antonelli had an unforgettable weekend at the Shanghai Grand Prix, where he secured his first Formula 1 victory with a performance that surprised even his own team." };
+const NOTICIA_6_IMAGE    = "/badbunny.jpg";
+const NOTICIA_6_TAGS     = { es: ["FARANDULA", "FÓRMULA 1"], en: ["ENTERTAINMENT", "FORMULA 1"] };
+const NOTICIA_6_INTRO    = { es: "El joven piloto de Mercedes aseguró después de la carrera que mantiene los pies en la tierra, aunque reconoce que este resultado marca un momento clave en su carrera.", en: "The young Mercedes driver said after the race that he keeps his feet on the ground, although he acknowledges this result marks a key moment in his career." };
 
 const F1_TITLE    = { es: "Pilotos cuestionan las nuevas regulaciones de la Fórmula 1", en: "Drivers Question New Formula 1 Regulations" };
 const F1_SUBTITLE = { es: "Tras las primeras carreras bajo el nuevo reglamento, varias figuras del campeonato advierten que las diferencias de velocidad y la gestión de energía podrían alterar la dinámica tradicional del deporte.", en: "After the first races under the new regulations, several championship figures warn that speed differences and energy management could alter the sport's traditional dynamics." };
@@ -79,12 +1283,72 @@ const F1_IMAGE    = "/f1.jpg";
 const F1_TAGS     = { es: ["DEPORTES", "FÓRMULA 1"], en: ["SPORTS", "FORMULA 1"] };
 const F1_INTRO    = { es: "La introducción del nuevo reglamento técnico ha generado un intenso debate dentro del paddock, donde varios pilotos y equipos cuestionan el impacto que estos cambios podrían tener en el desarrollo de las carreras.", en: "The introduction of the new technical regulations has generated an intense debate within the paddock, where several drivers and teams question the impact these changes could have on race development." };
 
-const ids = ["1","2","3","4","5","6","7","8","9","10","11","12"];
-const titles:    Record<string, { es: string; en: string }> = Object.fromEntries(ids.map(id => [id, F1_TITLE]));
-const subtitles: Record<string, { es: string; en: string }> = Object.fromEntries(ids.map(id => [id, F1_SUBTITLE]));
-const images:    Record<string, string>                      = Object.fromEntries(ids.map(id => [id, F1_IMAGE]));
-const tags:      Record<string, { es: string[]; en: string[] }> = Object.fromEntries(ids.map(id => [id, F1_TAGS]));
-const intros:    Record<string, { es: string; en: string }> = Object.fromEntries(ids.map(id => [id, F1_INTRO]));
+const NOTICIA_7_TITLE    = { es: "Científicos alertan por posible fenómeno climático 'super El Niño'", en: "Scientists warn of possible 'super El Niño' climate phenomenon" };
+const NOTICIA_7_SUBTITLE = { es: "Señales detectadas recientemente en el océano Pacífico han encendido las alertas entre científicos del clima, quienes monitorean cambios inusuales en las condiciones del mar.", en: "Signals recently detected in the Pacific Ocean have raised alarms among climate scientists, who are monitoring unusual changes in ocean conditions." };
+const NOTICIA_7_IMAGE    = "/petro.jpg";
+const NOTICIA_7_TAGS     = { es: ["SOCIAL", "CLIMA"], en: ["SOCIAL", "CLIMATE"] };
+const NOTICIA_7_INTRO    = { es: "Los expertos investigan si estos cambios podrían estar relacionados con la formación de un fenómeno climático que, de intensificarse, tendría efectos en el clima global durante los próximos meses.", en: "Experts are investigating whether these changes could be related to the formation of a climate phenomenon that, if it intensifies, would have effects on global climate over the coming months." };
+
+const NOTICIA_8_TITLE    = { es: "Colombia y Venezuela harán operaciones espejo contra el narcotráfico", en: "Colombia and Venezuela to carry out mirror operations against drug trafficking" };
+const NOTICIA_8_SUBTITLE = { es: "La frontera entre Colombia y Venezuela, una de las más extensas y complejas de América Latina, vuelve a estar en el centro del debate sobre seguridad regional. Un nuevo acuerdo entre ambos gobiernos busca enfrentar las redes criminales que operan en la zona.", en: "The border between Colombia and Venezuela, one of the most extensive and complex in Latin America, is once again at the center of the regional security debate. A new agreement between both governments seeks to confront the criminal networks operating in the area." };
+const NOTICIA_8_IMAGE    = "/trump.jpg";
+const NOTICIA_8_TAGS     = { es: ["SOCIAL", "COLOMBIA"], en: ["SOCIAL", "COLOMBIA"] };
+const NOTICIA_8_INTRO    = { es: "Las autoridades han planteado medidas como el intercambio de información de inteligencia y operaciones coordinadas en ambos lados de la frontera para combatir el narcotráfico y otras economías ilegales, aunque expertos advierten que el plan podría tener efectos delicados en una región marcada por la presencia de grupos armados.", en: "Authorities have proposed measures such as intelligence information sharing and coordinated operations on both sides of the border to combat drug trafficking and other illegal economies, although experts warn the plan could have delicate effects in a region marked by the presence of armed groups." };
+
+const NOTICIA_9_TITLE    = { es: "¿La IA va a reemplazar o potenciar a los trabajadores?", en: "Will AI replace or empower workers?" };
+const NOTICIA_9_SUBTITLE = { es: "La expansión acelerada de la inteligencia artificial está cambiando la forma en que las personas trabajan, estudian y producen conocimiento, generando transformaciones en múltiples sectores.", en: "The accelerated expansion of artificial intelligence is changing the way people work, study and produce knowledge, generating transformations across multiple sectors." };
+const NOTICIA_9_IMAGE    = "/activismo.jpg";
+const NOTICIA_9_TAGS     = { es: ["SOCIAL", "TECNOLOGÍA"], en: ["SOCIAL", "TECHNOLOGY"] };
+const NOTICIA_9_INTRO    = { es: "Mientras algunos expertos aseguran que estas tecnologías abrirán nuevas oportunidades laborales, otros advierten que su impacto podría transformar profundamente el mercado de trabajo en los próximos años.", en: "While some experts claim these technologies will open new job opportunities, others warn that their impact could profoundly transform the labor market in the coming years." };
+
+const NOTICIA_10_TITLE    = { es: "Crean una vacuna nasal que promete frenar virus, bacterias y hasta alergias", en: "Scientists create nasal vaccine that promises to stop viruses, bacteria and even allergies" };
+const NOTICIA_10_SUBTITLE = { es: "Un nuevo desarrollo científico podría cambiar la forma en que se enfrentan múltiples enfermedades respiratorias. Investigadores en Estados Unidos presentaron una vacuna nasal experimental que busca activar defensas del sistema inmunológico.", en: "A new scientific development could change the way multiple respiratory diseases are confronted. Researchers in the United States presented an experimental nasal vaccine that seeks to activate immune system defenses." };
+const NOTICIA_10_IMAGE    = "/science-fake.jpg";
+const NOTICIA_10_TAGS     = { es: ["CIENCIA", "SALUD"], en: ["SCIENCE", "HEALTH"] };
+const NOTICIA_10_INTRO    = { es: "Según los científicos, la vacuna podría ofrecer protección frente a distintos virus, bacterias e incluso algunos desencadenantes alérgicos, un enfoque que ha despertado tanto entusiasmo como preguntas dentro de la comunidad científica.", en: "According to scientists, the vaccine could offer protection against various viruses, bacteria and even some allergic triggers, an approach that has sparked both enthusiasm and questions within the scientific community." };
+
+const NOTICIA_11_TITLE    = { es: "Eclipse lunar teñirá la Luna de rojo en marzo", en: "Lunar eclipse will turn the Moon red in March" };
+const NOTICIA_11_SUBTITLE = { es: "El 3 de marzo de 2026 ocurrirá un eclipse lunar total que hará que la Luna adquiera un tono rojizo conocido como 'luna de sangre'.", en: "On March 3, 2026, a total lunar eclipse will occur that will cause the Moon to take on a reddish hue known as a 'blood moon'." };
+const NOTICIA_11_IMAGE    = "/ciencia.jpg";
+const NOTICIA_11_TAGS     = { es: ["CIENCIA", "ASTRONOMÍA"], en: ["SCIENCE", "ASTRONOMY"] };
+const NOTICIA_11_INTRO    = { es: "El fenómeno será visible en diferentes partes del mundo, aunque su intensidad y duración variarán según la ubicación geográfica.", en: "The phenomenon will be visible in different parts of the world, although its intensity and duration will vary depending on geographic location." };
+
+const NOTICIA_12_TITLE    = { es: "Mascotas y salud: lo que dicen los estudios sobre vivir con perros", en: "Pets and health: what studies say about living with dogs" };
+const NOTICIA_12_SUBTITLE = { es: "Diversos estudios científicos han analizado durante años la relación entre tener mascotas y la salud de las personas.", en: "Various scientific studies have analyzed for years the relationship between having pets and people's health." };
+const NOTICIA_12_IMAGE    = "/ia.jpg";
+const NOTICIA_12_TAGS     = { es: ["CIENCIA", "SALUD"], en: ["SCIENCE", "HEALTH"] };
+const NOTICIA_12_INTRO    = { es: "Algunas investigaciones sugieren que convivir con animales, especialmente perros, podría estar relacionado con mejores indicadores de bienestar físico y mental.", en: "Some research suggests that living with animals, especially dogs, could be associated with better indicators of physical and mental wellbeing." };
+
+const titles: Record<string, { es: string; en: string }> = {
+  "1": NOTICIA_1_TITLE, "2": NOTICIA_2_TITLE, "3": NOTICIA_3_TITLE,
+  "4": NOTICIA_4_TITLE, "5": NOTICIA_5_TITLE, "6": NOTICIA_6_TITLE,
+  "7": NOTICIA_7_TITLE, "8": NOTICIA_8_TITLE, "9": NOTICIA_9_TITLE,
+  "10": NOTICIA_10_TITLE, "11": NOTICIA_11_TITLE, "12": NOTICIA_12_TITLE,
+};
+const subtitles: Record<string, { es: string; en: string }> = {
+  "1": NOTICIA_1_SUBTITLE, "2": NOTICIA_2_SUBTITLE, "3": NOTICIA_3_SUBTITLE,
+  "4": NOTICIA_4_SUBTITLE, "5": NOTICIA_5_SUBTITLE, "6": NOTICIA_6_SUBTITLE,
+  "7": NOTICIA_7_SUBTITLE, "8": NOTICIA_8_SUBTITLE, "9": NOTICIA_9_SUBTITLE,
+  "10": NOTICIA_10_SUBTITLE, "11": NOTICIA_11_SUBTITLE, "12": NOTICIA_12_SUBTITLE,
+};
+const images: Record<string, string> = {
+  "1": NOTICIA_1_IMAGE, "2": NOTICIA_2_IMAGE, "3": NOTICIA_3_IMAGE,
+  "4": NOTICIA_4_IMAGE, "5": NOTICIA_5_IMAGE, "6": NOTICIA_6_IMAGE,
+  "7": NOTICIA_7_IMAGE, "8": NOTICIA_8_IMAGE, "9": NOTICIA_9_IMAGE,
+  "10": NOTICIA_10_IMAGE, "11": NOTICIA_11_IMAGE, "12": NOTICIA_12_IMAGE,
+};
+const tags: Record<string, { es: string[]; en: string[] }> = {
+  "1": NOTICIA_1_TAGS, "2": NOTICIA_2_TAGS, "3": NOTICIA_3_TAGS,
+  "4": NOTICIA_4_TAGS, "5": NOTICIA_5_TAGS, "6": NOTICIA_6_TAGS,
+  "7": NOTICIA_7_TAGS, "8": NOTICIA_8_TAGS, "9": NOTICIA_9_TAGS,
+  "10": NOTICIA_10_TAGS, "11": NOTICIA_11_TAGS, "12": NOTICIA_12_TAGS,
+};
+const intros: Record<string, { es: string; en: string }> = {
+  "1": NOTICIA_1_INTRO, "2": NOTICIA_2_INTRO, "3": NOTICIA_3_INTRO,
+  "4": NOTICIA_4_INTRO, "5": NOTICIA_5_INTRO, "6": NOTICIA_6_INTRO,
+  "7": NOTICIA_7_INTRO, "8": NOTICIA_8_INTRO, "9": NOTICIA_9_INTRO,
+  "10": NOTICIA_10_INTRO, "11": NOTICIA_11_INTRO, "12": NOTICIA_12_INTRO,
+};
 
 type ContentItem =
   | { type: "text"; text: string; image?: string }
@@ -132,7 +1396,13 @@ export default function NoticiaPage() {
   const [firstImage, setFirstImage] = useState<string | undefined>(undefined);
   const [roundCount, setRoundCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [optOrder, setOptOrder] = useState(false);
+const [colorOrder, setColorOrder] = useState(false);
 
+useEffect(() => {
+  setOptOrder(Math.random() < 0.5);
+  setColorOrder(Math.random() < 0.5);
+}, []);
   const current = story[step];
 
   const handleOption = (option: Option) => {
@@ -190,7 +1460,7 @@ export default function NoticiaPage() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-start mb-8 md:mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-stretch mb-8 md:mb-10">
           <div className="min-w-0">
             <h1 className="font-title font-bold text-black dark:text-white leading-tight uppercase mb-4 md:mb-6"
               style={{ fontSize: "clamp(1.5rem, 4.5vw, 999px)" }}>
@@ -200,7 +1470,7 @@ export default function NoticiaPage() {
               {subtitles[params.id][lang === "ES" ? "es" : "en"]}
             </p>
           </div>
-          <div className="rounded-2xl overflow-hidden bg-[#FF3D00] h-[280px] md:h-[500px]">
+          <div className="rounded-2xl overflow-hidden bg-[#FF3B27] h-full min-h-[280px]">
             <img src={images[params.id]} alt={titles[params.id][lang === "ES" ? "es" : "en"]}
               className="w-full h-full object-cover grayscale"
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
@@ -239,7 +1509,7 @@ export default function NoticiaPage() {
                       <p key={ti} className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed mb-6">{t.text}</p>
                     ))}
                   </div>
-                  <div className="bg-[#FF3D00] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
+                  <div className="bg-[#FF3B27] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
                     {(imageItem?.image || firstImage) && (
                       <img src={imageItem?.image || firstImage!} alt=""
                         className="absolute inset-0 w-full h-full object-cover grayscale"
@@ -254,7 +1524,7 @@ export default function NoticiaPage() {
               <div key={gi} className="mb-10">
                 {group.texts.map((t, ti) => (
                   <div key={ti}>
-                    <p className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed border-l-2 border-[#FF3D00] pl-4 md:pl-6 mb-6">{t.text}</p>
+                    <p className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed border-l-2 border-[#FF3B27] pl-4 md:pl-6 mb-6">{t.text}</p>
                     {t.image && <img src={t.image} alt="" className="w-full h-[240px] md:h-[420px] object-cover grayscale mb-6 rounded-xl" />}
                   </div>
                 ))}
@@ -265,59 +1535,49 @@ export default function NoticiaPage() {
       </section>
 
       {/* OPCIONES */}
-      {!current.ending && current.options && (
-        <section className="max-w-7xl mx-auto px-4 md:px-10 pb-16 md:pb-32">
-          <h2 className="font-title font-bold text-black dark:text-white text-2xl md:text-3xl mb-6 md:mb-10">
-            {started
-              ? t("¿Cómo continúa la historia?", "How does the story continue?")
-              : t("¿Cómo arranca tu noticia?", "How does your story start?")}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {(() => {
-              const opts = roundCount % 2 === 0
-                ? current.options!.map((o, idx) => ({ opt: o, orig: idx }))
-                : [...current.options!.map((o, idx) => ({ opt: o, orig: idx }))].reverse();
-              return opts.map(({ opt, orig }, i) => {
-                const isGreen = orig === 0;
-                return (
-                  <div key={i} className="relative">
-                    {isGreen && (
-                      <div className="absolute inset-0 bg-[#FF3D00] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4"
-                        style={{ clipPath: "polygon(5% 0, 98% 3%, 95% 88%, 100% 97%, 1% 100%, 3% 60%, 0 20%)" }} />
-                    )}
-                    <button
-                      onClick={() => handleOption(opt)}
-                      style={{
-                        clipPath: i === 0
-                          ? "polygon(4% 0, 100% 2%, 97% 75%, 100% 95%, 2% 100%, 0% 55%, 3% 18%)"
-                          : "polygon(0 3%, 96% 0, 100% 20%, 98% 60%, 100% 97%, 4% 95%, 2% 40%)"
-                      }}
-                      className={`relative w-full text-left p-6 md:p-10 transition-all duration-300 hover:scale-[1.02] ${isGreen ? "bg-[#CCFF00] text-black" : "bg-[#FF3D00] text-white"}`}>
-                      {isGreen ? (
-                        <p className="font-title font-bold tracking-widest uppercase mb-3 text-base md:text-lg">
-                          {t("OPCIÓN A", "OPTION A")}
-                        </p>
-                      ) : (
-                        <p className="font-sans font-bold tracking-widest uppercase mb-3 text-sm">
-                          {t("OPCIÓN B", "OPTION B")}
-                        </p>
-                      )}
-                      <hr className={`mb-4 md:mb-6 ${isGreen ? "border-black/30" : "border-white/30"}`} />
-                      {current.type === "subtitle" ? (
-                        <p className="font-title font-bold leading-tight uppercase text-lg md:text-2xl">
-                          {lang === "ES" ? opt.text : opt.textEn}
-                        </p>
-                      ) : (
-                        <p className="text-sm md:text-base leading-relaxed">{lang === "ES" ? opt.text : opt.textEn}</p>
-                      )}
-                    </button>
-                  </div>
-                );
-              });
-            })()}
-          </div>
-        </section>
-      )}
+{!current.ending && current.options && (
+  <section className="max-w-7xl mx-auto px-4 md:px-10 pb-16 md:pb-32">
+    <h2 className="font-title font-bold text-black dark:text-white text-2xl md:text-3xl mb-6 md:mb-10">
+      {started
+        ? t("¿Cómo continúa la historia?", "How does the story continue?")
+        : t("¿Cómo arranca tu noticia?", "How does your story start?")}
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      {(() => {
+        const opts = (optOrder ? roundCount % 2 === 0 : roundCount % 2 !== 0)
+          ? current.options!.map((o, idx) => ({ opt: o, orig: idx }))
+          : [...current.options!.map((o, idx) => ({ opt: o, orig: idx }))].reverse();
+        return opts.map(({ opt }, i) => {
+          const isGreen = colorOrder ? i === 0 : i === 1;
+          return (
+            <div key={i} className="relative">
+              {isGreen && (
+                <div className="absolute inset-0 bg-[#FF3B27] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4"
+                  style={{ clipPath: "polygon(5% 0, 98% 3%, 95% 88%, 100% 97%, 1% 100%, 3% 60%, 0 20%)" }} />
+              )}
+              <button
+                onClick={() => handleOption(opt)}
+                style={{
+                  clipPath: i === 0
+                    ? "polygon(4% 0, 100% 2%, 97% 75%, 100% 95%, 2% 100%, 0% 55%, 3% 18%)"
+                    : "polygon(0 3%, 96% 0, 100% 20%, 98% 60%, 100% 97%, 4% 95%, 2% 40%)"
+                }}
+                className={`relative w-full text-left p-6 md:p-10 transition-all duration-300 hover:scale-[1.02] ${isGreen ? "bg-[#BEFE46] text-black" : "bg-[#FF3B27] text-white"}`}>
+                {current.type === "subtitle" ? (
+                  <p className="font-title font-bold leading-tight uppercase text-lg md:text-2xl">
+                    {lang === "ES" ? opt.text : opt.textEn}
+                  </p>
+                ) : (
+                  <p className="text-sm md:text-base leading-relaxed">{lang === "ES" ? opt.text : opt.textEn}</p>
+                )}
+              </button>
+            </div>
+          );
+        });
+      })()}
+    </div>
+  </section>
+)}
 
       {/* FINAL */}
       {current.ending && (
@@ -328,10 +1588,10 @@ export default function NoticiaPage() {
             {t("Tu noticia está lista", "Your story is ready")}
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <button onClick={() => setShowModal(true)} className="w-full sm:w-auto bg-[#CCFF00] text-black font-bold px-8 md:px-10 py-4 rounded-full hover:bg-white transition text-sm md:text-base">
+            <button onClick={() => setShowModal(true)} className="w-full sm:w-auto bg-[#BEFE46] text-black font-bold px-8 md:px-10 py-4 rounded-full hover:bg-white transition text-sm md:text-base">
               {t("Publicar noticia", "Publish story")}
             </button>
-            <Link href={`/noticia/${params.id}`} className="w-full sm:w-auto text-center bg-[#FF3D00] text-white font-bold px-8 md:px-10 py-4 rounded-full hover:bg-red-600 transition text-sm md:text-base">
+            <Link href={`/noticia/${params.id}`} className="w-full sm:w-auto text-center bg-[#FF3B27] text-white font-bold px-8 md:px-10 py-4 rounded-full hover:bg-red-600 transition text-sm md:text-base">
               {t("Volver a empezar", "Start over")}
             </Link>
           </div>
@@ -342,12 +1602,11 @@ export default function NoticiaPage() {
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-          <div className={`relative z-10 w-full max-w-3xl rounded-3xl overflow-hidden flex flex-col md:flex-row ${isGoodNews ? "bg-[#CCFF00]" : "bg-[#FF3D00]"}`}>
-            {/* Formulario — 50% */}
+          <div className={`relative z-10 w-full max-w-3xl rounded-3xl overflow-hidden flex flex-col md:flex-row ${isGoodNews ? "bg-[#BEFE46]" : "bg-[#FF3B27]"}`}>
             <div className="w-full md:w-1/2 p-8 flex flex-col justify-between" style={{ minHeight: "380px" }}>
               <div>
                 <div className="mb-5">
-                  <span className={`inline-block rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase ${isGoodNews ? "bg-[#FF3D00] text-white" : "bg-[#CCFF00] text-black"}`}>
+                  <span className={`inline-block rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase ${isGoodNews ? "bg-[#FF3B27] text-white" : "bg-[#BEFE46] text-black"}`}>
                     {isGoodNews ? t("NOTICIA VERÍDICA", "VERIFIED NEWS") : t("FAKE NEWS", "FAKE NEWS")}
                   </span>
                 </div>
@@ -366,12 +1625,11 @@ export default function NoticiaPage() {
                   className="w-full p-3 rounded-full bg-[#FFF5E4] text-black text-sm outline-none mb-5"
                 />
                 <button onClick={handlePublish}
-                  className={`px-6 py-3 rounded-full font-bold text-sm transition hover:opacity-90 ${isGoodNews ? "bg-[#FF3D00] text-white" : "bg-[#CCFF00] text-black"}`}>
+                  className={`px-6 py-3 rounded-full font-bold text-sm transition hover:opacity-90 ${isGoodNews ? "bg-[#FF3B27] text-white" : "bg-[#BEFE46] text-black"}`}>
                   {t("Publicar noticia", "Publish story")}
                 </button>
               </div>
             </div>
-            {/* Imagen — 50% */}
             <div className="hidden md:block w-1/2 relative">
               <img
                 src={images[params.id]}

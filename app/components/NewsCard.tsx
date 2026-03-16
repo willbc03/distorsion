@@ -16,13 +16,13 @@ export default function NewsCard({
   image,
 }: NewsCardProps) {
   const variants = [
-    { bg: "#FF3D00", text: "text-white", numColor: "#CCFF00", btnBg: "#CCFF00", btnText: "#FF3D00" },
-    { bg: "#CCFF00", text: "text-black", numColor: "#FF3D00", btnBg: "#FF3D00", btnText: "#CCFF00" },
-    { bg: "#FF3D00", text: "text-white", numColor: "#CCFF00", btnBg: "#CCFF00", btnText: "#FF3D00" },
+    { bg: "#FF3B27", text: "text-white", numColor: "#BEFE46", btnBg: "#BEFE46", btnText: "#FF3B27" },
+    { bg: "#BEFE46", text: "text-black", numColor: "#FF3B27", btnBg: "#FF3B27", btnText: "#BEFE46" },
+    { bg: "#FF3B27", text: "text-white", numColor: "#BEFE46", btnBg: "#BEFE46", btnText: "#FF3B27" },
   ];
 
   const v = variants[variant % variants.length];
-  const glowColor = v.bg === "#FF3D00" ? "rgba(255, 61, 0, 0.6)" : "rgba(204, 255, 0, 0.5)";
+  const glowColor = v.bg === "#FF3B27" ? "rgba(255, 61, 0, 0.6)" : "rgba(204, 255, 0, 0.5)";
 
   return (
     <Link href={href} className="block">

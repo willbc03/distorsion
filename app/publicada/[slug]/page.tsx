@@ -84,7 +84,7 @@ export default function PublicadaPage() {
           ))}
           <span className="text-black/50 dark:text-white/50">/</span>
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-[#CCFF00] flex items-center justify-center text-black font-bold text-xs">
+            <div className="w-6 h-6 rounded-full bg-[#BEFE46] flex items-center justify-center text-black font-bold text-xs">
               {news.author.charAt(0).toUpperCase()}
             </div>
             <span className="text-black/70 dark:text-white/70">
@@ -102,7 +102,7 @@ export default function PublicadaPage() {
             </h1>
             <p className="text-black/70 dark:text-white/70 text-sm md:text-base leading-relaxed">{news.subtitle}</p>
           </div>
-          <div className="rounded-2xl overflow-hidden bg-[#FF3D00] h-[280px] md:h-[500px]">
+          <div className="rounded-2xl overflow-hidden bg-[#FF3B27] h-[280px] md:h-[500px]">
             <img src={news.heroImage.startsWith("/") ? news.heroImage : `/${news.heroImage}`}
               alt={news.title} className="w-full h-full object-cover grayscale"
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
@@ -140,7 +140,7 @@ export default function PublicadaPage() {
                       <p key={ti} className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed mb-6">{t.text}</p>
                     ))}
                   </div>
-                  <div className="bg-[#FF3D00] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
+                  <div className="bg-[#FF3B27] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
                     {imageItem?.image && (
                       <img src={imageItem.image} alt=""
                         className="absolute inset-0 w-full h-full object-cover grayscale"
@@ -155,7 +155,7 @@ export default function PublicadaPage() {
               <div key={gi} className="mb-10">
                 {group.texts.map((t, ti) => (
                   <div key={ti}>
-                    <p className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed border-l-2 border-[#FF3D00] pl-4 md:pl-6 mb-6">{t.text}</p>
+                    <p className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed border-l-2 border-[#FF3B27] pl-4 md:pl-6 mb-6">{t.text}</p>
                     {t.image && <img src={t.image} alt="" className="w-full h-[240px] md:h-[420px] object-cover grayscale mb-6 rounded-xl" />}
                   </div>
                 ))}
@@ -172,10 +172,10 @@ export default function PublicadaPage() {
             {t("Noticia publicada", "Story published")}
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <Link href="/" className="w-full sm:w-auto text-center bg-[#CCFF00] text-black font-bold px-8 md:px-10 py-4 rounded-full hover:bg-white transition text-sm md:text-base">
+            <Link href="/" className="w-full sm:w-auto text-center bg-[#BEFE46] text-black font-bold px-8 md:px-10 py-4 rounded-full hover:bg-white transition text-sm md:text-base">
               {t("Volver al inicio", "Back to home")}
             </Link>
-            <Link href={`/noticia/${noticiaId}`} className="w-full sm:w-auto text-center bg-[#FF3D00] text-white font-bold px-8 md:px-10 py-4 rounded-full hover:bg-red-600 transition text-sm md:text-base">
+            <Link href={`/noticia/${noticiaId}`} className="w-full sm:w-auto text-center bg-[#FF3B27] text-white font-bold px-8 md:px-10 py-4 rounded-full hover:bg-red-600 transition text-sm md:text-base">
               {t("Volver a empezar", "Start over")}
             </Link>
           </div>
