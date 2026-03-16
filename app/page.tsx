@@ -90,12 +90,17 @@ useEffect(() => {
           }}
         >
           <video
-            autoPlay muted loop playsInline
-            className="w-full"
-            style={{ objectFit: "contain", transform: "scale(1.3)", transformOrigin: "center center" }}
-          >
-            <source src="/distorsion-titulo.webm" type="video/webm" />
-          </video>
+  autoPlay muted loop playsInline
+  className="w-full"
+  style={{ 
+    objectFit: "contain", 
+    transform: "scale(1.3)", 
+    transformOrigin: "center center",
+    mixBlendMode: "screen"
+  }}
+>
+  <source src="/distorsion-titulo.webm" type="video/webm" />
+</video>
         </div>
       </section>
 
