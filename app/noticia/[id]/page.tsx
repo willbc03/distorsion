@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLang } from "../../components/LanguageContext";
 import Navbar from "../../components/Navbar";
+import Image from "next/image";
 
 type Option = { text: string; textEn: string; next: number; image?: string; };
 type StoryNode = {
@@ -22,12 +23,12 @@ const storyBayern: StoryNode[] = [
       {
         text: "Tras el partido, el Bayern Múnich confirmó que inició el proceso de apelación para revisar la expulsión de Luis Díaz. El club considera que, al existir un reconocimiento del árbitro sobre la dureza de la decisión, el tribunal deportivo podría analizar nuevamente la jugada. Mientras tanto, el equipo continúa preparando su próximo compromiso de Bundesliga.",
         textEn: "After the match, Bayern Munich confirmed it has begun the appeal process to review Luis Díaz's red card. The club believes that, given the referee's acknowledgment of the harshness of the decision, the sports tribunal could re-examine the play. Meanwhile, the team continues preparing for their next Bundesliga fixture.",
-        next: 1, image: "/futbol.jpg"
+        next: 1, image: "/2bayern.jpg"
       },
       {
         text: "Después del encuentro, el Bayern Múnich decidió presentar una apelación para revisar la expulsión de Luis Díaz. Aunque el árbitro admitió que la sanción pudo haber sido demasiado severa, el debate sobre la jugada sigue abierto y el club insiste en que la decisión influyó en el desarrollo del partido.",
         textEn: "After the match, Bayern Munich decided to file an appeal to review Luis Díaz's red card. Although the referee admitted the punishment may have been too harsh, the debate over the play remains open and the club insists the decision affected the course of the match.",
-        next: 1, image: "/futbol.jpg"
+        next: 1, image: "/3bayern.jpg"
       },
     ],
   },
@@ -78,12 +79,12 @@ const storyBayern: StoryNode[] = [
       {
         text: "Si el recurso prospera, el Bayern podría contar con Luis Díaz para el partido frente a Unión Berlín. La presencia del colombiano sería clave para mantener la dinámica ofensiva del equipo en un momento importante de la temporada.\n\nEl club espera que el tribunal deportivo valore la evidencia disponible y que el reconocimiento del error arbitral sea suficiente para reconsiderar la sanción.",
         textEn: "If the appeal succeeds, Bayern could have Luis Díaz available for the match against Union Berlin. The Colombian's presence would be key to maintaining the team's offensive momentum at a crucial point in the season.\n\nThe club hopes the sports tribunal will weigh the available evidence and that the acknowledgment of the referee's error will be sufficient to reconsider the suspension.",
-        next: 6, image: "/futbol.jpg"
+        next: 6, image: "/1bayern.jpg"
       },
       {
         text: "La apelación del Bayern fue admitida a trámite y el tribunal deportivo confirmó que revisará las imágenes antes de ratificar o levantar la sanción. El club confía en que el fallo llegará antes del próximo partido.",
         textEn: "Bayern's appeal was accepted for review and the sports tribunal confirmed it will examine the footage before upholding or lifting the suspension. The club is confident the ruling will come before their next match.",
-        next: 6, image: "/futbol.jpg"
+        next: 6, image: "/1bayern.jpg"
       },
     ],
   },
@@ -94,12 +95,12 @@ const storyBayern: StoryNode[] = [
       {
         text: "Sin embargo, algunos expertos señalan que incluso si la apelación es revisada, no siempre estas decisiones terminan cambiando el resultado disciplinario. En muchas ocasiones, el comité arbitral mantiene la sanción para respaldar la autoridad del árbitro en el campo.\n\nEsto deja abierta la posibilidad de que el Bayern tenga que afrontar el próximo partido sin el jugador colombiano.",
         textEn: "However, some experts point out that even if the appeal is reviewed, these decisions do not always end up changing the disciplinary outcome. In many cases, the referee committee upholds the sanction to support the authority of the on-field official.\n\nThis leaves open the possibility that Bayern may have to face their next match without the Colombian player.",
-        next: 7, image: "/futbol.jpg"
+        next: 7, image: "/2bayern.jpg"
       },
       {
         text: "A pesar del sólido respaldo del club, filtraciones sin confirmar sobre el estado físico de Luis Díaz comenzaron a circular en medios, desviando la atención del proceso arbitral y generando ruido innecesario alrededor de la apelación.",
         textEn: "Despite the club's solid backing, unconfirmed leaks about Luis Díaz's physical condition began circulating in the media, diverting attention from the arbitration process and generating unnecessary noise around the appeal.",
-        next: 7, image: "/futbol.jpg"
+        next: 7, image: "/2bayern.jpg"
       },
     ],
   },
@@ -116,12 +117,12 @@ const storyVenezuela: StoryNode[] = [
       {
         text: "Desde la primera entrada el encuentro mostró intensidad ofensiva. Ronald Acuña Jr. abrió el marcador con un cuadrangular que encendió al público presente en el estadio.\n\nJapón respondió poco después con un jonrón de Shohei Ohtani, lo que confirmó que el partido tendría momentos de gran nivel competitivo.",
         textEn: "From the first inning the game showed offensive intensity. Ronald Acuña Jr. opened the scoring with a home run that electrified the crowd.\n\nJapan responded shortly after with a Shohei Ohtani homer, confirming the match would feature moments of high competitive quality.",
-        next: 1, image: "/futbol.jpg"
+        next: 1, image: "/2venezuela.jpg"
       },
       {
         text: "El partido comenzó con una dinámica ofensiva por parte de ambos equipos. Ronald Acuña Jr. conectó un cuadrangular temprano que puso en ventaja a Venezuela.\n\nSin embargo, Japón reaccionó rápidamente con un jonrón de Shohei Ohtani, demostrando por qué era considerado uno de los favoritos del torneo.",
         textEn: "The game began with an offensive dynamic from both teams. Ronald Acuña Jr. hit an early home run that gave Venezuela the lead.\n\nHowever, Japan responded quickly with a Shohei Ohtani homer, showing why they were considered one of the tournament's favorites.",
-        next: 1, image: "/futbol.jpg"
+        next: 1, image: "/2venezuela.jpg"
       },
     ],
   },
@@ -184,12 +185,12 @@ const storyVenezuela: StoryNode[] = [
       {
         text: "Con este resultado, Venezuela aseguró su regreso a una semifinal del Clásico Mundial y además obtuvo la clasificación directa a los Juegos Olímpicos de Los Ángeles 2028. El equipo ahora se prepara para enfrentar a Italia en busca de un lugar en la final.",
         textEn: "With this result, Venezuela secured their return to a World Baseball Classic semifinal and also obtained direct qualification for the 2028 Los Angeles Olympics. The team now prepares to face Italy in search of a place in the final.",
-        next: 6, image: "/futbol.jpg"
+        next: 6, image: "/2venezuela.jpg"
       },
       {
         text: "El triunfo venezolano fue respaldado por estadísticas sólidas a lo largo del partido: 12 hits, 3 cuadrangulares y una actuación del cuerpo de lanzadores que mantuvo a Japón por debajo de su promedio ofensivo en el torneo.",
         textEn: "The Venezuelan victory was backed by solid statistics throughout the game: 12 hits, 3 home runs and a pitching staff performance that kept Japan below their offensive average in the tournament.",
-        next: 6, image: "/futbol.jpg"
+        next: 6, image: "/2venezuela.jpg"
       },
     ],
   },
@@ -225,12 +226,12 @@ const storyPresupuesto: StoryNode[] = [
       {
         text: "Durante el encuentro se explicó que la disminución de recursos podría afectar varios programas deportivos. Autoridades y representantes del sector coincidieron en que es necesario revisar la situación para evitar consecuencias a largo plazo.",
         textEn: "During the meeting it was explained that the decrease in resources could affect several sports programs. Authorities and sector representatives agreed that the situation needs to be reviewed to avoid long-term consequences.",
-        next: 1, image: "/f1.jpg"
+        next: 1, image: "/2debate.jpg"
       },
       {
         text: "En el foro también se mencionó que la reducción presupuestal ha generado preocupación entre ligas y federaciones, quienes consideran que algunos programas podrían verse limitados si no se revisa la asignación de recursos.",
         textEn: "The forum also mentioned that the budget reduction has raised concern among leagues and federations, who consider that some programs could be limited if the resource allocation is not reviewed.",
-        next: 1, image: "/f1.jpg"
+        next: 1, image: "/2debate.jpg"
       },
     ],
   },
@@ -242,12 +243,12 @@ const storyPresupuesto: StoryNode[] = [
       {
         text: "ALGUNOS SECTORES PROPONEN NUEVAS INICIATIVAS LEGISLATIVAS PARA FORTALECER LA FINANCIACIÓN DEL DEPORTE",
         textEn: "SOME SECTORS PROPOSE NEW LEGISLATIVE INITIATIVES TO STRENGTHEN SPORTS FUNDING",
-        next: 2
+        next: 2, image: "/3debate.jpg"
       },
       {
         text: "OTROS ANALISTAS ADVIERTEN QUE LOS RECORTES PODRÍAN AFECTAR LA CONTINUIDAD DE VARIOS PROYECTOS DEPORTIVOS",
         textEn: "OTHER ANALYSTS WARN THAT CUTS COULD AFFECT THE CONTINUITY OF SEVERAL SPORTS PROJECTS",
-        next: 3
+        next: 3, image: "/3debate.jpg"
       },
     ],
   },
@@ -293,12 +294,12 @@ const storyPresupuesto: StoryNode[] = [
       {
         text: "Los defensores de las nuevas iniciativas consideran que el deporte puede convertirse en una herramienta clave para el desarrollo social, especialmente en programas dirigidos a jóvenes y comunidades.",
         textEn: "Advocates of the new initiatives believe that sport can become a key tool for social development, especially in programs aimed at youth and communities.",
-        next: 6, image: "/f1.jpg"
+        next: 6, image: "/3debate.jpg"
       },
       {
         text: "Expertos en política pública señalan que invertir en deporte base genera retornos a largo plazo en salud, convivencia y representación internacional, lo que justifica revisar con urgencia la asignación presupuestal.",
         textEn: "Public policy experts point out that investing in grassroots sport generates long-term returns in health, social cohesion and international representation, which justifies urgently reviewing the budget allocation.",
-        next: 6, image: "/f1.jpg"
+        next: 6, image: "/3debate.jpg"
       },
     ],
   },
@@ -333,12 +334,12 @@ const storyPolilla: StoryNode[] = [
       {
         text: "El humorista Nelson Polanía, conocido como 'Polilla', compartió recientemente que tras el fallecimiento de su esposa, la también comediante Fabiola Posada, conocida como 'La Gorda Fabiola', comenzó a encontrar cartas y poemas escritos por ella hace varios años. Según relató, estos escritos aparecieron mientras revisaba algunos objetos personales en su casa, convirtiéndose en un recuerdo inesperado dentro de su proceso de duelo.",
         textEn: "Comedian Nelson Polanía, known as 'Polilla', recently shared that after the passing of his wife, fellow comedian Fabiola Posada, known as 'La Gorda Fabiola', he began finding letters and poems she had written years ago. According to him, these writings appeared while going through some personal belongings at home, becoming an unexpected memory within his grieving process.",
-        next: 1, image: "/bts.jpg"
+        next: 1, image: "/nelson.jpg"
       },
       {
         text: "Durante una entrevista en el podcast Me raya la cabeza de Caracol Televisión, Nelson Polanía habló sobre cómo ha enfrentado la pérdida de su esposa, la humorista Fabiola Posada. En medio de ese proceso, el comediante contó que descubrió varios escritos que ella había dejado años atrás, entre cartas y poemas que hoy se han convertido en un apoyo emocional para él.",
         textEn: "During an interview on Caracol Televisión's podcast Me raya la cabeza, Nelson Polanía spoke about how he has faced the loss of his wife, comedian Fabiola Posada. In the midst of that process, he shared that he discovered several writings she had left years ago, including letters and poems that have now become an emotional support for him.",
-        next: 1, image: "/bts.jpg"
+        next: 1, image: "/podcast.jpg"
       },
     ],
   },
@@ -397,7 +398,7 @@ const storyPolilla: StoryNode[] = [
       {
         text: "En la entrevista, Polilla también habló sobre las estrategias que ha utilizado para cuidar su salud mental tras la pérdida de su esposa. Entre ellas, escribir recuerdos de su relación y transformar algunas de esas experiencias en historias que, desde el humor, le permiten rendir homenaje a la mujer con la que compartió 28 años.",
         textEn: "In the interview, Polilla also spoke about the strategies he has used to take care of his mental health after the loss of his wife. Among them, writing memories of their relationship and transforming some of those experiences into stories that, through humor, allow him to pay tribute to the woman with whom he shared 28 years.",
-        next: 6, image: "/bts.jpg"
+        next: 6, image: "/escritos.jpg"
       },
       {
         text: "El comediante señaló que el humor ha sido su principal herramienta para procesar el duelo, y que contar estas historias en escena le ha permitido sentir que su esposa sigue presente de alguna manera en su trabajo y en la conexión que tiene con el público.",
@@ -434,12 +435,12 @@ const storyValdiri: StoryNode[] = [
       {
         text: "La celebración se llevó a cabo el 13 de marzo en un exclusivo lugar de Cartagena y contó con presentaciones musicales, una decoración temática y varios cambios de vestuario para la quinceañera. Diferentes creadores de contenido y figuras del entretenimiento asistieron al evento y compartieron algunos momentos en redes sociales.",
         textEn: "The celebration took place on March 13th at an exclusive venue in Cartagena and featured musical performances, themed decoration and several outfit changes for the birthday girl. Different content creators and entertainment figures attended the event and shared some moments on social media.",
-        next: 1, image: "/jimcarrey.jpg"
+        next: 1, image: "/2valdiri.jpg"
       },
       {
         text: "El evento reunió a familiares, amigos y varias figuras del mundo digital que acompañaron a Isabella en su celebración. Videos y fotografías del festejo comenzaron a circular en redes sociales, mostrando parte de la ambientación, los artistas invitados y los diferentes momentos de la noche.",
         textEn: "The event brought together family, friends and several digital world figures who joined Isabella in her celebration. Videos and photographs from the party began circulating on social media, showing part of the setting, the invited artists and the different moments of the night.",
-        next: 1, image: "/jimcarrey.jpg"
+        next: 1, image: "/2valdiri.jpg"
       },
     ],
   },
@@ -535,12 +536,12 @@ const storyAntonelli: StoryNode[] = [
       {
         text: "Antonelli completó una carrera sólida en la que mantuvo el liderato durante gran parte de las 56 vueltas. Solo un bloqueo de ruedas en las últimas vueltas le generó un momento de tensión antes de asegurar la victoria.",
         textEn: "Antonelli completed a solid race in which he held the lead for most of the 56 laps. Only a wheel lock-up in the final laps created a moment of tension before he secured the victory.",
-        next: 1, image: "/badbunny.jpg"
+        next: 1, image: "/2kimi.jpg"
       },
       {
         text: "El piloto de Mercedes vivió un fin de semana lleno de emociones en Shanghái, pasando de conseguir su primera pole position a lograr su primer triunfo en la categoría.",
         textEn: "The Mercedes driver had an emotion-filled weekend in Shanghai, going from securing his first pole position to achieving his first victory in the category.",
-        next: 1, image: "/badbunny.jpg"
+        next: 1, image: "/2kimi.jpg"
       },
     ],
   },
@@ -636,12 +637,12 @@ const storyElNino: StoryNode[] = [
       {
         text: "Científicos están monitoreando cambios recientes en la temperatura del océano Pacífico que podrían indicar el desarrollo de un nuevo episodio de El Niño en los próximos meses. Este fenómeno ocurre cuando las aguas del Pacífico ecuatorial se calientan por encima de lo normal y puede modificar los patrones de lluvia y temperatura en distintas regiones del planeta. Aunque algunos modelos climáticos sugieren que el evento podría ser más intenso de lo habitual, los investigadores señalan que todavía es temprano para confirmar su magnitud.",
         textEn: "Scientists are monitoring recent changes in Pacific Ocean temperatures that could indicate the development of a new El Niño episode in the coming months. This phenomenon occurs when equatorial Pacific waters warm above normal levels and can modify rainfall and temperature patterns across different regions of the planet. Although some climate models suggest the event could be more intense than usual, researchers note it is still too early to confirm its magnitude.",
-        next: 1, image: "/petro.jpg"
+        next: 1, image: "/2nino.jpg"
       },
       {
         text: "Señales detectadas en el océano Pacífico indican la posible formación de un 'super' evento de El Niño que podría alterar significativamente el clima del planeta en los próximos años. Este fenómeno, caracterizado por un calentamiento intenso de las aguas del Pacífico ecuatorial, tiene la capacidad de elevar las temperaturas globales y provocar cambios drásticos en los patrones climáticos de diversas regiones del mundo.",
         textEn: "Signals detected in the Pacific Ocean indicate the possible formation of a 'super' El Niño event that could significantly alter the planet's climate in the coming years. This phenomenon, characterized by intense warming of equatorial Pacific waters, has the capacity to raise global temperatures and cause drastic changes in climate patterns across various regions of the world.",
-        next: 1, image: "/petro.jpg"
+        next: 1, image: "/2nino.jpg"
       },
     ],
   },
@@ -737,12 +738,12 @@ const storyFrontera: StoryNode[] = [
       {
         text: "Los gobiernos de Colombia y Venezuela anunciaron nuevas medidas de cooperación para enfrentar el narcotráfico y otras economías ilegales que operan a lo largo de su frontera común, una zona de más de 2.200 kilómetros donde actúan diversas estructuras criminales. El acuerdo incluye el intercambio de información de inteligencia y la coordinación de acciones de seguridad entre las autoridades de ambos países.",
         textEn: "The governments of Colombia and Venezuela announced new cooperation measures to confront drug trafficking and other illegal economies operating along their shared border, a zone of more than 2,200 kilometers where various criminal structures operate. The agreement includes intelligence information sharing and coordination of security actions between authorities from both countries.",
-        next: 1, image: "/trump.jpg"
+        next: 1, image: "/1narco.jpeg"
       },
       {
         text: "El nuevo acuerdo de seguridad entre Colombia y Venezuela para realizar operaciones conjuntas en la frontera ha generado inquietud entre algunos analistas, que advierten que la estrategia podría intensificar las tensiones en una región donde operan diversos grupos armados y redes del narcotráfico. La extensa zona limítrofe ha sido durante años un escenario complejo de criminalidad y presencia de actores ilegales, lo que plantea dudas sobre cómo se desarrollarán estas operaciones coordinadas.",
         textEn: "The new security agreement between Colombia and Venezuela to carry out joint operations on the border has raised concern among some analysts, who warn that the strategy could intensify tensions in a region where various armed groups and drug trafficking networks operate. The extensive border zone has for years been a complex scenario of criminality and illegal actors, raising questions about how these coordinated operations will unfold.",
-        next: 1, image: "/trump.jpg"
+        next: 1, image: "/1narco.jpeg"
       },
     ],
   },
@@ -838,12 +839,12 @@ const storyIA: StoryNode[] = [
       {
         text: "El avance de la inteligencia artificial generativa está generando un intenso debate sobre el futuro del trabajo. Mientras algunas personas temen que las máquinas puedan reemplazar empleos humanos, varios académicos señalan que estas tecnologías también podrían convertirse en herramientas que potencien las capacidades de los trabajadores y transformen la manera en que se realizan muchas tareas.",
         textEn: "The advance of generative artificial intelligence is generating an intense debate about the future of work. While some people fear that machines could replace human jobs, several academics note that these technologies could also become tools that enhance workers' capabilities and transform the way many tasks are performed.",
-        next: 1, image: "/activismo.jpg"
+        next: 1, image: "/2ia.jpg"
       },
       {
         text: "El rápido crecimiento de la inteligencia artificial generativa está provocando preocupación en distintos sectores laborales ante la posibilidad de que miles de empleos sean reemplazados por sistemas capaces de escribir, analizar información y automatizar tareas que antes requerían intervención humana. El avance de estas tecnologías ha encendido el debate sobre hasta qué punto las máquinas podrían asumir funciones que tradicionalmente han sido realizadas por trabajadores.",
         textEn: "The rapid growth of generative artificial intelligence is causing concern across different labor sectors over the possibility that thousands of jobs could be replaced by systems capable of writing, analyzing information and automating tasks that previously required human intervention. The advance of these technologies has sparked debate about the extent to which machines could take over functions traditionally performed by workers.",
-        next: 1, image: "/activismo.jpg"
+        next: 1, image: "/2ia.jpg"
       },
     ],
   },
@@ -1243,37 +1244,37 @@ const stories: Record<string, StoryNode[]> = {
 
 const NOTICIA_1_TITLE    = { es: "Polémica arbitral marca el partido del Bayern Múnich y genera apelación del club", en: "Controversial refereeing marks Bayern Munich match and prompts club appeal" };
 const NOTICIA_1_SUBTITLE = { es: "El Bayern Múnich presentó una apelación ante la Federación Alemana para revisar la expulsión del colombiano Luis Díaz en el partido contra Bayer Leverkusen.", en: "Bayern Munich filed an appeal with the German Football Federation to review the red card given to Colombian player Luis Díaz in the match against Bayer Leverkusen." };
-const NOTICIA_1_IMAGE    = "/futbol.jpg";
+const NOTICIA_1_IMAGE    = "/1bayern.jpg";
 const NOTICIA_1_TAGS     = { es: ["DEPORTES", "FÚTBOL"], en: ["SPORTS", "FOOTBALL"] };
 const NOTICIA_1_INTRO    = { es: "El árbitro del encuentro reconoció después que la decisión pudo haber sido demasiado severa.", en: "The match referee later acknowledged that the decision may have been too harsh." };
 
 const NOTICIA_2_TITLE    = { es: "Venezuela sorprende en el Clásico Mundial de Béisbol y avanza a semifinales", en: "Venezuela stuns at the World Baseball Classic and advances to semifinals" };
 const NOTICIA_2_SUBTITLE = { es: "La selección de Venezuela derrotó 8-5 a Japón en el Clásico Mundial de Béisbol 2026, en un partido lleno de ofensiva que terminó sorprendiendo a uno de los favoritos del torneo.", en: "Venezuela defeated Japan 8-5 at the 2026 World Baseball Classic, in an offense-filled game that ended up stunning one of the tournament's favorites." };
-const NOTICIA_2_IMAGE    = "/futbol.jpg";
+const NOTICIA_2_IMAGE    = "/1venezuela.jpg";
 const NOTICIA_2_TAGS     = { es: ["DEPORTES", "BÉISBOL"], en: ["SPORTS", "BASEBALL"] };
 const NOTICIA_2_INTRO    = { es: "Con este resultado, el equipo venezolano avanzó a las semifinales del campeonato y además aseguró su clasificación a los Juegos Olímpicos de Los Ángeles 2028, marcando un momento histórico para el béisbol del país.", en: "With this result, the Venezuelan team advanced to the championship semifinals and also secured their qualification for the 2028 Los Angeles Olympics, marking a historic moment for baseball in the country." };
 
 const NOTICIA_3_TITLE    = { es: "Debate sobre el presupuesto del deporte colombiano para 2026", en: "Debate over Colombia's sports budget for 2026" };
 const NOTICIA_3_SUBTITLE = { es: "El presupuesto destinado al deporte en Colombia para 2026 ha disminuido considerablemente, generando preocupación entre dirigentes deportivos y diferentes federaciones del país.", en: "The budget allocated to sports in Colombia for 2026 has decreased considerably, raising concern among sports leaders and various federations across the country." };
-const NOTICIA_3_IMAGE    = "/f1.jpg";
+const NOTICIA_3_IMAGE    = "/1debate.jpg";
 const NOTICIA_3_TAGS     = { es: ["DEPORTES", "COLOMBIA"], en: ["SPORTS", "COLOMBIA"] };
 const NOTICIA_3_INTRO    = { es: "Atletas y organizaciones advierten que esta reducción podría afectar programas de formación, preparación deportiva y la participación de Colombia en competencias internacionales durante los próximos años.", en: "Athletes and organizations warn that this reduction could affect training programs, sports preparation and Colombia's participation in international competitions in the coming years." };
 
 const NOTICIA_4_TITLE    = { es: "Polilla habla de cartas que le dejó la Gorda Fabiola", en: "Polilla speaks about letters left by La Gorda Fabiola" };
 const NOTICIA_4_SUBTITLE = { es: "El humorista Nelson Polanía, conocido como 'Polilla', compartió recientemente algunos detalles sobre el proceso que ha vivido tras la pérdida de su esposa, la también comediante Fabiola Posada, recordada como 'La Gorda Fabiola'.", en: "Comedian Nelson Polanía, known as 'Polilla', recently shared some details about the process he has gone through after the loss of his wife, fellow comedian Fabiola Posada, known as 'La Gorda Fabiola'." };
-const NOTICIA_4_IMAGE    = "/bts.jpg";
+const NOTICIA_4_IMAGE    = "/okpolilla.jpg";
 const NOTICIA_4_TAGS     = { es: ["FARANDULA", "COLOMBIA"], en: ["ENTERTAINMENT", "COLOMBIA"] };
 const NOTICIA_4_INTRO    = { es: "Durante una entrevista, el comediante contó que en medio del duelo comenzó a encontrar cartas y poemas escritos por ella hace varios años, los cuales hoy se han convertido en un recuerdo significativo dentro de su historia juntos.", en: "During an interview, the comedian shared that amid his grief he began finding letters and poems she had written years ago, which have now become a meaningful memory within their shared story." };
 
 const NOTICIA_5_TITLE    = { es: "Valdiri regaló esmeraldas en los 15 de su hija", en: "Valdiri gifted emeralds at her daughter's quinceañera" };
 const NOTICIA_5_SUBTITLE = { es: "La creadora de contenido Andrea Valdiri celebró los quince años de su hija Isabella con una fiesta en Cartagena que reunió a invitados del mundo digital y del entretenimiento.", en: "Content creator Andrea Valdiri celebrated her daughter Isabella's fifteenth birthday with a party in Cartagena that brought together guests from the digital and entertainment world." };
-const NOTICIA_5_IMAGE    = "/jimcarrey.jpg";
+const NOTICIA_5_IMAGE    = "/1valdiri.jpg";
 const NOTICIA_5_TAGS     = { es: ["FARANDULA", "COLOMBIA"], en: ["ENTERTAINMENT", "COLOMBIA"] };
 const NOTICIA_5_INTRO    = { es: "Uno de los detalles que más llamó la atención fue el recuerdo entregado a los asistentes: un dije con esmeralda como símbolo de prosperidad.", en: "One of the most attention-grabbing details was the keepsake given to guests: an emerald charm as a symbol of prosperity." };
 
 const NOTICIA_6_TITLE    = { es: "F1: Antonelli gana en Shanghái y apunta alto", en: "F1: Antonelli wins in Shanghai and aims high" };
 const NOTICIA_6_SUBTITLE = { es: "El piloto italiano Kimi Antonelli vivió un fin de semana inolvidable en el Gran Premio de Shanghái, donde consiguió su primera victoria en Fórmula 1 tras una actuación que sorprendió incluso dentro de su propio equipo.", en: "Italian driver Kimi Antonelli had an unforgettable weekend at the Shanghai Grand Prix, where he secured his first Formula 1 victory with a performance that surprised even his own team." };
-const NOTICIA_6_IMAGE    = "/badbunny.jpg";
+const NOTICIA_6_IMAGE    = "/1kimi.jpg";
 const NOTICIA_6_TAGS     = { es: ["FARANDULA", "FÓRMULA 1"], en: ["ENTERTAINMENT", "FORMULA 1"] };
 const NOTICIA_6_INTRO    = { es: "El joven piloto de Mercedes aseguró después de la carrera que mantiene los pies en la tierra, aunque reconoce que este resultado marca un momento clave en su carrera.", en: "The young Mercedes driver said after the race that he keeps his feet on the ground, although he acknowledges this result marks a key moment in his career." };
 
@@ -1285,19 +1286,19 @@ const F1_INTRO    = { es: "La introducción del nuevo reglamento técnico ha gen
 
 const NOTICIA_7_TITLE    = { es: "Científicos alertan por posible fenómeno climático 'super El Niño'", en: "Scientists warn of possible 'super El Niño' climate phenomenon" };
 const NOTICIA_7_SUBTITLE = { es: "Señales detectadas recientemente en el océano Pacífico han encendido las alertas entre científicos del clima, quienes monitorean cambios inusuales en las condiciones del mar.", en: "Signals recently detected in the Pacific Ocean have raised alarms among climate scientists, who are monitoring unusual changes in ocean conditions." };
-const NOTICIA_7_IMAGE    = "/petro.jpg";
+const NOTICIA_7_IMAGE    = "/1nino.jpg";
 const NOTICIA_7_TAGS     = { es: ["SOCIAL", "CLIMA"], en: ["SOCIAL", "CLIMATE"] };
 const NOTICIA_7_INTRO    = { es: "Los expertos investigan si estos cambios podrían estar relacionados con la formación de un fenómeno climático que, de intensificarse, tendría efectos en el clima global durante los próximos meses.", en: "Experts are investigating whether these changes could be related to the formation of a climate phenomenon that, if it intensifies, would have effects on global climate over the coming months." };
 
 const NOTICIA_8_TITLE    = { es: "Colombia y Venezuela harán operaciones espejo contra el narcotráfico", en: "Colombia and Venezuela to carry out mirror operations against drug trafficking" };
 const NOTICIA_8_SUBTITLE = { es: "La frontera entre Colombia y Venezuela, una de las más extensas y complejas de América Latina, vuelve a estar en el centro del debate sobre seguridad regional. Un nuevo acuerdo entre ambos gobiernos busca enfrentar las redes criminales que operan en la zona.", en: "The border between Colombia and Venezuela, one of the most extensive and complex in Latin America, is once again at the center of the regional security debate. A new agreement between both governments seeks to confront the criminal networks operating in the area." };
-const NOTICIA_8_IMAGE    = "/trump.jpg";
+const NOTICIA_8_IMAGE    = "/3narco.jpg";
 const NOTICIA_8_TAGS     = { es: ["SOCIAL", "COLOMBIA"], en: ["SOCIAL", "COLOMBIA"] };
 const NOTICIA_8_INTRO    = { es: "Las autoridades han planteado medidas como el intercambio de información de inteligencia y operaciones coordinadas en ambos lados de la frontera para combatir el narcotráfico y otras economías ilegales, aunque expertos advierten que el plan podría tener efectos delicados en una región marcada por la presencia de grupos armados.", en: "Authorities have proposed measures such as intelligence information sharing and coordinated operations on both sides of the border to combat drug trafficking and other illegal economies, although experts warn the plan could have delicate effects in a region marked by the presence of armed groups." };
 
 const NOTICIA_9_TITLE    = { es: "¿La IA va a reemplazar o potenciar a los trabajadores?", en: "Will AI replace or empower workers?" };
 const NOTICIA_9_SUBTITLE = { es: "La expansión acelerada de la inteligencia artificial está cambiando la forma en que las personas trabajan, estudian y producen conocimiento, generando transformaciones en múltiples sectores.", en: "The accelerated expansion of artificial intelligence is changing the way people work, study and produce knowledge, generating transformations across multiple sectors." };
-const NOTICIA_9_IMAGE    = "/activismo.jpg";
+const NOTICIA_9_IMAGE    = "/1ia.jpg";
 const NOTICIA_9_TAGS     = { es: ["SOCIAL", "TECNOLOGÍA"], en: ["SOCIAL", "TECHNOLOGY"] };
 const NOTICIA_9_INTRO    = { es: "Mientras algunos expertos aseguran que estas tecnologías abrirán nuevas oportunidades laborales, otros advierten que su impacto podría transformar profundamente el mercado de trabajo en los próximos años.", en: "While some experts claim these technologies will open new job opportunities, others warn that their impact could profoundly transform the labor market in the coming years." };
 

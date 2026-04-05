@@ -6,26 +6,26 @@ import NewsCard from "./components/NewsCard";
 import { useLang } from "./components/LanguageContext";
 
 const noticiasPorGenero = {
-  deportes: [
-  { id: 1, title: "Polémica arbitral en el Bayern Múnich", titleEn: "Refereeing controversy at Bayern Munich", description: "El Bayern apeló la expulsión de Luis Díaz tras el reconocimiento del árbitro.", descriptionEn: "Bayern appealed Luis Díaz's red card after the referee acknowledged the harsh decision.", href: "/noticia/1", image: "/futbol.jpg" },
-  { id: 2, title: "Venezuela avanza al Clásico Mundial", titleEn: "Venezuela advances at the World Baseball Classic", description: "La selección derrotó 8-5 a Japón y aseguró su clasificación a los Juegos Olímpicos 2028.", descriptionEn: "The team defeated Japan 8-5 and secured their qualification for the 2028 Olympics.", href: "/noticia/2", image: "/futbol.jpg" },
-  { id: 3, title: "Debate sobre el presupuesto deportivo", titleEn: "Debate over the sports budget", description: "El recorte para 2026 preocupa a federaciones y atletas colombianos.", descriptionEn: "The 2026 budget cut raises concern among Colombian federations and athletes.", href: "/noticia/3", image: "/f1.jpg" },
+deportes: [
+  { id: 1, title: "Polémica arbitral en el Bayern Múnich", titleEn: "Refereeing controversy at Bayern Munich", description: "El Bayern apeló la expulsión de Luis Díaz tras el reconocimiento del árbitro.", descriptionEn: "Bayern appealed Luis Díaz's red card after the referee acknowledged the harsh decision.", href: "/noticia/1", image: "/2bayern.jpg", imagePosition: "center center", imageScale: 1 },
+  { id: 2, title: "Venezuela avanza al Clásico Mundial", titleEn: "Venezuela advances at the World Baseball Classic", description: "La selección derrotó 8-5 a Japón y aseguró su clasificación a los Juegos Olímpicos 2028.", descriptionEn: "The team defeated Japan 8-5 and secured their qualification for the 2028 Olympics.", href: "/noticia/2", image: "/3venezuela.jpeg", imagePosition: "center top", imageScale: 1 },
+  { id: 3, title: "Debate sobre el presupuesto deportivo", titleEn: "Debate over the sports budget", description: "El recorte para 2026 preocupa a federaciones y atletas colombianos.", descriptionEn: "The 2026 budget cut raises concern among Colombian federations and athletes.", href: "/noticia/3", image: "/1debate.jpg", imagePosition: "right center", imageScale: 1 },
 ],
-  farandula: [
-  { id: 4, title: "Polilla habla de cartas de la Gorda Fabiola", titleEn: "Polilla speaks about La Gorda Fabiola's letters", description: "El comediante encontró cartas y poemas escritos por su esposa durante su proceso de duelo.", descriptionEn: "The comedian found letters and poems written by his wife during his grieving process.", href: "/noticia/4", image: "/bts.jpg" },
-  { id: 5, title: "Valdiri regaló esmeraldas en los 15 de su hija", titleEn: "Valdiri gifted emeralds at her daughter's quinceañera", description: "La fiesta en Cartagena sorprendió con dijes de esmeralda como recuerdo para los invitados.", descriptionEn: "The Cartagena party surprised guests with emerald charms as keepsakes.", href: "/noticia/5", image: "/jimcarrey.jpg" },
-  { id: 6, title: "F1: Antonelli gana en Shanghái y apunta alto", titleEn: "F1: Antonelli wins in Shanghai and aims high", description: "El piloto de Mercedes logró su primera victoria en F1 con una actuación que sorprendió a su propio equipo.", descriptionEn: "The Mercedes driver secured his first F1 win with a performance that surprised even his own team.", href: "/noticia/6", image: "/badbunny.jpg" },
+farandula: [
+  { id: 4, title: "Polilla habla de cartas de la Gorda Fabiola", titleEn: "Polilla speaks about La Gorda Fabiola's letters", description: "El comediante encontró cartas y poemas escritos por su esposa durante su proceso de duelo.", descriptionEn: "The comedian found letters and poems written by his wife during his grieving process.", href: "/noticia/4", image: "/okpolilla.jpg", imagePosition: "center center", imageScale: 1 },
+  { id: 5, title: "Valdiri regaló esmeraldas en los 15 de su hija", titleEn: "Valdiri gifted emeralds at her daughter's quinceañera", description: "La fiesta en Cartagena sorprendió con dijes de esmeralda como recuerdo para los invitados.", descriptionEn: "The Cartagena party surprised guests with emerald charms as keepsakes.", href: "/noticia/5", image: "/3valdiri.jpg", imagePosition: "center top", imageScale: 1 },
+  { id: 6, title: "F1: Antonelli gana en Shanghái y apunta alto", titleEn: "F1: Antonelli wins in Shanghai and aims high", description: "El piloto de Mercedes logró su primera victoria en F1 con una actuación que sorprendió a su propio equipo.", descriptionEn: "The Mercedes driver secured his first F1 win with a performance that surprised even his own team.", href: "/noticia/6", image: "/1kimi.jpg", imagePosition: "right center top", imageScale: 1 },
 ],
   social: [
-  { id: 7, title: "Alerta por posible 'super El Niño'", titleEn: "Warning over possible 'super El Niño'", description: "Científicos monitorean señales en el Pacífico que podrían indicar un fenómeno climático intenso.", descriptionEn: "Scientists monitor Pacific signals that could indicate an intense climate phenomenon.", href: "/noticia/7", image: "/petro.jpg" },
-  { id: 8, title: "Colombia y Venezuela contra el narcotráfico", titleEn: "Colombia and Venezuela against drug trafficking", description: "Ambos países anunciaron operaciones espejo en la frontera para combatir redes criminales.", descriptionEn: "Both countries announced mirror operations on the border to combat criminal networks.", href: "/noticia/8", image: "/trump.jpg" },
-  { id: 9, title: "¿La IA reemplazará a los trabajadores?", titleEn: "Will AI replace workers?", description: "Expertos debaten si la inteligencia artificial eliminará empleos o creará nuevas oportunidades.", descriptionEn: "Experts debate whether artificial intelligence will eliminate jobs or create new opportunities.", href: "/noticia/9", image: "/activismo.jpg" },
-],
+    { id: 7, title: "Alerta por posible 'super El Niño'", titleEn: "Warning over possible 'super El Niño'", description: "Científicos monitorean señales en el Pacífico que podrían indicar un fenómeno climático intenso.", descriptionEn: "Scientists monitor Pacific signals that could indicate an intense climate phenomenon.", href: "/noticia/7", image: "/3nino.jpg", imagePosition: "center center" },
+    { id: 8, title: "Colombia y Venezuela contra el narcotráfico", titleEn: "Colombia and Venezuela against drug trafficking", description: "Ambos países anunciaron operaciones espejo en la frontera para combatir redes criminales.", descriptionEn: "Both countries announced mirror operations on the border to combat criminal networks.", href: "/noticia/8", image: "/3narco.jpg", imagePosition: "center center" },
+    { id: 9, title: "¿La IA reemplazará a los trabajadores?", titleEn: "Will AI replace workers?", description: "Expertos debaten si la inteligencia artificial eliminará empleos o creará nuevas oportunidades.", descriptionEn: "Experts debate whether artificial intelligence will eliminate jobs or create new opportunities.", href: "/noticia/9", image: "/3ia.jpeg", imagePosition: "center center" },
+  ],
   ciencia: [
-  { id: 10, title: "Vacuna nasal contra virus y alergias", titleEn: "Nasal vaccine against viruses and allergies", description: "Investigadores presentaron una vacuna experimental que activa defensas frente a virus, bacterias y alérgenos.", descriptionEn: "Researchers presented an experimental vaccine that activates defenses against viruses, bacteria and allergens.", href: "/noticia/10", image: "/science-fake.jpg" },
-  { id: 11, title: "Eclipse lunar teñirá la Luna de rojo", titleEn: "Lunar eclipse will turn the Moon red", description: "El 3 de marzo de 2026 la Luna adquirirá un tono rojizo visible en distintas partes del mundo.", descriptionEn: "On March 3, 2026 the Moon will turn reddish and be visible across different parts of the world.", href: "/noticia/11", image: "/ciencia.jpg" },
-  { id: 12, title: "Mascotas y salud: vivir con perros", titleEn: "Pets and health: living with dogs", description: "Estudios sugieren que convivir con perros podría mejorar indicadores de bienestar físico y mental.", descriptionEn: "Studies suggest that living with dogs could improve physical and mental wellbeing indicators.", href: "/noticia/12", image: "/ia.jpg" },
-],
+    { id: 10, title: "Vacuna nasal contra virus y alergias", titleEn: "Nasal vaccine against viruses and allergies", description: "Investigadores presentaron una vacuna experimental que activa defensas frente a virus, bacterias y alérgenos.", descriptionEn: "Researchers presented an experimental vaccine that activates defenses against viruses, bacteria and allergens.", href: "/noticia/10", image: "/science-fake.jpg", imagePosition: "center center" },
+    { id: 11, title: "Eclipse lunar teñirá la Luna de rojo", titleEn: "Lunar eclipse will turn the Moon red", description: "El 3 de marzo de 2026 la Luna adquirirá un tono rojizo visible en distintas partes del mundo.", descriptionEn: "On March 3, 2026 the Moon will turn reddish and be visible across different parts of the world.", href: "/noticia/11", image: "/ciencia.jpg", imagePosition: "center center" },
+    { id: 12, title: "Mascotas y salud: vivir con perros", titleEn: "Pets and health: living with dogs", description: "Estudios sugieren que convivir con perros podría mejorar indicadores de bienestar físico y mental.", descriptionEn: "Studies suggest that living with dogs could improve physical and mental wellbeing indicators.", href: "/noticia/12", image: "/ia.jpg", imagePosition: "center center" },
+  ],
 };
 
 const generosLabel: Record<keyof typeof noticiasPorGenero, { es: string; en: string }> = {
@@ -170,7 +170,16 @@ useEffect(() => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {noticiasPorGenero[generoSeleccionado].map((noticia, i) => (
-                <NewsCard key={noticia.id} title={lang === "ES" ? noticia.title : (noticia as any).titleEn} description={lang === "ES" ? noticia.description : (noticia as any).descriptionEn} href={noticia.href} image={(noticia as any).image} variant={i} />
+                <NewsCard
+  key={noticia.id}
+  title={lang === "ES" ? noticia.title : (noticia as any).titleEn}
+  description={lang === "ES" ? noticia.description : (noticia as any).descriptionEn}
+  href={noticia.href}
+  image={(noticia as any).image}
+  imagePosition={(noticia as any).imagePosition}
+  imageScale={(noticia as any).imageScale}
+  variant={i}
+/>
               ))}
             </div>
           </div>
