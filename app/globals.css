@@ -17,3 +17,17 @@ body {
 .font-title {
   font-family: "MerriweatherBold", Georgia, serif !important;
 }
+
+.text-size-md p,
+.text-size-md span,
+.text-size-md li,
+.text-size-md a {
+  font-size: 1.1em !important;
+}
+
+.text-size-lg p,
+.text-size-lg span,
+.text-size-lg li,
+.text-size-lg a {
+  font-size: 1.25em !important;
+}

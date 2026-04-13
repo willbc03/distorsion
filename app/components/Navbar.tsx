@@ -60,31 +60,17 @@ export default function Navbar() {
             ${isContacto ? "bg-[#BEFE46] text-black" : dark ? "text-white hover:bg-white/10" : "text-black hover:bg-black/10"}`}>
           {t("Contacto", "Contact")}
         </Link>
-        <div className={`w-px h-4 mx-1 ${dark ? "bg-white/20" : "bg-black/20"}`} />
-        <button
-  onClick={() => setLang(lang === "ES" ? "EN" : "ES")}
-  className={`flex items-center gap-1 px-3 py-2 rounded-full bg-[#FF3B27] transition hover:opacity-90`}
->
-  <span className={`text-xs font-bold transition ${lang === "ES" ? "text-white" : "text-white/40"}`}>ES</span>
-  <span className="text-xs text-white/40">/</span>
-  <span className={`text-xs font-bold transition ${lang === "EN" ? "text-white" : "text-white/40"}`}>EN</span>
-</button>
       </nav>
 
       {/* NAVBAR MOBILE */}
       <nav className={`absolute top-4 left-4 right-4 z-50 backdrop-blur-md border rounded-2xl px-4 py-3 flex items-center justify-between transition-colors duration-300 md:hidden
         ${dark ? "bg-white/10 border-white/20" : "bg-white/80 border-black/20"}`}>
-       <button
-  onClick={() => setLang(lang === "ES" ? "EN" : "ES")}
-  className="flex items-center gap-1 px-2 py-1.5 rounded-full bg-[#FF3B27]"
->
-  <span className={`text-xs font-bold ${lang === "ES" ? "text-white" : "text-white/40"}`}>ES</span>
-  <span className="text-xs text-white/40">/</span>
-  <span className={`text-xs font-bold ${lang === "EN" ? "text-white" : "text-white/40"}`}>EN</span>
-</button>
+        <span className={`text-sm font-bold ${dark ? "text-white" : "text-black"}`}>
+          DISTORSIÓN
+        </span>
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`w-9 h-9 rounded-full flex flex-col items-center justify-center gap-1.5 ${dark ? "text-white" : "text-black"}`}
+          className={`w-9 h-9 rounded-full flex flex-col items-center justify-center gap-1.5`}
         >
           <span className={`block w-5 h-0.5 transition-all ${dark ? "bg-white" : "bg-black"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
           <span className={`block w-5 h-0.5 transition-all ${dark ? "bg-white" : "bg-black"} ${menuOpen ? "opacity-0" : ""}`} />
@@ -117,6 +103,16 @@ export default function Navbar() {
           </Link>
         </div>
       )}
+
+      {/* Botón ES/EN flotante */}
+      <button
+  onClick={() => setLang(lang === "ES" ? "EN" : "ES")}
+  className="fixed bottom-[136px] right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 bg-[#FF3B27]"
+>
+  <span className="text-xs font-bold text-white leading-none">
+    {lang === "ES" ? "ES" : "EN"}
+  </span>
+</button>
 
       {/* Botón sol/luna */}
       <button

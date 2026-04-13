@@ -1,25 +1,25 @@
 "use client";
 
 import Navbar from "./components/Navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import NewsCard from "./components/NewsCard";
 import { useLang } from "./components/LanguageContext";
 
 const noticiasPorGenero = {
-deportes: [
-  { id: 1, title: "Polémica arbitral en el Bayern Múnich", titleEn: "Refereeing controversy at Bayern Munich", description: "El Bayern apeló la expulsión de Luis Díaz tras el reconocimiento del árbitro.", descriptionEn: "Bayern appealed Luis Díaz's red card after the referee acknowledged the harsh decision.", href: "/noticia/1", image: "/2bayern.jpg", imagePosition: "center center", imageScale: 1 },
-  { id: 2, title: "Venezuela avanza al Clásico Mundial", titleEn: "Venezuela advances at the World Baseball Classic", description: "La selección derrotó 8-5 a Japón y aseguró su clasificación a los Juegos Olímpicos 2028.", descriptionEn: "The team defeated Japan 8-5 and secured their qualification for the 2028 Olympics.", href: "/noticia/2", image: "/3venezuela.jpeg", imagePosition: "center top", imageScale: 1 },
-  { id: 3, title: "Debate sobre el presupuesto deportivo", titleEn: "Debate over the sports budget", description: "El recorte para 2026 preocupa a federaciones y atletas colombianos.", descriptionEn: "The 2026 budget cut raises concern among Colombian federations and athletes.", href: "/noticia/3", image: "/1debate.jpg", imagePosition: "right center", imageScale: 1 },
-],
-farandula: [
-  { id: 4, title: "Polilla habla de cartas de la Gorda Fabiola", titleEn: "Polilla speaks about La Gorda Fabiola's letters", description: "El comediante encontró cartas y poemas escritos por su esposa durante su proceso de duelo.", descriptionEn: "The comedian found letters and poems written by his wife during his grieving process.", href: "/noticia/4", image: "/okpolilla.jpg", imagePosition: "center center", imageScale: 1 },
-  { id: 5, title: "Valdiri regaló esmeraldas en los 15 de su hija", titleEn: "Valdiri gifted emeralds at her daughter's quinceañera", description: "La fiesta en Cartagena sorprendió con dijes de esmeralda como recuerdo para los invitados.", descriptionEn: "The Cartagena party surprised guests with emerald charms as keepsakes.", href: "/noticia/5", image: "/3valdiri.jpg", imagePosition: "center top", imageScale: 1 },
-  { id: 6, title: "F1: Antonelli gana en Shanghái y apunta alto", titleEn: "F1: Antonelli wins in Shanghai and aims high", description: "El piloto de Mercedes logró su primera victoria en F1 con una actuación que sorprendió a su propio equipo.", descriptionEn: "The Mercedes driver secured his first F1 win with a performance that surprised even his own team.", href: "/noticia/6", image: "/1kimi.jpg", imagePosition: "right center top", imageScale: 1 },
-],
+  deportes: [
+    { id: 1, title: "Polémica arbitral en el Bayern Múnich", titleEn: "Refereeing controversy at Bayern Munich", description: "El Bayern apeló la expulsión de Luis Díaz tras el reconocimiento del árbitro.", descriptionEn: "Bayern appealed Luis Díaz's red card after the referee acknowledged the harsh decision.", href: "/noticia/1", image: "/bayerncard.jpg", imagePosition: "center center", imageScale: 1 },
+    { id: 2, title: "Venezuela avanza al Clásico Mundial", titleEn: "Venezuela advances at the World Baseball Classic", description: "La selección derrotó 8-5 a Japón y aseguró su clasificación a los Juegos Olímpicos 2028.", descriptionEn: "The team defeated Japan 8-5 and secured their qualification for the 2028 Olympics.", href: "/noticia/2", image: "/venezuelacard.jpg", imagePosition: "center top", imageScale: 1 },
+    { id: 3, title: "Debate sobre el presupuesto deportivo", titleEn: "Debate over the sports budget", description: "El recorte para 2026 preocupa a federaciones y atletas colombianos.", descriptionEn: "The 2026 budget cut raises concern among Colombian federations and athletes.", href: "/noticia/3", image: "/debatecard.jpg", imagePosition: "right center", imageScale: 1 },
+  ],
+  farandula: [
+    { id: 4, title: "Polilla habla de cartas de la Gorda Fabiola", titleEn: "Polilla speaks about La Gorda Fabiola's letters", description: "El comediante encontró cartas y poemas escritos por su esposa durante su proceso de duelo.", descriptionEn: "The comedian found letters and poems written by his wife during his grieving process.", href: "/noticia/4", image: "/polillacard.jpg", imagePosition: "center center", imageScale: 1 },
+    { id: 5, title: "Valdiri regaló esmeraldas en los 15 de su hija", titleEn: "Valdiri gifted emeralds at her daughter's quinceañera", description: "La fiesta en Cartagena sorprendió con dijes de esmeralda como recuerdo para los invitados.", descriptionEn: "The Cartagena party surprised guests with emerald charms as keepsakes.", href: "/noticia/5", image: "/valdiricard.jpg", imagePosition: "center top", imageScale: 1 },
+    { id: 6, title: "F1: Antonelli gana en Shanghái y apunta alto", titleEn: "F1: Antonelli wins in Shanghai and aims high", description: "El piloto de Mercedes logró su primera victoria en F1 con una actuación que sorprendió a su propio equipo.", descriptionEn: "The Mercedes driver secured his first F1 win with a performance that surprised even his own team.", href: "/noticia/6", image: "/kimicard.jpg", imagePosition: "right center top", imageScale: 1 },
+  ],
   social: [
-    { id: 7, title: "Alerta por posible 'super El Niño'", titleEn: "Warning over possible 'super El Niño'", description: "Científicos monitorean señales en el Pacífico que podrían indicar un fenómeno climático intenso.", descriptionEn: "Scientists monitor Pacific signals that could indicate an intense climate phenomenon.", href: "/noticia/7", image: "/3nino.jpg", imagePosition: "center center" },
-    { id: 8, title: "Colombia y Venezuela contra el narcotráfico", titleEn: "Colombia and Venezuela against drug trafficking", description: "Ambos países anunciaron operaciones espejo en la frontera para combatir redes criminales.", descriptionEn: "Both countries announced mirror operations on the border to combat criminal networks.", href: "/noticia/8", image: "/3narco.jpg", imagePosition: "center center" },
-    { id: 9, title: "¿La IA reemplazará a los trabajadores?", titleEn: "Will AI replace workers?", description: "Expertos debaten si la inteligencia artificial eliminará empleos o creará nuevas oportunidades.", descriptionEn: "Experts debate whether artificial intelligence will eliminate jobs or create new opportunities.", href: "/noticia/9", image: "/3ia.jpeg", imagePosition: "center center" },
+    { id: 7, title: "Alerta por posible 'super El Niño'", titleEn: "Warning over possible 'super El Niño'", description: "Científicos monitorean señales en el Pacífico que podrían indicar un fenómeno climático intenso.", descriptionEn: "Scientists monitor Pacific signals that could indicate an intense climate phenomenon.", href: "/noticia/7", image: "/ninocard.jpg", imagePosition: "center center" },
+    { id: 8, title: "Colombia y Venezuela contra el narcotráfico", titleEn: "Colombia and Venezuela against drug trafficking", description: "Ambos países anunciaron operaciones espejo en la frontera para combatir redes criminales.", descriptionEn: "Both countries announced mirror operations on the border to combat criminal networks.", href: "/noticia/8", image: "/narcocard.jpg", imagePosition: "center center" },
+    { id: 9, title: "¿La IA reemplazará a los trabajadores?", titleEn: "Will AI replace workers?", description: "Expertos debaten si la inteligencia artificial eliminará empleos o creará nuevas oportunidades.", descriptionEn: "Experts debate whether artificial intelligence will eliminate jobs or create new opportunities.", href: "/noticia/9", image: "/iacard.jpg", imagePosition: "center center" },
   ],
   ciencia: [
     { id: 10, title: "Vacuna nasal contra virus y alergias", titleEn: "Nasal vaccine against viruses and allergies", description: "Investigadores presentaron una vacuna experimental que activa defensas frente a virus, bacterias y alérgenos.", descriptionEn: "Researchers presented an experimental vaccine that activates defenses against viruses, bacteria and allergens.", href: "/noticia/10", image: "/science-fake.jpg", imagePosition: "center center" },
@@ -30,7 +30,7 @@ farandula: [
 
 const generosLabel: Record<keyof typeof noticiasPorGenero, { es: string; en: string }> = {
   deportes:  { es: "Deportes",  en: "Sports"       },
-  farandula: { es: "Farandula", en: "Entertainment" },
+  farandula: { es: "Farándula", en: "Entertainment" },
   social:    { es: "Social",    en: "Social"        },
   ciencia:   { es: "Ciencia",   en: "Science"       },
 };
@@ -52,6 +52,20 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const audioRef = useRef<HTMLAudioElement>(null);
+const [muted, setMuted] = useState(true);
+
+const toggleAudio = () => {
+  if (!audioRef.current) return;
+  if (muted) {
+    audioRef.current.play();
+    setMuted(false);
+  } else {
+    audioRef.current.pause();
+    setMuted(true);
+  }
+};
+
 useEffect(() => {
   if (window.location.hash === "#arma-tu-noticia") {
     const section = document.getElementById("arma-tu-noticia");
@@ -62,6 +76,8 @@ useEffect(() => {
   return (
     <main className="text-black dark:text-white">
       <Navbar />
+
+      <audio ref={audioRef} loop src="/glitch-sound.mp3" />
 
       {/* VIDEO FONDO GLOBAL — fijo detrás de todo en dark mode */}
       <div className="fixed inset-0 z-0 hidden dark:block pointer-events-none">
@@ -99,19 +115,19 @@ useEffect(() => {
     mixBlendMode: "screen"
   }}
 >
-  <source src="/distorsion-titulo.webm" type="video/webm" />
-  <source src="/distorsion-titulo.mp4" type="video/mp4" />
+  <source src="/DISTORSION-titulo.webm" type="video/webm" />
+  <source src="/DISTORSION-titulo.mp4" type="video/mp4" />
 </video>
         </div>
       </section>
 
       <div className="relative z-10">
 
-        {/* QUÉ ES DISTORSION */}
+        {/* QUÉ ES DISTORSIÓN */}
         <section className="bg-[#F5F5F5] dark:bg-transparent pt-16 md:pt-32 pb-10 px-4 md:px-10 overflow-hidden transition-colors duration-300">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-title font-bold mb-6 md:mb-8 text-black dark:text-white">
-              {t("¿QUÉ ES DISTORSION?", "WHAT IS DISTORSION?")}
+              {t("¿QUÉ ES DISTORSIÓN?", "WHAT IS DISTORTION?")}
             </h2>
             <p className="max-w-2xl mx-auto text-xs md:text-sm text-black/70 dark:text-white/80">
   {t(
@@ -133,7 +149,7 @@ useEffect(() => {
                 }}>
                 <h3 className="font-bold text-lg md:text-xl mb-3">{t(card.titleEs, card.titleEn)}</h3>
                 <hr className="mb-4" style={{ borderColor: card.textColor, opacity: 0.3 }} />
-                <p className="text-xs md:text-sm leading-relaxed" style={{ opacity: 0.85 }}>{t(card.descEs, card.descEn)}</p>
+                <p className="text-[10px] md:text-xs leading-relaxed" style={{ opacity: 0.85 }}>{t(card.descEs, card.descEn)}</p>
               </div>
             ))}
           </div>
@@ -141,7 +157,7 @@ useEffect(() => {
 
         {/* IMAGEN */}
         <section className="bg-[#F5F5F5] dark:bg-transparent pt-0 pb-10 flex items-center justify-center overflow-hidden transition-colors duration-300">
-          <img src="/grafico.png" alt="Gráfico Real o Fake" className="w-full object-contain" />
+          <img src={lang === "ES" ? "/grafico.png" : "/grafico-en.png"} alt="Gráfico Real o Fake" className="w-full object-contain" />
         </section>
 
         {/* ARMA TU NOTICIA */}
@@ -186,6 +202,27 @@ useEffect(() => {
         </section>
 
       </div>
+
+<button
+  onClick={toggleAudio}
+  className="fixed bottom-[78px] right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+  style={{ backgroundColor: muted ? "#0A0A0A" : "#BEFE46" }}
+>
+  {muted ? (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#BEFE46" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <line x1="23" y1="9" x2="17" y2="15"/>
+      <line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+  ) : (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    </svg>
+  )}
+</button>
+
     </main>
   );
 }

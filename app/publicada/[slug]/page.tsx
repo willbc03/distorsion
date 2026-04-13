@@ -12,15 +12,16 @@ type ContentItem =
   | { type: "text-full"; text: string };
 
 type SavedNews = {
-  title: string;
-  subtitle: string;
+  titleEs: string; titleEn: string;
+  subtitleEs: string; subtitleEn: string;
   heroImage: string;
-  intro: string;
-  tags: string[];
-  contentItems: ContentItem[];
+  introEs: string; introEn: string;
+  tagsEs: string[]; tagsEn: string[];
+  contentItemsEs: ContentItem[];
+  contentItemsEn: ContentItem[];
   author: string;
   verdict: "buena" | "mala";
-  verdictText: string;
+  verdictEs: string; verdictEn: string;
   createdAt: string;
 };
 
@@ -44,15 +45,41 @@ function groupItems(items: ContentItem[]) {
   return groups;
 }
 
+const imagesPerGroup: Record<string, [string, string, string]> = {
+  "1":  ["/1bayern.jpg",      "/2bayern.jpg",      "/3bayern.jpg"],
+  "2":  ["/1venezuela.jpg",   "/2venezuela.jpg",   "/3venezuela.jpg"],
+  "3":  ["/1debate.jpg",      "/2debate.jpg",      "/3debate.jpg"],
+  "4":  ["/okpolilla.jpg",    "/nelson.jpg",       "/escritos.jpg"],
+  "5":  ["/1valdiri.jpg",     "/2valdiri.jpg",     "/3valdiri.jpg"],
+  "6":  ["/1kimi.jpg",        "/2kimi.jpg",        "/3kimi.jpg"],
+  "7":  ["/1nino.jpg",        "/2nino.jpg",        "/3nino.jpg"],
+  "8":  ["/3narco.jpg",       "/1narco.jpeg",      "/2narco.jpg"],
+  "9":  ["/1ia.jpg",          "/2ia.jpg",          "/3ia.jpeg"],
+  "10": ["/science-fake.jpg", "/science-fake.jpg", "/science-fake.jpg"],
+  "11": ["/ciencia.jpg",      "/ciencia.jpg",      "/ciencia.jpg"],
+  "12": ["/ia.jpg",           "/ia.jpg",           "/ia.jpg"],
+};
+
 export default function PublicadaPage() {
   const params = useParams<{ slug: string }>();
   const { lang, t } = useLang();
   const [news, setNews] = useState<SavedNews | null>(null);
+  const [fontSize, setFontSize] = useState(0);
 
   useEffect(() => {
     const raw = localStorage.getItem(`news-${params.slug}`);
     if (raw) setNews(JSON.parse(raw));
   }, [params.slug]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("text-size-md", "text-size-lg");
+    if (fontSize === 1) root.classList.add("text-size-md");
+    if (fontSize === 2) root.classList.add("text-size-lg");
+    return () => {
+      root.classList.remove("text-size-md", "text-size-lg");
+    };
+  }, [fontSize]);
 
   if (!news) {
     return (
@@ -62,11 +89,17 @@ export default function PublicadaPage() {
     );
   }
 
+  const title = lang === "ES" ? news.titleEs : news.titleEn;
+  const subtitle = lang === "ES" ? news.subtitleEs : news.subtitleEn;
+  const intro = lang === "ES" ? news.introEs : news.introEn;
+  const currentTags = lang === "ES" ? news.tagsEs : news.tagsEn;
+  const contentItems = lang === "ES" ? news.contentItemsEs : news.contentItemsEn;
+
   const date = new Date(news.createdAt).toLocaleDateString(lang === "ES" ? "es-ES" : "en-US", {
     year: "numeric", month: "long", day: "numeric"
   }).toUpperCase();
 
-  const groups = groupItems(news.contentItems || []);
+  const groups = groupItems(contentItems || []);
   const noticiaId = params.slug.split("-")[1];
 
   return (
@@ -79,7 +112,7 @@ export default function PublicadaPage() {
         <div className="flex items-center gap-2 md:gap-4 mb-6 md:mb-8 text-xs font-medium tracking-widest flex-wrap">
           <span className="text-black/70 dark:text-white/70 font-medium">{date}</span>
           <span className="text-black/50 dark:text-white/50">/</span>
-          {(news.tags || []).map((tag, i) => (
+          {(currentTags || []).map((tag, i) => (
             <span key={i} className="border-2 border-black/60 dark:border-white/60 rounded-full px-3 py-1 text-black dark:text-white font-medium">{tag}</span>
           ))}
           <span className="text-black/50 dark:text-white/50">/</span>
@@ -93,24 +126,24 @@ export default function PublicadaPage() {
           </div>
         </div>
 
-        {/* HERO: 1 col mobile, 2 col desktop */}
+        {/* HERO */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-start mb-8 md:mb-10">
           <div>
             <h1 className="font-title font-bold text-black dark:text-white leading-tight uppercase mb-4 md:mb-6"
               style={{ fontSize: "clamp(1.8rem, 3.8vw, 999px)" }}>
-              {news.title}
+              {title}
             </h1>
-            <p className="text-black/70 dark:text-white/70 text-sm md:text-base leading-relaxed">{news.subtitle}</p>
+            <p className="text-black/70 dark:text-white/70 text-sm md:text-base leading-relaxed">{subtitle}</p>
           </div>
           <div className="rounded-2xl overflow-hidden bg-[#FF3B27] h-[280px] md:h-[500px]">
             <img src={news.heroImage.startsWith("/") ? news.heroImage : `/${news.heroImage}`}
-              alt={news.title} className="w-full h-full object-cover grayscale"
+              alt={title} className="w-full h-full object-cover grayscale"
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
           </div>
         </div>
 
         <hr className="border-black/30 dark:border-white/30 mb-6 md:mb-8" />
-        <p className="text-black/70 dark:text-white/70 text-sm md:text-base leading-relaxed mb-10 md:mb-16">{news.intro}</p>
+        <p className="text-black/70 dark:text-white/70 text-sm md:text-base leading-relaxed mb-10 md:mb-16">{intro}</p>
 
         {/* CONTENIDO */}
         {groups.map((group, gi) => {
@@ -141,11 +174,19 @@ export default function PublicadaPage() {
                     ))}
                   </div>
                   <div className="bg-[#FF3B27] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
-                    {imageItem?.image && (
-                      <img src={imageItem.image} alt=""
-                        className="absolute inset-0 w-full h-full object-cover grayscale"
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
-                    )}
+                    {(() => {
+                      const subtitleIndex = groups.slice(0, gi).filter(g => !!g.subtitle).length;
+                      const noticiaImages = imagesPerGroup[noticiaId] || [news.heroImage, news.heroImage, news.heroImage];
+                      const groupImage = imageItem?.image || noticiaImages[subtitleIndex + 1] || noticiaImages[0];
+                      return (
+                        <img
+                          src={groupImage}
+                          alt=""
+                          className="absolute inset-0 w-full h-full object-cover grayscale"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                        />
+                      );
+                    })()}
                   </div>
                 </div>
               </div>
@@ -182,6 +223,19 @@ export default function PublicadaPage() {
         </div>
 
       </section>
+
+      {/* Botón tamaño texto */}
+      <button
+  onClick={() => setFontSize(prev => (prev + 1) % 3)}
+  className="fixed bottom-[78px] right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+  style={{ backgroundColor: "#BEFE46" }}
+>
+  <span className="font-bold leading-none text-black"
+    style={{ fontSize: fontSize === 0 ? "12px" : fontSize === 1 ? "11px" : "9px" }}>
+    {fontSize === 0 ? "A" : fontSize === 1 ? "A+" : "A++"}
+  </span>
+</button>
+
     </main>
   );
 }

@@ -1338,6 +1338,22 @@ const images: Record<string, string> = {
   "7": NOTICIA_7_IMAGE, "8": NOTICIA_8_IMAGE, "9": NOTICIA_9_IMAGE,
   "10": NOTICIA_10_IMAGE, "11": NOTICIA_11_IMAGE, "12": NOTICIA_12_IMAGE,
 };
+
+const imagesPerGroup: Record<string, [string, string, string]> = {
+  "1":  ["/1bayern.jpg",      "/2bayern.jpg",      "/3bayern.jpg"],
+  "2":  ["/1venezuela.jpg",   "/2venezuela.jpg",   "/3venezuela.jpg"],
+  "3":  ["/1debate.jpg",      "/2debate.jpg",      "/3debate.jpg"],
+  "4":  ["/okpolilla.jpg",    "/nelson.jpg",       "/escritos.jpg"],
+  "5":  ["/1valdiri.jpg",     "/2valdiri.jpg",     "/3valdiri.jpg"],
+  "6":  ["/1kimi.jpg",        "/2kimi.jpg",        "/3kimi.jpg"],
+  "7":  ["/1nino.jpg",        "/2nino.jpg",        "/3nino.jpg"],
+  "8":  ["/3narco.jpg",       "/1narco.jpeg",      "/2narco.jpg"],
+  "9":  ["/1ia.jpg",          "/2ia.jpg",          "/3ia.jpeg"],
+  "10": ["/science-fake.jpg", "/science-fake.jpg", "/science-fake.jpg"],
+  "11": ["/ciencia.jpg",      "/ciencia.jpg",      "/ciencia.jpg"],
+  "12": ["/ia.jpg",           "/ia.jpg",           "/ia.jpg"],
+};
+
 const tags: Record<string, { es: string[]; en: string[] }> = {
   "1": NOTICIA_1_TAGS, "2": NOTICIA_2_TAGS, "3": NOTICIA_3_TAGS,
   "4": NOTICIA_4_TAGS, "5": NOTICIA_5_TAGS, "6": NOTICIA_6_TAGS,
@@ -1392,31 +1408,62 @@ export default function NoticiaPage() {
 
   const [step, setStep] = useState(0);
   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
+  const [contentItemsEs, setContentItemsEs] = useState<ContentItem[]>([]);
+  const [contentItemsEn, setContentItemsEn] = useState<ContentItem[]>([]);
   const [name, setName] = useState("");
   const [started, setStarted] = useState(false);
   const [firstImage, setFirstImage] = useState<string | undefined>(undefined);
   const [roundCount, setRoundCount] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [optOrder, setOptOrder] = useState(false);
-const [colorOrder, setColorOrder] = useState(false);
+  const [colorOrder, setColorOrder] = useState(false);
+  const [fontSize, setFontSize] = useState(0);
+
+  useEffect(() => {
+    setOptOrder(Math.random() < 0.5);
+    setColorOrder(Math.random() < 0.5);
+  }, []);
+
+  useEffect(() => {
+  const root = document.documentElement;
+  root.classList.remove("text-size-md", "text-size-lg");
+  if (fontSize === 1) root.classList.add("text-size-md");
+  if (fontSize === 2) root.classList.add("text-size-lg");
+  return () => {
+    root.classList.remove("text-size-md", "text-size-lg");
+  };
+}, [fontSize]);
 
 useEffect(() => {
-  setOptOrder(Math.random() < 0.5);
-  setColorOrder(Math.random() < 0.5);
-}, []);
+  if (lang === "ES") {
+    setContentItems(contentItemsEs);
+  } else {
+    setContentItems(contentItemsEn);
+  }
+}, [lang]);
+
   const current = story[step];
 
   const handleOption = (option: Option) => {
     const nodeType = current.type ?? "text";
-    const text = lang === "ES" ? option.text : option.textEn;
+    const textEs = option.text;
+    const textEn = option.textEn;
+
     if (nodeType === "subtitle") {
-      setContentItems((prev) => [...prev, { type: "subtitle", text }]);
+      setContentItemsEs(prev => [...prev, { type: "subtitle", text: textEs }]);
+      setContentItemsEn(prev => [...prev, { type: "subtitle", text: textEn }]);
+      setContentItems(prev => [...prev, { type: "subtitle", text: lang === "ES" ? textEs : textEn }]);
     } else if (nodeType === "text-full") {
-      setContentItems((prev) => [...prev, { type: "text-full", text }]);
+      setContentItemsEs(prev => [...prev, { type: "text-full", text: textEs }]);
+      setContentItemsEn(prev => [...prev, { type: "text-full", text: textEn }]);
+      setContentItems(prev => [...prev, { type: "text-full", text: lang === "ES" ? textEs : textEn }]);
     } else {
       if (option.image && !firstImage) setFirstImage(option.image);
-      setContentItems((prev) => [...prev, { type: "text", text, image: option.image }]);
+      setContentItemsEs(prev => [...prev, { type: "text", text: textEs, image: option.image }]);
+      setContentItemsEn(prev => [...prev, { type: "text", text: textEn, image: option.image }]);
+      setContentItems(prev => [...prev, { type: "text", text: lang === "ES" ? textEs : textEn, image: option.image }]);
     }
+
     setStep(option.next);
     setStarted(true);
     setRoundCount(prev => prev + 1);
@@ -1426,15 +1473,21 @@ useEffect(() => {
     if (!name.trim() || !current.ending) return;
     const slug = `noticia-${params.id}-${Date.now()}`;
     localStorage.setItem(`news-${slug}`, JSON.stringify({
-      title: titles[params.id][lang === "ES" ? "es" : "en"],
-      subtitle: subtitles[params.id][lang === "ES" ? "es" : "en"],
+      titleEs: titles[params.id].es,
+      titleEn: titles[params.id].en,
+      subtitleEs: subtitles[params.id].es,
+      subtitleEn: subtitles[params.id].en,
       heroImage: images[params.id],
-      intro: intros[params.id][lang === "ES" ? "es" : "en"],
-      tags: tags[params.id][lang === "ES" ? "es" : "en"],
-      contentItems,
+      introEs: intros[params.id].es,
+      introEn: intros[params.id].en,
+      tagsEs: tags[params.id].es,
+      tagsEn: tags[params.id].en,
+      contentItemsEs,
+      contentItemsEn,
       author: name,
       verdict: current.ending.tone,
-      verdictText: lang === "ES" ? current.ending.verdict : current.ending.verdictEn,
+      verdictEs: current.ending.verdict,
+      verdictEn: current.ending.verdictEn,
       createdAt: new Date().toISOString(),
     }));
     router.push(`/publicada/${slug}`);
@@ -1498,28 +1551,36 @@ useEffect(() => {
             );
           } else if (hasSubtitle) {
             return (
-              <div key={gi} className="mb-10 md:mb-16">
-                <hr className="border-black/10 dark:border-white/10 mb-8 md:mb-10" />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-stretch">
-                  <div className="min-w-0">
-                    <h2 className="font-title font-bold text-black dark:text-white leading-tight uppercase mb-6 md:mb-8"
-                      style={{ fontSize: "clamp(1.5rem, 3.8vw, 999px)" }}>
-                      {group.subtitle}
-                    </h2>
-                    {group.texts.map((t, ti) => (
-                      <p key={ti} className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed mb-6">{t.text}</p>
-                    ))}
-                  </div>
-                  <div className="bg-[#FF3B27] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
-                    {(imageItem?.image || firstImage) && (
-                      <img src={imageItem?.image || firstImage!} alt=""
-                        className="absolute inset-0 w-full h-full object-cover grayscale"
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
+  <div key={gi} className="mb-10 md:mb-16">
+    <hr className="border-black/10 dark:border-white/10 mb-8 md:mb-10" />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-stretch">
+      <div className="min-w-0">
+        <h2 className="font-title font-bold text-black dark:text-white leading-tight uppercase mb-6 md:mb-8"
+          style={{ fontSize: "clamp(1.5rem, 3.8vw, 999px)" }}>
+          {group.subtitle}
+        </h2>
+        {group.texts.map((t, ti) => (
+          <p key={ti} className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed mb-6">{t.text}</p>
+        ))}
+      </div>
+      <div className="bg-[#FF3B27] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
+        {(() => {
+          const subtitleIndex = groups.slice(0, gi).filter(g => !!g.subtitle).length;
+          const noticiaImages = imagesPerGroup[params.id] || [images[params.id], images[params.id], images[params.id]];
+          const groupImage = imageItem?.image || noticiaImages[subtitleIndex + 1] || noticiaImages[0];
+          return (
+            <img
+              src={groupImage}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover grayscale"
+              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+            />
+          );
+        })()}
+      </div>
+    </div>
+  </div>
+);
           } else {
             return (
               <div key={gi} className="mb-10">
@@ -1536,49 +1597,45 @@ useEffect(() => {
       </section>
 
       {/* OPCIONES */}
-{!current.ending && current.options && (
-  <section className="max-w-7xl mx-auto px-4 md:px-10 pb-16 md:pb-32">
-    <h2 className="font-title font-bold text-black dark:text-white text-2xl md:text-3xl mb-6 md:mb-10">
-      {started
-        ? t("¿Cómo continúa la historia?", "How does the story continue?")
-        : t("¿Cómo arranca tu noticia?", "How does your story start?")}
-    </h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      {(() => {
-        const opts = (optOrder ? roundCount % 2 === 0 : roundCount % 2 !== 0)
-          ? current.options!.map((o, idx) => ({ opt: o, orig: idx }))
-          : [...current.options!.map((o, idx) => ({ opt: o, orig: idx }))].reverse();
-        return opts.map(({ opt }, i) => {
-          const isGreen = colorOrder ? i === 0 : i === 1;
-          return (
-            <div key={i} className="relative">
-              {isGreen && (
-                <div className="absolute inset-0 bg-[#FF3B27] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4"
-                  style={{ clipPath: "polygon(5% 0, 98% 3%, 95% 88%, 100% 97%, 1% 100%, 3% 60%, 0 20%)" }} />
-              )}
-              <button
-                onClick={() => handleOption(opt)}
-                style={{
-                  clipPath: i === 0
-                    ? "polygon(4% 0, 100% 2%, 97% 75%, 100% 95%, 2% 100%, 0% 55%, 3% 18%)"
-                    : "polygon(0 3%, 96% 0, 100% 20%, 98% 60%, 100% 97%, 4% 95%, 2% 40%)"
-                }}
-                className={`relative w-full text-left p-6 md:p-10 transition-all duration-300 hover:scale-[1.02] ${isGreen ? "bg-[#BEFE46] text-black" : "bg-[#FF3B27] text-white"}`}>
-                {current.type === "subtitle" ? (
-                  <p className="font-title font-bold leading-tight uppercase text-lg md:text-2xl">
-                    {lang === "ES" ? opt.text : opt.textEn}
-                  </p>
-                ) : (
-                  <p className="text-sm md:text-base leading-relaxed">{lang === "ES" ? opt.text : opt.textEn}</p>
-                )}
-              </button>
-            </div>
-          );
-        });
-      })()}
-    </div>
-  </section>
-)}
+      {!current.ending && current.options && (
+        <section className="max-w-7xl mx-auto px-4 md:px-10 pb-16 md:pb-32">
+          <h2 className="font-title font-bold text-black dark:text-white text-2xl md:text-3xl mb-6 md:mb-10">
+            {started
+              ? t("¿Cómo continúa la historia?", "How does the story continue?")
+              : t("¿Cómo arranca tu noticia?", "How does your story start?")}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {(() => {
+              const opts = (optOrder ? roundCount % 2 === 0 : roundCount % 2 !== 0)
+                ? current.options!.map((o, idx) => ({ opt: o, orig: idx }))
+                : [...current.options!.map((o, idx) => ({ opt: o, orig: idx }))].reverse();
+              return opts.map(({ opt }, i) => {
+                const isGreen = colorOrder ? i === 0 : i === 1;
+                return (
+                  <div key={i} className="relative">
+                    {isGreen && (
+                      <div className="absolute inset-0 bg-[#FF3B27] translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4"
+                        style={{ clipPath: "polygon(5% 0, 98% 3%, 95% 88%, 100% 97%, 1% 100%, 3% 60%, 0 20%)" }} />
+                    )}
+                    <button
+                      onClick={() => handleOption(opt)}
+                      style={{
+                        clipPath: i === 0
+                          ? "polygon(4% 0, 100% 2%, 97% 75%, 100% 95%, 2% 100%, 0% 55%, 3% 18%)"
+                          : "polygon(0 3%, 96% 0, 100% 20%, 98% 60%, 100% 97%, 4% 95%, 2% 40%)"
+                      }}
+                      className={`relative w-full text-left p-6 md:p-10 transition-all duration-300 hover:scale-[1.02] ${isGreen ? "bg-[#BEFE46] text-black" : "bg-[#FF3B27] text-white"}`}>
+                      <p className="text-sm md:text-base leading-relaxed">
+  {lang === "ES" ? opt.text : opt.textEn}
+</p>
+                    </button>
+                  </div>
+                );
+              });
+            })()}
+          </div>
+        </section>
+      )}
 
       {/* FINAL */}
       {current.ending && (
@@ -1592,9 +1649,11 @@ useEffect(() => {
             <button onClick={() => setShowModal(true)} className="w-full sm:w-auto bg-[#BEFE46] text-black font-bold px-8 md:px-10 py-4 rounded-full hover:bg-white transition text-sm md:text-base">
               {t("Publicar noticia", "Publish story")}
             </button>
-            <Link href={`/noticia/${params.id}`} className="w-full sm:w-auto text-center bg-[#FF3B27] text-white font-bold px-8 md:px-10 py-4 rounded-full hover:bg-red-600 transition text-sm md:text-base">
+            <button
+              onClick={() => window.location.reload()}
+              className="w-full sm:w-auto text-center bg-[#FF3B27] text-white font-bold px-8 md:px-10 py-4 rounded-full hover:bg-red-600 transition text-sm md:text-base">
               {t("Volver a empezar", "Start over")}
-            </Link>
+            </button>
           </div>
         </section>
       )}
@@ -1641,6 +1700,19 @@ useEffect(() => {
           </div>
         </div>
       )}
+
+{/* Botón tamaño texto */}
+<button
+  onClick={() => setFontSize(prev => (prev + 1) % 3)}
+  className="fixed bottom-[78px] right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110"
+  style={{ backgroundColor: "#BEFE46" }}
+>
+  <span className="font-bold leading-none text-black"
+    style={{ fontSize: fontSize === 0 ? "12px" : fontSize === 1 ? "11px" : "9px" }}>
+    {fontSize === 0 ? "A" : fontSize === 1 ? "A+" : "A++"}
+  </span>
+</button>
+
     </main>
   );
 }

@@ -60,28 +60,7 @@ export default function ContactoPage() {
               </a>
             </div>
 
-            <hr className="border-black/10 dark:border-white/10" />
-
-            <div>
-              <p className="text-black/40 dark:text-white/40 text-xs tracking-widest uppercase mb-5">
-                {t("Redes sociales", "Social media")}
-              </p>
-              <div className="flex flex-col gap-3">
-                {[
-                  { label: "Instagram", handle: "@webdistorsion", url: "https://instagram.com/webdistorsion" },
-                  { label: "Twitter / X", handle: "@webdistorsion", url: "https://twitter.com/webdistorsion" },
-                  { label: "TikTok", handle: "@webdistorsion", url: "https://tiktok.com/@webdistorsion" },
-                ].map((red) => (
-                  <a key={red.label} href={red.url} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-between group">
-                    <span className="text-black/50 dark:text-white/50 text-sm">{red.label}</span>
-                    <span className="text-black dark:text-white font-medium group-hover:text-[#BEFE46] transition-colors">
-                      {red.handle}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
+          
 
             <hr className="border-black/10 dark:border-white/10" />
 
