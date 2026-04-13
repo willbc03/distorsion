@@ -1565,9 +1565,8 @@ useEffect(() => {
       </div>
       <div className="bg-[#FF3B27] overflow-hidden relative rounded-xl" style={{ minHeight: "200px" }}>
         {(() => {
-          const subtitleIndex = groups.slice(0, gi).filter(g => !!g.subtitle).length;
-          const noticiaImages = imagesPerGroup[params.id] || [images[params.id], images[params.id], images[params.id]];
-          const groupImage = imageItem?.image || noticiaImages[subtitleIndex + 1] || noticiaImages[0];
+  const noticiaImages = imagesPerGroup[params.id] || [images[params.id], images[params.id], images[params.id]];
+  const groupImage = noticiaImages[2] || noticiaImages[0];
           return (
             <img
               src={groupImage}
