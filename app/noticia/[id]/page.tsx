@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useLang } from "../../components/LanguageContext";
 import Navbar from "../../components/Navbar";
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
+import { supabase } from "../../lib/supabase";
 
 type Option = { text: string; textEn: string; next: number; image?: string; };
 type StoryNode = {
@@ -1418,6 +1420,7 @@ export default function NoticiaPage() {
   const [optOrder, setOptOrder] = useState(false);
   const [colorOrder, setColorOrder] = useState(false);
   const [fontSize, setFontSize] = useState(0);
+  const [toEmail, setToEmail] = useState("");
 
   useEffect(() => {
     setOptOrder(Math.random() < 0.5);
@@ -1469,29 +1472,50 @@ useEffect(() => {
     setRoundCount(prev => prev + 1);
   };
 
-  const handlePublish = () => {
-    if (!name.trim() || !current.ending) return;
-    const slug = `noticia-${params.id}-${Date.now()}`;
-    localStorage.setItem(`news-${slug}`, JSON.stringify({
-      titleEs: titles[params.id].es,
-      titleEn: titles[params.id].en,
-      subtitleEs: subtitles[params.id].es,
-      subtitleEn: subtitles[params.id].en,
-      heroImage: images[params.id],
-      introEs: intros[params.id].es,
-      introEn: intros[params.id].en,
-      tagsEs: tags[params.id].es,
-      tagsEn: tags[params.id].en,
-      contentItemsEs,
-      contentItemsEn,
-      author: name,
-      verdict: current.ending.tone,
-      verdictEs: current.ending.verdict,
-      verdictEn: current.ending.verdictEn,
-      createdAt: new Date().toISOString(),
-    }));
-    router.push(`/publicada/${slug}`);
-  };
+  const handlePublish = async () => {
+  if (!name.trim() || !current.ending) return;
+  const slug = `noticia-${params.id}-${Date.now()}`;
+
+  const { error } = await supabase.from("noticias").insert({
+    id: slug,
+    title_es: titles[params.id].es,
+    title_en: titles[params.id].en,
+    subtitle_es: subtitles[params.id].es,
+    subtitle_en: subtitles[params.id].en,
+    hero_image: images[params.id],
+    intro_es: intros[params.id].es,
+    intro_en: intros[params.id].en,
+    tags_es: tags[params.id].es,
+    tags_en: tags[params.id].en,
+    content_items_es: contentItemsEs,
+    content_items_en: contentItemsEn,
+    author: name,
+    verdict: current.ending.tone,
+    verdict_es: current.ending.verdict,
+    verdict_en: current.ending.verdictEn,
+  });
+
+  if (error) console.log("ERROR SUPABASE:", error);
+
+  if (toEmail.trim()) {
+    await emailjs.send(
+      "service_44xpgyr",
+      "template_pbix8c8",
+      {
+        author_name: name,
+        to_email: toEmail,
+        news_title: titles[params.id][lang === "ES" ? "es" : "en"],
+        verdict: current.ending.tone === "buena"
+          ? (lang === "ES" ? "Noticia verídica ✓" : "Verified news ✓")
+          : (lang === "ES" ? "Fake news ✗" : "Fake news ✗"),
+        news_url: `https://distorsion-vert.vercel.app/publicada/${slug}`,
+      },
+      "_1OCE3ABHBb9pAfjx"
+    );
+  }
+
+  router.push(`/publicada/${slug}`);
+};
 
   const today = new Date().toLocaleDateString(lang === "ES" ? "es-ES" : "en-US", {
     year: "numeric", month: "long", day: "numeric"
@@ -1683,6 +1707,15 @@ useEffect(() => {
                   onChange={(e) => setName(e.target.value)}
                   className="w-full p-3 rounded-full bg-[#FFF5E4] text-black text-sm outline-none mb-5"
                 />
+                <label className={`block text-xs font-medium mb-1.5 mt-4 ${isGoodNews ? "text-black/60" : "text-white/70"}`}>
+  {t("Enviar a correo (opcional)", "Send to email (optional)")}
+</label>
+<input
+  value={toEmail}
+  onChange={(e) => setToEmail(e.target.value)}
+  placeholder="ejemplo@correo.com"
+  className="w-full p-3 rounded-full bg-[#FFF5E4] text-black text-sm outline-none mb-5"
+/>
                 <button onClick={handlePublish}
                   className={`px-6 py-3 rounded-full font-bold text-sm transition hover:opacity-90 ${isGoodNews ? "bg-[#FF3B27] text-white" : "bg-[#BEFE46] text-black"}`}>
                   {t("Publicar noticia", "Publish story")}

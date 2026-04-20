@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import { useLang } from "../../components/LanguageContext";
+import { supabase } from "../../lib/supabase";
 
 type ContentItem =
   | { type: "text"; text: string; image?: string }
@@ -66,10 +67,41 @@ export default function PublicadaPage() {
   const [news, setNews] = useState<SavedNews | null>(null);
   const [fontSize, setFontSize] = useState(0);
 
-  useEffect(() => {
-    const raw = localStorage.getItem(`news-${params.slug}`);
-    if (raw) setNews(JSON.parse(raw));
-  }, [params.slug]);
+useEffect(() => {
+  const fetchNews = async () => {
+    const { data, error } = await supabase
+      .from("noticias")
+      .select("*")
+      .eq("id", params.slug)
+      .single();
+
+    if (error || !data) {
+      setNews(null);
+      return;
+    }
+
+    setNews({
+      titleEs: data.title_es,
+      titleEn: data.title_en,
+      subtitleEs: data.subtitle_es,
+      subtitleEn: data.subtitle_en,
+      heroImage: data.hero_image,
+      introEs: data.intro_es,
+      introEn: data.intro_en,
+      tagsEs: data.tags_es,
+      tagsEn: data.tags_en,
+      contentItemsEs: data.content_items_es,
+      contentItemsEn: data.content_items_en,
+      author: data.author,
+      verdict: data.verdict,
+      verdictEs: data.verdict_es,
+      verdictEn: data.verdict_en,
+      createdAt: data.created_at,
+    });
+  };
+
+  fetchNews();
+}, [params.slug]);
 
   useEffect(() => {
     const root = document.documentElement;
