@@ -942,12 +942,12 @@ const storyVacuna: StoryNode[] = [
       {
         text: "Un grupo de científicos en Estados Unidos presentó una vacuna nasal experimental que en pruebas de laboratorio mostró resultados prometedores frente a distintos virus, bacterias e incluso algunos desencadenantes alérgicos. El estudio, publicado en la revista Science, propone una estrategia diferente a las vacunas tradicionales al intentar reforzar la coordinación entre distintos mecanismos del sistema inmunológico.",
         textEn: "A group of scientists in the United States presented an experimental nasal vaccine that in laboratory tests showed promising results against various viruses, bacteria and even some allergic triggers. The study, published in the journal Science, proposes a different strategy from traditional vaccines by attempting to strengthen coordination between different mechanisms of the immune system.",
-        next: 1, image: "/science-fake.jpg"
+        next: 1, image: "/vacuna2.jpg"
       },
       {
         text: "Un equipo de investigadores en Estados Unidos desarrolló una vacuna nasal experimental diseñada para actuar contra múltiples virus, bacterias y hasta alergias al mismo tiempo. El enfoque busca modificar la forma en que el sistema inmunológico responde a distintas amenazas respiratorias, lo que abre el debate sobre cómo podría reaccionar el organismo ante una intervención que altera varios mecanismos de defensa simultáneamente.",
         textEn: "A team of researchers in the United States developed an experimental nasal vaccine designed to act against multiple viruses, bacteria and even allergies at the same time. The approach seeks to modify the way the immune system responds to different respiratory threats, opening debate about how the body could react to an intervention that alters several defense mechanisms simultaneously.",
-        next: 1, image: "/science-fake.jpg"
+        next: 1, image: "/vacuna2.jpg"
       },
     ],
   },
@@ -1006,12 +1006,12 @@ const storyVacuna: StoryNode[] = [
       {
         text: "Los investigadores señalan que los resultados obtenidos hasta ahora son prometedores, aunque todavía se encuentran en una etapa temprana de investigación. El siguiente paso será realizar ensayos en humanos para comprobar si la vacuna mantiene su eficacia y seguridad fuera del laboratorio. Si los resultados se confirman, este enfoque podría abrir nuevas posibilidades para prevenir distintas infecciones respiratorias mediante estrategias inmunológicas más amplias.",
         textEn: "Researchers note that the results obtained so far are promising, although they are still at an early stage of research. The next step will be to conduct human trials to verify whether the vaccine maintains its efficacy and safety outside the laboratory. If the results are confirmed, this approach could open new possibilities for preventing various respiratory infections through broader immunological strategies.",
-        next: 6, image: "/science-fake.jpg"
+        next: 6, image: "/vacuna3.jpg"
       },
       {
         text: "Expertos independientes consultados por medios especializados destacaron que el diseño del estudio es sólido, aunque señalaron que será fundamental esperar los resultados de ensayos clínicos en humanos antes de proyectar aplicaciones a gran escala de esta tecnología.",
         textEn: "Independent experts consulted by specialized media highlighted that the study design is solid, although they noted it will be essential to wait for the results of human clinical trials before projecting large-scale applications of this technology.",
-        next: 6, image: "/science-fake.jpg"
+        next: 6, image: "/vacuna3.jpg"
       },
     ],
   },
@@ -1022,12 +1022,12 @@ const storyVacuna: StoryNode[] = [
       {
         text: "Aunque el estudio plantea una idea innovadora, el desarrollo de una vacuna capaz de modificar de forma amplia la respuesta del sistema inmunológico también genera interrogantes sobre sus posibles efectos a largo plazo. Antes de llegar a su aplicación en personas, los científicos deberán demostrar que mantener al sistema inmune en un estado de alerta más prolongado no produce reacciones adversas o desequilibrios inmunológicos que puedan afectar la salud de quienes reciban este tipo de intervención.",
         textEn: "Although the study raises an innovative idea, the development of a vaccine capable of broadly modifying the immune system response also raises questions about its possible long-term effects. Before reaching application in humans, scientists will need to demonstrate that keeping the immune system in a more prolonged state of alert does not produce adverse reactions or immune imbalances that could affect the health of those receiving this type of intervention.",
-        next: 7, image: "/science-fake.jpg"
+        next: 7, image: "/vacuna2.jpg"
       },
       {
         text: "Algunos titulares comenzaron a circular en redes sociales afirmando que la vacuna ya había sido aprobada para uso humano, información incorrecta que los propios investigadores debieron desmentir públicamente antes de que se extendiera más la confusión.",
         textEn: "Some headlines began circulating on social media claiming the vaccine had already been approved for human use, incorrect information that the researchers themselves had to publicly deny before the confusion spread further.",
-        next: 7, image: "/science-fake.jpg"
+        next: 7, image: "/vacuna2.jpg"
       },
     ],
   },
@@ -1043,12 +1043,12 @@ const storyEclipse: StoryNode[] = [
       {
         text: "Un eclipse lunar ocurre cuando la Tierra se alinea entre el Sol y la Luna, proyectando su sombra sobre el satélite. Durante este proceso, la Luna puede adquirir un tono rojizo debido a la forma en que la atmósfera terrestre filtra la luz solar.",
         textEn: "A lunar eclipse occurs when the Earth aligns between the Sun and the Moon, casting its shadow on the satellite. During this process, the Moon can take on a reddish hue due to the way the Earth's atmosphere filters sunlight.",
-        next: 1, image: "/ciencia.jpg"
+        next: 1, image: "/lunar2.jpg"
       },
       {
         text: "El fenómeno se produce cuando la Luna atraviesa la sombra de la Tierra. En lugar de desaparecer, el satélite cambia de color y puede verse rojizo durante la fase conocida como totalidad.",
         textEn: "The phenomenon occurs when the Moon passes through Earth's shadow. Instead of disappearing, the satellite changes color and can appear reddish during the phase known as totality.",
-        next: 1, image: "/ciencia.jpg"
+        next: 1, image: "/lunar2.jpg"
       },
     ],
   },
@@ -1107,12 +1107,12 @@ const storyEclipse: StoryNode[] = [
       {
         text: "El eclipse del 3 de marzo podrá observarse en distintas regiones del planeta, aunque la visibilidad dependerá del lugar desde donde se observe.",
         textEn: "The March 3rd eclipse will be observable in different regions of the planet, although visibility will depend on the location from which it is observed.",
-        next: 6, image: "/ciencia.jpg"
+        next: 6, image: "/lunar3.jpg"
       },
       {
         text: "Organizaciones astronómicas han publicado guías con los horarios exactos del eclipse según cada zona horaria, para que los observadores puedan planificar con anticipación el mejor momento para ver el fenómeno.",
         textEn: "Astronomical organizations have published guides with the exact eclipse times for each time zone, so observers can plan in advance the best moment to watch the phenomenon.",
-        next: 6, image: "/ciencia.jpg"
+        next: 6, image: "/lunar3.jpg"
       },
     ],
   },
@@ -1123,12 +1123,12 @@ const storyEclipse: StoryNode[] = [
       {
         text: "La intensidad del color puede variar dependiendo de las condiciones de la atmósfera terrestre en ese momento.",
         textEn: "The intensity of the color can vary depending on the conditions of the Earth's atmosphere at that moment.",
-        next: 7, image: "/ciencia.jpg"
+        next: 7, image: "/lunar2.jpg"
       },
       {
         text: "Algunos contenidos en redes sociales comenzaron a vincular el eclipse con predicciones sobre eventos naturales extremos, información sin ningún respaldo científico que generó confusión entre usuarios que no diferenciaron entre astronomía y superstición.",
         textEn: "Some social media content began linking the eclipse to predictions about extreme natural events, information with no scientific backing that generated confusion among users who did not differentiate between astronomy and superstition.",
-        next: 7, image: "/ciencia.jpg"
+        next: 7, image: "/lunar2.jpg"
       },
     ],
   },
@@ -1144,12 +1144,12 @@ const storyMascotas: StoryNode[] = [
       {
         text: "Varios estudios han encontrado que las personas que conviven con mascotas suelen presentar indicadores de salud positivos. Entre ellos se mencionan menores niveles de estrés, presión arterial más baja y una mayor actividad física relacionada con el cuidado del animal.",
         textEn: "Several studies have found that people who live with pets tend to show positive health indicators. Among them are lower stress levels, lower blood pressure and greater physical activity related to animal care.",
-        next: 1, image: "/ia.jpg"
+        next: 1, image: "/perros2.jpg"
       },
       {
         text: "Algunas investigaciones han observado que quienes tienen mascotas muestran ciertos indicadores de salud favorables. Sin embargo, los científicos señalan que estos resultados pueden estar relacionados con otros factores del estilo de vida de las personas.",
         textEn: "Some research has observed that pet owners show certain favorable health indicators. However, scientists note that these results may be related to other lifestyle factors of the individuals.",
-        next: 1, image: "/ia.jpg"
+        next: 1, image: "/perros2.jpg"
       },
     ],
   },
@@ -1208,12 +1208,12 @@ const storyMascotas: StoryNode[] = [
       {
         text: "Más allá del ejercicio, varios científicos destacan que las mascotas también pueden influir en la salud mental. La compañía diaria puede reducir la sensación de soledad, disminuir el estrés y generar rutinas que favorecen el bienestar emocional.\n\nEn especial para personas que viven solas, el vínculo con un animal puede convertirse en una fuente constante de apoyo y motivación.",
         textEn: "Beyond exercise, several scientists highlight that pets can also influence mental health. Daily companionship can reduce the feeling of loneliness, decrease stress and generate routines that promote emotional wellbeing.\n\nEspecially for people who live alone, the bond with an animal can become a constant source of support and motivation.",
-        next: 6, image: "/ia.jpg"
+        next: 6, image: "/perros3.jpg"
       },
       {
         text: "Investigadores también han explorado cómo el vínculo emocional con las mascotas puede activar mecanismos neurológicos relacionados con el bienestar, como la liberación de oxitocina, una hormona asociada al afecto y la reducción del estrés.",
         textEn: "Researchers have also explored how the emotional bond with pets can activate neurological mechanisms related to wellbeing, such as the release of oxytocin, a hormone associated with affection and stress reduction.",
-        next: 6, image: "/ia.jpg"
+        next: 6, image: "/perros3.jpg"
       },
     ],
   },
@@ -1224,12 +1224,12 @@ const storyMascotas: StoryNode[] = [
       {
         text: "Sin embargo, los especialistas también recuerdan que tener una mascota implica responsabilidades importantes. El cuidado diario, los gastos veterinarios y el tiempo necesario para atender al animal pueden representar un desafío para algunos propietarios.\n\nPor ello, los expertos recomiendan que la decisión de adoptar un animal no se base únicamente en posibles beneficios para la salud.",
         textEn: "However, specialists also remind that having a pet involves important responsibilities. Daily care, veterinary expenses and the time needed to attend to the animal can represent a challenge for some owners.\n\nFor this reason, experts recommend that the decision to adopt an animal should not be based solely on possible health benefits.",
-        next: 7, image: "/ia.jpg"
+        next: 7, image: "/perros2.jpg"
       },
       {
         text: "Titulares en redes sociales comenzaron a circular afirmando que tener un perro garantiza una vida más larga, simplificando de forma engañosa los hallazgos de estudios que en realidad señalan asociaciones estadísticas y no relaciones de causa y efecto.",
         textEn: "Headlines on social media began circulating claiming that having a dog guarantees a longer life, misleadingly simplifying the findings of studies that actually point to statistical associations and not cause-and-effect relationships.",
-        next: 7, image: "/ia.jpg"
+        next: 7, image: "/perros2.jpg"
       },
     ],
   },
@@ -1306,19 +1306,19 @@ const NOTICIA_9_INTRO    = { es: "Mientras algunos expertos aseguran que estas t
 
 const NOTICIA_10_TITLE    = { es: "Crean una vacuna nasal que promete frenar virus, bacterias y hasta alergias", en: "Scientists create nasal vaccine that promises to stop viruses, bacteria and even allergies" };
 const NOTICIA_10_SUBTITLE = { es: "Un nuevo desarrollo científico podría cambiar la forma en que se enfrentan múltiples enfermedades respiratorias. Investigadores en Estados Unidos presentaron una vacuna nasal experimental que busca activar defensas del sistema inmunológico.", en: "A new scientific development could change the way multiple respiratory diseases are confronted. Researchers in the United States presented an experimental nasal vaccine that seeks to activate immune system defenses." };
-const NOTICIA_10_IMAGE    = "/science-fake.jpg";
+const NOTICIA_10_IMAGE    = "/vacuna1.jpg";
 const NOTICIA_10_TAGS     = { es: ["CIENCIA", "SALUD"], en: ["SCIENCE", "HEALTH"] };
 const NOTICIA_10_INTRO    = { es: "Según los científicos, la vacuna podría ofrecer protección frente a distintos virus, bacterias e incluso algunos desencadenantes alérgicos, un enfoque que ha despertado tanto entusiasmo como preguntas dentro de la comunidad científica.", en: "According to scientists, the vaccine could offer protection against various viruses, bacteria and even some allergic triggers, an approach that has sparked both enthusiasm and questions within the scientific community." };
 
 const NOTICIA_11_TITLE    = { es: "Eclipse lunar teñirá la Luna de rojo en marzo", en: "Lunar eclipse will turn the Moon red in March" };
 const NOTICIA_11_SUBTITLE = { es: "El 3 de marzo de 2026 ocurrirá un eclipse lunar total que hará que la Luna adquiera un tono rojizo conocido como 'luna de sangre'.", en: "On March 3, 2026, a total lunar eclipse will occur that will cause the Moon to take on a reddish hue known as a 'blood moon'." };
-const NOTICIA_11_IMAGE    = "/ciencia.jpg";
+const NOTICIA_11_IMAGE    = "/lunar1.jpg";
 const NOTICIA_11_TAGS     = { es: ["CIENCIA", "ASTRONOMÍA"], en: ["SCIENCE", "ASTRONOMY"] };
 const NOTICIA_11_INTRO    = { es: "El fenómeno será visible en diferentes partes del mundo, aunque su intensidad y duración variarán según la ubicación geográfica.", en: "The phenomenon will be visible in different parts of the world, although its intensity and duration will vary depending on geographic location." };
 
 const NOTICIA_12_TITLE    = { es: "Mascotas y salud: lo que dicen los estudios sobre vivir con perros", en: "Pets and health: what studies say about living with dogs" };
 const NOTICIA_12_SUBTITLE = { es: "Diversos estudios científicos han analizado durante años la relación entre tener mascotas y la salud de las personas.", en: "Various scientific studies have analyzed for years the relationship between having pets and people's health." };
-const NOTICIA_12_IMAGE    = "/ia.jpg";
+const NOTICIA_12_IMAGE    = "/perros1.jpg";
 const NOTICIA_12_TAGS     = { es: ["CIENCIA", "SALUD"], en: ["SCIENCE", "HEALTH"] };
 const NOTICIA_12_INTRO    = { es: "Algunas investigaciones sugieren que convivir con animales, especialmente perros, podría estar relacionado con mejores indicadores de bienestar físico y mental.", en: "Some research suggests that living with animals, especially dogs, could be associated with better indicators of physical and mental wellbeing." };
 
@@ -1351,9 +1351,9 @@ const imagesPerGroup: Record<string, [string, string, string]> = {
   "7":  ["/1nino.jpg",        "/2nino.jpg",        "/3nino.jpg"],
   "8":  ["/3narco.jpg",       "/1narco.jpeg",      "/2narco.jpg"],
   "9":  ["/1ia.jpg",          "/2ia.jpg",          "/3ia.jpeg"],
-  "10": ["/science-fake.jpg", "/science-fake.jpg", "/science-fake.jpg"],
-  "11": ["/ciencia.jpg",      "/ciencia.jpg",      "/ciencia.jpg"],
-  "12": ["/ia.jpg",           "/ia.jpg",           "/ia.jpg"],
+"10": ["/vacuna1.jpg", "/vacuna2.jpg", "/vacuna3.jpg"],
+ "11": ["/lunar1.jpg", "/lunar2.jpg", "/lunar3.jpg"],
+"12": ["/perros1.jpg", "/perros2.jpg", "/perros3.jpg"],
 };
 
 const tags: Record<string, { es: string[]; en: string[] }> = {
@@ -1421,6 +1421,7 @@ export default function NoticiaPage() {
   const [colorOrder, setColorOrder] = useState(false);
   const [fontSize, setFontSize] = useState(0);
   const [toEmail, setToEmail] = useState("");
+  const [isPublishing, setIsPublishing] = useState(false);
 
   useEffect(() => {
     setOptOrder(Math.random() < 0.5);
@@ -1716,10 +1717,47 @@ useEffect(() => {
   placeholder="ejemplo@correo.com"
   className="w-full p-3 rounded-full bg-[#FFF5E4] text-black text-sm outline-none mb-5"
 />
-                <button onClick={handlePublish}
-                  className={`px-6 py-3 rounded-full font-bold text-sm transition hover:opacity-90 ${isGoodNews ? "bg-[#FF3B27] text-white" : "bg-[#BEFE46] text-black"}`}>
-                  {t("Publicar noticia", "Publish story")}
-                </button>
+                <button
+  onClick={handlePublish}
+  disabled={isPublishing}
+  className={`
+    px-6 py-3 rounded-full font-bold text-sm
+    transition-all duration-150
+    hover:opacity-90 hover:scale-[1.02]
+    active:scale-[0.97]
+    disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100
+    flex items-center justify-center gap-2 min-w-[160px]
+    ${isGoodNews ? "bg-[#FF3B27] text-white" : "bg-[#BEFE46] text-black"}
+  `}
+>
+  {isPublishing ? (
+    <>
+      <svg
+        className="animate-spin h-4 w-4"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="3"
+          opacity="0.25"
+        />
+        <path
+          d="M4 12a8 8 0 018-8"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      </svg>
+      {t("Publicando...", "Publishing...")}
+    </>
+  ) : (
+    t("Publicar noticia", "Publish story")
+  )}
+</button>
               </div>
             </div>
             <div className="hidden md:block w-1/2 relative">
